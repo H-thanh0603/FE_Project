@@ -598,6 +598,33 @@ h1, h2, h3, h4 {
   gap: var(--spacing-4);
 }
 
+.recently-viewed {
+  padding-top: 0;
+}
+
+.recently-viewed-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-4);
+}
+
+.recently-viewed-clear {
+  border: 0;
+  padding: var(--spacing-1);
+  background: transparent;
+  color: var(--color-muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.recently-viewed-clear:hover {
+  color: var(--color-primary);
+}
+
 .pagination {
   display: flex;
   align-items: center;

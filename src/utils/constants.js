@@ -6,6 +6,7 @@ export const STORAGE_KEYS = {
   USER: 'shoe_store_user',
   ACCOUNTS: 'shoe_store_accounts',
   ADDRESSES: 'shoe_store_addresses',
+  RECENTLY_VIEWED: 'shoe_store_recently_viewed',
 };
 
 // Đơn vị tiền tệ hiển thị

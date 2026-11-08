@@ -28,6 +28,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
+| Sản phẩm đã xem gần đây | ✅ | Lưu tối đa 8 sản phẩm trong LocalStorage; hiển thị ở trang chủ và chi tiết |
 | Tìm kiếm, lọc theo thương hiệu, danh mục, giá, size, màu và khuyến mãi | ✅ | Trang Sản phẩm |
 | Sắp xếp và phân trang sản phẩm | ✅ | Tính trên kết quả sau khi lọc |
 | Chi tiết sản phẩm (chọn size) | ✅ | |

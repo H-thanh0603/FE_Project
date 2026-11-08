@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProductById, getBrandName } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useRecentlyViewed } from '../context/RecentlyViewedContext';
+import RecentlyViewed from '../components/product/RecentlyViewed';
 import formatPrice from '../utils/formatPrice';
 import { getProductBadge } from '../utils/productLabels';
 
@@ -11,8 +13,13 @@ export default function ProductDetail() {
   const product = getProductById(id);
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { recordView } = useRecentlyViewed();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
+
+  useEffect(() => {
+    if (product) recordView(product.id);
+  }, [product, recordView]);
 
   if (!product) {
     return (
@@ -121,6 +128,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+      <RecentlyViewed excludeProductId={product.id} />
     </div>
   );
 }

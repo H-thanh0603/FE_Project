@@ -6,6 +6,7 @@ import TechSection from '../components/home/TechSection';
 import TrustBadges from '../components/home/TrustBadges';
 import CommunitySection from '../components/home/CommunitySection';
 import NewsletterSection from '../components/home/NewsletterSection';
+import RecentlyViewed from '../components/product/RecentlyViewed';
 import '../components/home/home.css';
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <CategorySection />
       <FlashDropSection />
       <FeaturedProducts />
+      <RecentlyViewed />
       <TechSection />
       <TrustBadges />
       <CommunitySection />
