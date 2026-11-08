@@ -5,75 +5,122 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import formatPrice from '../utils/formatPrice';
 
+function tagClass(tag) {
+  if (tag === 'LIMITED') return 'shop-card-tag--lime';
+  if (tag === 'HOT SELLER' || tag === 'PRO HOOPS') return 'shop-card-tag--black';
+  if (tag?.startsWith('-')) return 'shop-card-tag--red-dark';
+  return '';
+}
+
 export default function ProductDetail() {
   const { id } = useParams();
   const product = getProductById(id);
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
-  const [added, setAdded] = useState(false);
+  const [justAdded, setJustAdded] = useState(false);
 
   if (!product) {
     return (
-      <div className="page">
-        <p>Không tìm thấy sản phẩm.</p>
-        <Link to="/products" className="btn btn-outline">
-          Về danh sách sản phẩm
-        </Link>
+      <div className="container">
+        <div className="page">
+          <h1 className="section-title">Không tìm thấy sản phẩm</h1>
+          <div className="empty-state">
+            <span className="icon">inventory_2</span>
+            <p>Sản phẩm này không tồn tại hoặc đã bị gỡ.</p>
+          </div>
+          <Link to="/products" className="btn btn--dark" style={{ alignSelf: 'flex-start' }}>
+            Về danh sách sản phẩm
+          </Link>
+        </div>
       </div>
     );
   }
 
+  const wishlisted = isWishlisted(product.id);
+  const onSale = Boolean(product.oldPrice);
+
   const handleAddToCart = () => {
     addItem(product, size);
-    setAdded(true);
-    setTimeout(() => setAdded(false), 1500);
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 1500);
   };
 
   return (
-    <div className="page">
-      <div className="detail">
-        <div className="detail-image">
-          <img
-            src={product.image}
-            alt={product.name}
-            onError={(event) => {
-              event.currentTarget.style.display = 'none';
-            }}
-          />
-        </div>
+    <div className="container">
+      <div className="page">
+        <nav className="breadcrumb" aria-label="Đường dẫn">
+          <Link to="/">Trang chủ</Link>
+          <span className="icon">chevron_right</span>
+          <Link to="/products">Sản phẩm</Link>
+          <span className="icon">chevron_right</span>
+          <span>{product.name}</span>
+        </nav>
 
-        <div className="detail-info">
-          <p className="detail-brand">{getBrandName(product.brandId)}</p>
-          <h1 className="page-title">{product.name}</h1>
-          <p className="detail-price">{formatPrice(product.price)}</p>
-          <p className="detail-description">{product.description}</p>
-
-          <div className="detail-sizes">
-            <span>Chọn size: </span>
-            {product.sizes.map((s) => (
-              <button
-                key={s}
-                type="button"
-                className={`size-btn${size === s ? ' selected' : ''}`}
-                onClick={() => setSize(s)}
-              >
-                {s}
-              </button>
-            ))}
+        <div className="detail">
+          <div className="detail-image">
+            {product.tag && (
+              <span className={`shop-card-tag ${tagClass(product.tag)}`}>{product.tag}</span>
+            )}
+            <img
+              src={product.image}
+              alt={product.name}
+              onError={(event) => {
+                event.currentTarget.style.display = 'none';
+              }}
+            />
           </div>
 
-          <div className="detail-actions">
-            <button type="button" className="btn btn-primary" onClick={handleAddToCart}>
-              {added ? '✓ Đã thêm vào giỏ' : 'Thêm vào giỏ'}
-            </button>
-            <button
-              type="button"
-              className="btn btn-outline"
-              onClick={() => toggleWishlist(product.id)}
-            >
-              {isWishlisted(product.id) ? '❤️ Đã yêu thích' : '🤍 Yêu thích'}
-            </button>
+          <div className="detail-info">
+            <div className="eyebrow">{getBrandName(product.brandId)}</div>
+            <h1 className="section-title">{product.name}</h1>
+
+            {product.rating && (
+              <div className="shop-card-rating">
+                <span className="icon icon--fill" style={{ fontSize: 16 }}>star</span>
+                <span className="shop-card-rating-score">{product.rating}</span>
+                <span className="shop-card-rating-count">({product.reviews} đánh giá)</span>
+              </div>
+            )}
+
+            <p className="detail-price">
+              {formatPrice(product.price)}
+              {onSale && <span className="shop-card-old-price">{formatPrice(product.oldPrice)}</span>}
+            </p>
+            <p className="detail-description">{product.description}</p>
+
+            <div className="detail-block">
+              <div className="shop-card-sizes-label">Chọn kích cỡ</div>
+              <div className="detail-sizes">
+                {product.sizes.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    className={`size-chip${size === s ? ' selected' : ''}`}
+                    onClick={() => setSize(s)}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="detail-actions">
+              <button type="button" className="btn btn--dark" onClick={handleAddToCart}>
+                <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>
+                {justAdded ? 'Đã thêm vào giỏ' : 'Thêm vào giỏ'}
+              </button>
+              <button
+                type="button"
+                className="btn btn--outline"
+                onClick={() => toggleWishlist(product.id)}
+              >
+                <span className={`icon${wishlisted ? ' icon--fill' : ''}`} style={{ color: wishlisted ? 'var(--color-primary)' : 'inherit' }}>
+                  favorite
+                </span>
+                {wishlisted ? 'Đã yêu thích' : 'Yêu thích'}
+              </button>
+            </div>
           </div>
         </div>
       </div>

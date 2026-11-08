@@ -86,6 +86,25 @@ h1, h2, h3, h4 {
   color: var(--color-muted);
 }
 
+/* Trạng thái rỗng dùng chung */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-6) var(--spacing-3);
+  background: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.empty-state .icon {
+  font-size: 40px;
+  color: var(--color-muted);
+}
+
 /* Nhãn nhỏ chữ hoa — dùng cho eyebrow, badge, label */
 .label {
   font-family: var(--font-display);
@@ -102,6 +121,103 @@ h1, h2, h3, h4 {
 .label--lg {
   font-size: 0.88rem;
   letter-spacing: 0.06em;
+}
+
+/* Khối section dùng chung mọi trang */
+.section {
+  padding: var(--spacing-6) 0;
+}
+
+.section--subtle {
+  background: var(--color-surface);
+}
+
+.section--dark {
+  background: var(--color-dark);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.section--dark::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 59, 0, 0.12);
+  filter: blur(80px);
+  pointer-events: none;
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-5);
+}
+
+@media (min-width: 768px) {
+  .section-head {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.eyebrow {
+  color: var(--color-primary);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.section-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.section-title--light {
+  color: #fff;
+}
+
+.section-desc {
+  color: var(--color-muted);
+  max-width: 28rem;
+  font-size: 0.95rem;
+}
+
+/* Chip chọn size — dùng ở thẻ sản phẩm và trang chi tiết */
+.size-chip {
+  border: none;
+  padding: 3px 8px;
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.size-chip:hover {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.size-chip.selected {
+  background: var(--color-dark);
+  color: #fff;
+  font-weight: 700;
 }
 
 /* Nút bấm */
@@ -281,6 +397,69 @@ h1, h2, h3, h4 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.order-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+}
+
+.order-card-date {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.order-card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--spacing-2);
+  margin-top: var(--spacing-1);
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+.order-card-total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+/* Trang xác thực (Đăng nhập / Đăng ký) */
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-5);
+  box-shadow: var(--shadow);
+}
+
+.auth-switch {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+}
+
+/* Trang 404 */
+.notfound-code {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 8rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-primary);
 }
 
 /* ============ NAVBAR ============ */
@@ -532,6 +711,7 @@ h1, h2, h3, h4 {
 }
 
 .detail-image {
+  position: relative;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -561,6 +741,7 @@ h1, h2, h3, h4 {
 
 .detail-description {
   color: var(--color-muted);
+  margin-bottom: var(--spacing-3);
 }
 
 .detail-sizes {
@@ -570,34 +751,45 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-.size-btn {
-  min-width: 40px;
-  padding: var(--spacing-1) var(--spacing-2);
-  border: 1px solid rgba(15, 16, 18, 0.2);
-  border-radius: var(--radius);
-  background: #fff;
-  font: inherit;
+/* Breadcrumb điều hướng */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb .icon {
+  font-size: 16px;
+}
+
+.breadcrumb span:last-child {
+  color: var(--color-text);
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.size-btn:hover {
-  background: var(--color-dark);
-  color: #fff;
-}
-
-.size-btn.selected {
-  background: var(--color-dark);
-  color: #fff;
-  font-weight: 700;
-  box-shadow: inset -2px -2px 0 var(--color-primary);
+.detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-3);
 }
 
 .detail-actions {
   display: flex;
   gap: var(--spacing-2);
   flex-wrap: wrap;
+  margin-top: var(--spacing-1);
 }
 
 /* ============ TRANG GIỎ HÀNG / THANH TOÁN ============ */
@@ -668,6 +860,11 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+.cart-total-value {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}
+
 .cart-footer-actions {
   display: flex;
   gap: var(--spacing-2);
@@ -678,4 +875,21 @@ h1, h2, h3, h4 {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--spacing-3);
+}
+
+.order-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-5) var(--spacing-4);
+}
+
+.order-success-icon {
+  font-size: 56px;
+  color: #647e00;
 }
