@@ -1,0 +1,31 @@
+/* Biến giao diện dùng chung — tránh hardcode màu/khoảng cách trong component */
+
+:root {
+  /* Màu sắc chủ đạo */
+  --color-primary: #e35d3c;
+  --color-primary-dark: #c74a2d;
+  --color-dark: #1f2430;
+  --color-text: #333846;
+  --color-muted: #8a8f9c;
+  --color-bg: #f7f7f9;
+  --color-surface: #ffffff;
+  --color-border: #e4e6eb;
+  --color-danger: #d93025;
+
+  /* Font chữ */
+  --font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+
+  /* Bo góc */
+  --radius: 8px;
+  --radius-lg: 16px;
+
+  /* Khoảng cách */
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 16px;
+  --spacing-4: 24px;
+  --spacing-5: 32px;
+
+  /* Đổ bóng */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}

@@ -1,0 +1,6 @@
+[
+  { "id": "nike", "name": "Nike" },
+  { "id": "adidas", "name": "Adidas" },
+  { "id": "puma", "name": "Puma" },
+  { "id": "new-balance", "name": "New Balance" }
+]

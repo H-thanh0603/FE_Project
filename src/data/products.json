@@ -1,0 +1,38 @@
+[
+  {
+    "id": "shoe-001",
+    "name": "Nike Air Force 1 '07",
+    "brandId": "nike",
+    "price": 2790000,
+    "sizes": [38, 39, 40, 41, 42, 43],
+    "image": "/images/shoes/shoe-001.jpg",
+    "description": "Sneaker kinh điển với đế Air êm ái, phù hợp cả đi học lẫn đi chơi."
+  },
+  {
+    "id": "shoe-002",
+    "name": "Adidas Ultraboost Light",
+    "brandId": "adidas",
+    "price": 4590000,
+    "sizes": [39, 40, 41, 42, 43, 44],
+    "image": "/images/shoes/shoe-002.jpg",
+    "description": "Đế Boost siêu nhẹ, hỗ trợ tốt cho chạy bộ đường dài."
+  },
+  {
+    "id": "shoe-003",
+    "name": "Puma RS-X Replay",
+    "brandId": "puma",
+    "price": 2490000,
+    "sizes": [37, 38, 39, 40, 41],
+    "image": "/images/shoes/shoe-003.jpg",
+    "description": "Thiết kế chunky cá tính, đệm RS dày và chắc chắn."
+  },
+  {
+    "id": "shoe-004",
+    "name": "New Balance 530",
+    "brandId": "new-balance",
+    "price": 2190000,
+    "sizes": [38, 39, 40, 41, 42],
+    "image": "/images/shoes/shoe-004.jpg",
+    "description": "Phong cách retro, nhẹ và thoáng khí, dễ phối đồ mỗi ngày."
+  }
+]
