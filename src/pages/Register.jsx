@@ -15,7 +15,7 @@ const EMPTY_FORM = {
 
 /**
  * ⚠️ Đăng ký MÔ PHỎNG: mật khẩu chỉ được kiểm tra hợp lệ phía client và
- * KHÔNG được lưu trữ. AuthContext chỉ lưu tên + email vào LocalStorage.
+ * KHÔNG được lưu trữ. AuthContext chỉ lưu thông tin hồ sơ vào LocalStorage.
  */
 export default function Register() {
   const { register } = useAuth();
@@ -64,7 +64,7 @@ export default function Register() {
     // Giả lập thời gian gọi API tạo tài khoản
     setSubmitting(true);
     setTimeout(() => {
-      const result = register({ name: form.name, email: form.email });
+      const result = register({ name: form.name, email: form.email, phone: form.phone });
       setSubmitting(false);
       if (!result.ok) {
         setErrors({ email: result.error });

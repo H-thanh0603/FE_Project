@@ -45,9 +45,15 @@ export default function Navbar() {
               {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
             </Link>
             {user ? (
-              <button type="button" className="btn btn--light" onClick={logout}>
-                Xin chào, {user.name} — Đăng xuất
-              </button>
+              <>
+                <Link to="/profile" className="btn btn--light">
+                  <span className="icon" style={{ fontSize: 16 }}>person</span>
+                  {user.name}
+                </Link>
+                <button type="button" className="btn btn--light" onClick={logout}>
+                  Đăng xuất
+                </button>
+              </>
             ) : (
               <Link to="/login" className="btn btn--light">
                 <span className="icon" style={{ fontSize: 16 }}>person</span>

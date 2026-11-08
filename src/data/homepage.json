@@ -25,6 +25,7 @@
     "description": "Tuyển tập các dòng giày được tối ưu hóa theo điều kiện bề mặt, cường độ vận động và tuyên ngôn phong cách riêng biệt.",
     "items": [
       {
+        "category": "running",
         "name": "Chạy Bộ Chuyên Nghiệp",
         "subtitle": "Road Running, Marathon, Half-Distance",
         "cta": "Xem Dòng Performance",
@@ -33,6 +34,7 @@
         "dark": false
       },
       {
+        "category": "streetwear",
         "name": "Phong Cách Đường Phố",
         "subtitle": "Streetwear, Retro Low, Hype Daily Wear",
         "cta": "Xem Street Style",
@@ -41,6 +43,7 @@
         "dark": false
       },
       {
+        "category": "basketball",
         "name": "Bóng Rổ Hi-Top",
         "subtitle": "Cushioning & Maximum Ankle Support",
         "cta": "Xem Giày Sân Đấu",
@@ -49,6 +52,7 @@
         "dark": false
       },
       {
+        "category": "limited",
         "name": "Bộ Sưu Tập Giới Hạn",
         "subtitle": "Collabs, Rare Vault & Deadstock Drops",
         "cta": "Săn Độc Quyền",

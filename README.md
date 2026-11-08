@@ -24,16 +24,21 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Tính năng | Trạng thái | Ghi chú |
 | --- | :---: | --- |
 | Khởi tạo cấu trúc dự án (Vite + React) | ✅ | Cấu hình chạy được với `npm run dev` |
-| Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
-| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 8 sản phẩm + nội dung trang chủ `homepage.json` |
+| Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục lọc sản phẩm, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
+| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
-| Tìm kiếm, lọc theo thương hiệu | ✅ | Trang Sản phẩm |
+| Sản phẩm đã xem gần đây | ✅ | Lưu tối đa 8 sản phẩm trong LocalStorage; hiển thị ở trang chủ và chi tiết |
+| Tìm kiếm, lọc theo thương hiệu, danh mục, giá, size, màu và khuyến mãi | ✅ | Trang Sản phẩm |
+| Sắp xếp và phân trang sản phẩm | ✅ | Tính trên kết quả sau khi lọc |
 | Chi tiết sản phẩm (chọn size) | ✅ | |
-| Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
+| Checkout nhiều bước & lịch sử đơn hàng (mô phỏng) | ✅ | Thông tin nhận hàng, giao hàng, thanh toán giả lập và xác nhận đơn; không có giao dịch thật |
+| Chi tiết đơn hàng (mô phỏng) | ✅ | Xem sản phẩm, phí, địa chỉ nhận và trạng thái đơn |
+| Thao tác đơn hàng (mô phỏng) | ✅ | Hủy đơn chờ xử lý, mua lại và cập nhật trạng thái để demo |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
+| Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
+| Sổ địa chỉ giao hàng (mô phỏng) | ✅ | Thêm, sửa, xóa, chọn mặc định; chọn nhanh khi checkout |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
-| Sắp xếp theo giá, lọc khoảng giá | 📋 | |
 | Đánh giá sản phẩm | 📋 | |
 | Áp dụng mã giảm giá | 📋 | |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
@@ -173,6 +178,7 @@ Sau đó mở địa chỉ mà Vite hiển thị trên terminal — thông thư�
 - **Hook / hàm tiện ích**: `camelCase`; tên hook luôn bắt đầu bằng `use`.
 - **Context**: tách `Provider` và custom hook (ví dụ `useCart()`) để component chỉ dùng hook, không import context trực tiếp.
 - **Dữ liệu**: component chỉ truy cập dữ liệu qua `services/`, không import trực tiếp JSON — giúp sau này thay bằng API thật mà không sửa UI.
+- **Catalog**: mỗi sản phẩm có một `category` chính (`running`, `streetwear`, `basketball`, `limited`) và mảng `tags` riêng cho nhãn như `new`, `bestseller`, `sale`; ảnh chưa có dùng chuỗi rỗng và hiển thị placeholder.
 - **LocalStorage**: chỉ dùng khóa khai báo trong `utils/constants.js`.
 - **Style**: dùng CSS Variables trong `styles/variables.css`, tránh hardcode màu và khoảng cách.
 - **Tài nguyên tĩnh**: ảnh giày đặt trong `public/images/shoes/`, tham chiếu bằng `/images/shoes/ten-anh.jpg`.

@@ -10,7 +10,10 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import Orders from './pages/Orders';
+import Profile from './pages/Profile';
+import Addresses from './pages/Addresses';
 import NotFound from './pages/NotFound';
+import OrderDetail from './pages/OrderDetail';
 
 export default function App() {
   return (
@@ -26,6 +29,9 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="orders" element={<Orders />} />
+        <Route path="orders/:id" element={<OrderDetail />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="addresses" element={<Addresses />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

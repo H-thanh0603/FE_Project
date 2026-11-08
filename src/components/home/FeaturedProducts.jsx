@@ -12,7 +12,7 @@ export default function FeaturedProducts() {
     () =>
       tab === 'all'
         ? products
-        : products.filter((product) => product.category?.includes(tab)),
+        : products.filter((product) => product.tags.includes(tab)),
     [tab],
   );
 

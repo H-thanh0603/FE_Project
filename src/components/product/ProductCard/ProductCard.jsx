@@ -2,16 +2,10 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
+import { getBrandName } from '../../../services/productService';
 import formatPrice from '../../../utils/formatPrice';
+import { getProductBadge } from '../../../utils/productLabels';
 import './ProductCard.css';
-
-/** Màu nền của badge theo nhãn: giới hạn -> lime, hot/pro -> đen, giảm giá -> đỏ đậm */
-function tagClass(tag) {
-  if (tag === 'LIMITED') return 'shop-card-tag--lime';
-  if (tag === 'HOT SELLER' || tag === 'PRO HOOPS') return 'shop-card-tag--black';
-  if (tag.startsWith('-')) return 'shop-card-tag--red-dark';
-  return '';
-}
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
@@ -27,13 +21,16 @@ export default function ProductCard({ product }) {
 
   const wishlisted = isWishlisted(product.id);
   const onSale = Boolean(product.oldPrice);
+  const badge = getProductBadge(product);
 
   return (
     <article className="shop-card">
       <div>
         <div className="shop-card-image">
-          {product.tag && (
-            <span className={`shop-card-tag ${tagClass(product.tag)}`}>{product.tag}</span>
+          {badge && (
+            <span className={`shop-card-tag${badge.tone ? ` shop-card-tag--${badge.tone}` : ''}`}>
+              {badge.label}
+            </span>
           )}
           <button
             type="button"
@@ -44,7 +41,13 @@ export default function ProductCard({ product }) {
             <span className={`icon${wishlisted ? ' icon--fill' : ''}`}>favorite</span>
           </button>
           <Link to={`/products/${product.id}`}>
-            <img src={product.image} alt={product.name} loading="lazy" />
+            {product.image ? (
+              <img src={product.image} alt={product.name} loading="lazy" />
+            ) : (
+              <span className="shop-card-image-placeholder icon" aria-label="Chưa có ảnh sản phẩm">
+                image
+              </span>
+            )}
           </Link>
         </div>
 
@@ -64,6 +67,7 @@ export default function ProductCard({ product }) {
           </div>
         )}
 
+        <p className="shop-card-brand">{getBrandName(product.brandId)}</p>
         <h3 className="shop-card-name">
           <Link to={`/products/${product.id}`}>{product.name}</Link>
         </h3>

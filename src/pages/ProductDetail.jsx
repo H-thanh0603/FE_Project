@@ -1,24 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getProductById, getBrandName } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useRecentlyViewed } from '../context/RecentlyViewedContext';
+import RecentlyViewed from '../components/product/RecentlyViewed';
 import formatPrice from '../utils/formatPrice';
-
-function tagClass(tag) {
-  if (tag === 'LIMITED') return 'shop-card-tag--lime';
-  if (tag === 'HOT SELLER' || tag === 'PRO HOOPS') return 'shop-card-tag--black';
-  if (tag?.startsWith('-')) return 'shop-card-tag--red-dark';
-  return '';
-}
+import { getProductBadge } from '../utils/productLabels';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const product = getProductById(id);
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { recordView } = useRecentlyViewed();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
+
+  useEffect(() => {
+    if (product) recordView(product.id);
+  }, [product, recordView]);
 
   if (!product) {
     return (
@@ -39,6 +40,7 @@ export default function ProductDetail() {
 
   const wishlisted = isWishlisted(product.id);
   const onSale = Boolean(product.oldPrice);
+  const badge = getProductBadge(product);
 
   const handleAddToCart = () => {
     addItem(product, size);
@@ -59,16 +61,18 @@ export default function ProductDetail() {
 
         <div className="detail">
           <div className="detail-image">
-            {product.tag && (
-              <span className={`shop-card-tag ${tagClass(product.tag)}`}>{product.tag}</span>
+            {badge && (
+              <span className={`shop-card-tag${badge.tone ? ` shop-card-tag--${badge.tone}` : ''}`}>
+                {badge.label}
+              </span>
             )}
-            <img
-              src={product.image}
-              alt={product.name}
-              onError={(event) => {
-                event.currentTarget.style.display = 'none';
-              }}
-            />
+            {product.image ? (
+              <img src={product.image} alt={product.name} />
+            ) : (
+              <span className="detail-image-placeholder icon" aria-label="Chưa có ảnh sản phẩm">
+                image
+              </span>
+            )}
           </div>
 
           <div className="detail-info">
@@ -124,6 +128,7 @@ export default function ProductDetail() {
           </div>
         </div>
       </div>
+      <RecentlyViewed excludeProductId={product.id} />
     </div>
   );
 }

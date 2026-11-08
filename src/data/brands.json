@@ -1,3 +1,7 @@
 [
-  { "id": "kinetic", "name": "KINETIC" }
+  { "id": "kinetic", "name": "KINETIC" },
+  { "id": "nike", "name": "Nike" },
+  { "id": "adidas", "name": "Adidas" },
+  { "id": "new-balance", "name": "New Balance" },
+  { "id": "asics", "name": "ASICS" }
 ]
