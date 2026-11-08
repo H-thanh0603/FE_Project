@@ -28,12 +28,12 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
-| Tìm kiếm, lọc theo thương hiệu | ✅ | Trang Sản phẩm |
+| Tìm kiếm, lọc theo thương hiệu, danh mục, giá, size, màu và khuyến mãi | ✅ | Trang Sản phẩm |
 | Chi tiết sản phẩm (chọn size) | ✅ | |
 | Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
-| Sắp xếp theo giá, lọc khoảng giá | 📋 | |
+| Sắp xếp sản phẩm | 📋 | |
 | Đánh giá sản phẩm | 📋 | |
 | Áp dụng mã giảm giá | 📋 | |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |

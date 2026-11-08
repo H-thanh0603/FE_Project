@@ -377,6 +377,99 @@ h1, h2, h3, h4 {
   min-width: 220px;
 }
 
+.toolbar > .input {
+  min-width: 180px;
+}
+
+.product-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: #fff;
+}
+
+.product-filter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.product-filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.product-filter-group > .input {
+  width: 180px;
+}
+
+.product-filter-label {
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.product-filter-options {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  flex-wrap: wrap;
+}
+
+.product-filter-sale {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  min-height: 44px;
+  font-size: 0.88rem;
+}
+
+.product-filter-sale input {
+  accent-color: var(--color-primary);
+}
+
+.product-color-option {
+  padding: 3px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.product-color-option.selected,
+.product-color-option:hover {
+  border-color: var(--color-dark);
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.product-color-swatch {
+  width: 27px;
+  height: 27px;
+  border: 2px solid #fff;
+  border-radius: var(--radius-pill);
+  background: var(--swatch-color);
+  box-shadow: 0 0 0 1px var(--color-border);
+  cursor: pointer;
+}
+
+.product-color-swatch.selected {
+  box-shadow: 0 0 0 2px var(--color-dark);
+}
+
+.toolbar .btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Lưới sản phẩm dùng ở trang Sản phẩm / Yêu thích */
 .product-grid {
   display: grid;
