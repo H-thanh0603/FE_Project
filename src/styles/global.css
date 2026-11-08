@@ -648,6 +648,7 @@ h1, h2, h3, h4 {
 }
 
 .detail-image {
+  position: relative;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
@@ -686,28 +687,37 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-.size-btn {
-  min-width: 40px;
-  padding: var(--spacing-1) var(--spacing-2);
-  border: 1px solid rgba(15, 16, 18, 0.2);
-  border-radius: var(--radius);
-  background: #fff;
-  font: inherit;
+/* Breadcrumb điều hướng */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+}
+
+.breadcrumb .icon {
+  font-size: 16px;
+}
+
+.breadcrumb span:last-child {
+  color: var(--color-text);
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
 }
 
-.size-btn:hover {
-  background: var(--color-dark);
-  color: #fff;
-}
-
-.size-btn.selected {
-  background: var(--color-dark);
-  color: #fff;
-  font-weight: 700;
-  box-shadow: inset -2px -2px 0 var(--color-primary);
+.detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
 }
 
 .detail-actions {
