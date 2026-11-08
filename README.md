@@ -33,6 +33,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Chi tiết sản phẩm (chọn size) | ✅ | |
 | Checkout nhiều bước & lịch sử đơn hàng (mô phỏng) | ✅ | Thông tin nhận hàng, giao hàng, thanh toán giả lập và xác nhận đơn; không có giao dịch thật |
 | Chi tiết đơn hàng (mô phỏng) | ✅ | Xem sản phẩm, phí, địa chỉ nhận và trạng thái đơn |
+| Thao tác đơn hàng (mô phỏng) | ✅ | Hủy đơn chờ xử lý, mua lại và cập nhật trạng thái để demo |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
 | Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
 | Sổ địa chỉ giao hàng (mô phỏng) | ✅ | Thêm, sửa, xóa, chọn mặc định; chọn nhanh khi checkout |

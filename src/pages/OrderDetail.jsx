@@ -1,5 +1,13 @@
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { getOrderById } from '../services/orderService';
+import { useCart } from '../context/CartContext';
+import {
+  advanceOrderStatus,
+  canCancelOrder,
+  cancelOrder,
+  getNextOrderStatus,
+  getOrderById,
+} from '../services/orderService';
 import formatPrice from '../utils/formatPrice';
 
 const ORDER_STATUSES = {
@@ -8,6 +16,14 @@ const ORDER_STATUSES = {
   shipping: { label: 'Đang giao hàng', icon: 'local_shipping' },
   delivered: { label: 'Đã giao hàng', icon: 'check_circle' },
   cancelled: { label: 'Đã hủy', icon: 'cancel' },
+};
+
+const ORDER_STATUS_LABELS = {
+  pending: 'Đã tiếp nhận',
+  confirmed: 'Đã xác nhận',
+  shipping: 'Đang giao hàng',
+  delivered: 'Đã giao hàng',
+  cancelled: 'Đã hủy',
 };
 
 function getOrderStatus(order) {
@@ -25,7 +41,42 @@ function getSubtotal(order) {
 
 export default function OrderDetail() {
   const { id } = useParams();
-  const order = getOrderById(id);
+  const [order, setOrder] = useState(() => getOrderById(id));
+  const [confirmCancel, setConfirmCancel] = useState(false);
+  const [actionMessage, setActionMessage] = useState('');
+  const { addItem } = useCart();
+
+  useEffect(() => {
+    setOrder(getOrderById(id));
+    setConfirmCancel(false);
+    setActionMessage('');
+  }, [id]);
+
+  const handleCancel = () => {
+    const result = cancelOrder(id);
+    if (!result.ok) {
+      setActionMessage(result.error);
+      return;
+    }
+    setOrder(result.order);
+    setConfirmCancel(false);
+    setActionMessage('Đơn hàng đã được hủy (mô phỏng).');
+  };
+
+  const handleAdvanceStatus = () => {
+    const result = advanceOrderStatus(id);
+    if (!result.ok) {
+      setActionMessage(result.error);
+      return;
+    }
+    setOrder(result.order);
+    setActionMessage('Trạng thái đơn hàng đã được cập nhật (mô phỏng).');
+  };
+
+  const handleReorder = () => {
+    order.items.forEach((item) => addItem(item, item.size, item.quantity));
+    setActionMessage('Đã thêm sản phẩm từ đơn hàng vào giỏ.');
+  };
 
   if (!order) {
     return (
@@ -124,6 +175,47 @@ export default function OrderDetail() {
               </p>
             </section>
           </div>
+        </div>
+
+        {actionMessage && <p className="profile-success" role="status">{actionMessage}</p>}
+        <div className="order-actions order-detail-actions">
+          <button type="button" className="btn btn--outline" onClick={handleReorder}>
+            Mua lại
+          </button>
+          {getNextOrderStatus(order) && (
+            <button type="button" className="btn btn--outline" onClick={handleAdvanceStatus}>
+              Cập nhật: {ORDER_STATUS_LABELS[getNextOrderStatus(order)]}
+            </button>
+          )}
+          {canCancelOrder(order) && (
+            confirmCancel ? (
+              <span className="order-cancel-confirm">
+                Xác nhận hủy đơn này?
+                <button
+                  type="button"
+                  className="order-action-link order-action-link--danger"
+                  onClick={handleCancel}
+                >
+                  Có, hủy đơn
+                </button>
+                <button
+                  type="button"
+                  className="order-action-link"
+                  onClick={() => setConfirmCancel(false)}
+                >
+                  Không
+                </button>
+              </span>
+            ) : (
+              <button
+                type="button"
+                className="order-action-link order-action-link--danger"
+                onClick={() => setConfirmCancel(true)}
+              >
+                Hủy đơn
+              </button>
+            )
+          )}
         </div>
 
         <Link to="/orders" className="btn btn--outline order-detail-back">

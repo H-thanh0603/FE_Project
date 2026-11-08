@@ -686,6 +686,51 @@ h1, h2, h3, h4 {
   font-size: 1rem;
 }
 
+.order-card-status {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.order-actions,
+.order-cancel-confirm {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.order-actions .btn {
+  padding: 0.55rem 0.8rem;
+  font-size: 0.72rem;
+}
+
+.order-action-link {
+  border: 0;
+  padding: 4px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.order-action-link:hover {
+  color: var(--color-primary);
+}
+
+.order-action-link--danger {
+  color: var(--color-danger);
+}
+
+.order-action-link--danger:hover {
+  color: var(--color-primary-dark);
+}
+
+.order-detail-actions {
+  padding: var(--spacing-2) 0;
+}
+
 .order-detail-link {
   display: inline-flex;
   align-items: center;
