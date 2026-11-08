@@ -22,41 +22,53 @@ export default function Products() {
   );
 
   return (
-    <div className="page">
-      <h1 className="page-title">Sản phẩm</h1>
-
-      <div className="toolbar">
-        <input
-          type="search"
-          className="input"
-          placeholder="Tìm kiếm giày..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-        <select
-          className="input"
-          value={brand}
-          onChange={(event) => setBrand(event.target.value)}
-          aria-label="Lọc theo thương hiệu"
-        >
-          <option value="all">Tất cả thương hiệu</option>
-          {brands.map((b) => (
-            <option key={b.id} value={b.id}>
-              {b.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {filtered.length === 0 ? (
-        <p>Không tìm thấy sản phẩm nào.</p>
-      ) : (
-        <div className="product-grid">
-          {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+    <div className="container">
+      <div className="page">
+        <div>
+          <div className="eyebrow">Cửa hàng KINETIC</div>
+          <h1 className="section-title">Tất Cả Sản Phẩm</h1>
         </div>
-      )}
+
+        <div className="toolbar">
+          <input
+            type="search"
+            className="input"
+            placeholder="Tìm kiếm giày..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <select
+            className="input"
+            value={brand}
+            onChange={(event) => setBrand(event.target.value)}
+            aria-label="Lọc theo thương hiệu"
+          >
+            <option value="all">Tất cả thương hiệu</option>
+            {brands.map((b) => (
+              <option key={b.id} value={b.id}>
+                {b.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <p className="page-note">
+          Hiển thị <strong>{filtered.length}</strong> / {products.length} sản phẩm
+        </p>
+
+        {filtered.length === 0 ? (
+          <div className="empty-state">
+            <span className="icon">search_off</span>
+            <p>Không tìm thấy sản phẩm nào phù hợp.</p>
+          </div>
+        ) : (
+          <div className="product-grid">
+            {filtered.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
