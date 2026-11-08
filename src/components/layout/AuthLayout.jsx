@@ -16,7 +16,7 @@ export default function AuthLayout({ eyebrow, title, subtitle, children }) {
     <div className="auth-layout">
       <aside className="auth-brand">
         <Link to="/" className="auth-brand-logo" aria-label="Về trang chủ KINETIC">
-          <img src="/images/logo.svg" alt="KINETIC" />
+          <img src="/images/logo-white.svg" alt="KINETIC" />
         </Link>
 
         <div className="auth-brand-body">

@@ -55,8 +55,6 @@
 
 .auth-brand-logo img {
   height: 30px;
-  /* Logo SVG chữ màu tối -> đảo trắng trên nền tối */
-  filter: brightness(0) invert(1);
 }
 
 .auth-brand-body {
@@ -277,6 +275,107 @@
 .form-banner--error {
   background: #ffdad6;
   color: #93000a;
+}
+
+.form-banner--info {
+  background: var(--color-surface);
+  color: var(--color-muted);
+}
+
+/* Dòng phân cách trước nút mạng xã hội */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+/* Nút đăng nhập mạng xã hội (mô phỏng) */
+.auth-social {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2);
+}
+
+.auth-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: 0.65rem var(--spacing-3);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.auth-social-btn:hover {
+  background: var(--color-dark);
+  color: #fff;
+}
+
+.auth-social-glyph {
+  font-weight: 800;
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+
+.auth-social-glyph--g {
+  color: #4285f4;
+}
+
+.auth-social-glyph--f {
+  color: #1877f2;
+}
+
+.auth-social-btn:hover .auth-social-glyph--g,
+.auth-social-btn:hover .auth-social-glyph--f {
+  color: inherit;
+}
+
+/* Liên kết chuyển giữa Đăng nhập / Đăng ký */
+.auth-switch {
+  font-size: 0.88rem;
+  color: var(--color-muted);
+  text-align: center;
+}
+
+.auth-switch a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: thu gọn khung trên màn hình nhỏ */
+@media (max-width: 900px) {
+  .auth-layout {
+    margin: var(--spacing-3) 0 var(--spacing-5);
+    min-height: auto;
+  }
+
+  .auth-panel {
+    padding: var(--spacing-4) var(--spacing-3);
+  }
 }
 
 /* Biểu tượng loading xoay tròn */

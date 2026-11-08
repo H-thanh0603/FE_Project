@@ -62,6 +62,8 @@ export default function Login() {
       subtitle="Đăng nhập để lưu giỏ hàng, theo dõi đơn hàng và nhận ưu đãi thành viên."
     >
       <form className="auth-form" onSubmit={handleSubmit} noValidate>
+        {formError && <p className="form-banner form-banner--error">{formError}</p>}
+
         <div className="field">
           <label className="field-label" htmlFor="login-email">Email</label>
           <div className="field-input">
@@ -116,8 +118,6 @@ export default function Login() {
           </Link>
         </div>
 
-        {formError && <p className="form-banner form-banner--error">{formError}</p>}
-
         <button type="submit" className="btn btn--red" disabled={submitting}>
           {submitting ? (
             <>
@@ -129,6 +129,31 @@ export default function Login() {
           )}
         </button>
       </form>
+
+      <div className="auth-divider">hoặc tiếp tục với</div>
+
+      <div className="auth-social">
+        <button
+          type="button"
+          className="auth-social-btn"
+          onClick={() =>
+            setFormError('Đăng nhập bằng Google chỉ là mô phỏng — dự án chưa có backend.')
+          }
+        >
+          <span className="auth-social-glyph auth-social-glyph--g">G</span>
+          Google
+        </button>
+        <button
+          type="button"
+          className="auth-social-btn"
+          onClick={() =>
+            setFormError('Đăng nhập bằng Facebook chỉ là mô phỏng — dự án chưa có backend.')
+          }
+        >
+          <span className="auth-social-glyph auth-social-glyph--f">f</span>
+          Facebook
+        </button>
+      </div>
 
       <p className="auth-switch">
         Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
