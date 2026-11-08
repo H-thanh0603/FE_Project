@@ -741,6 +741,7 @@ h1, h2, h3, h4 {
 
 .detail-description {
   color: var(--color-muted);
+  margin-bottom: var(--spacing-3);
 }
 
 .detail-sizes {
@@ -781,12 +782,14 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1);
+  margin-bottom: var(--spacing-3);
 }
 
 .detail-actions {
   display: flex;
   gap: var(--spacing-2);
   flex-wrap: wrap;
+  margin-top: var(--spacing-1);
 }
 
 /* ============ TRANG GIỎ HÀNG / THANH TOÁN ============ */
