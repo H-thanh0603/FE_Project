@@ -145,3 +145,118 @@
   color: var(--color-muted);
   font-size: 0.88rem;
 }
+
+/* ---------- Biểu mẫu xác thực ---------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.field-input {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: 1px solid rgba(15, 16, 18, 0.15);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  padding: 0 var(--spacing-3);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.field-input:focus-within {
+  border: 2px solid var(--color-border-strong);
+  background: #fff;
+}
+
+.field-input .icon {
+  color: var(--color-muted);
+  font-size: 20px;
+}
+
+.field-input input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0.8rem 0;
+  font: inherit;
+}
+
+.field-eye {
+  border: none;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+
+.field-eye:hover {
+  color: var(--color-text);
+}
+
+.field-error {
+  color: var(--color-danger);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.checkbox input {
+  accent-color: var(--color-primary);
+  width: 15px;
+  height: 15px;
+}
+
+.auth-link {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* Biểu tượng loading xoay tròn */
+.icon.spinning {
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
