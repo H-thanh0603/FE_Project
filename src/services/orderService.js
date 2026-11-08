@@ -13,6 +13,10 @@ export function getOrders() {
   }
 }
 
+export function getOrderById(orderId) {
+  return getOrders().find((order) => order.id === orderId) || null;
+}
+
 export function saveOrder(order) {
   const newOrder = {
     ...order,

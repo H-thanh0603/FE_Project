@@ -17,6 +17,10 @@
     position: static;
     grid-row: 1;
   }
+
+  .order-detail-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {

@@ -45,6 +45,10 @@ export default function Orders() {
                   <span>{order.items.length} sản phẩm</span>
                   <span className="order-card-total">{formatPrice(order.total)}</span>
                 </div>
+                <Link to={`/orders/${encodeURIComponent(order.id)}`} className="order-detail-link">
+                  Xem chi tiết đơn hàng
+                  <span className="icon">arrow_forward</span>
+                </Link>
               </li>
             ))}
           </ul>
