@@ -74,6 +74,21 @@ h1, h2, h3, h4 {
   max-width: 420px;
 }
 
+.profile-page {
+  max-width: 640px;
+}
+
+.profile-links {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.profile-success {
+  color: #356b00;
+  font-weight: 600;
+}
+
 .page-title {
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;

@@ -33,6 +33,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Chi tiết sản phẩm (chọn size) | ✅ | |
 | Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
+| Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
 | Đánh giá sản phẩm | 📋 | |
 | Áp dụng mã giảm giá | 📋 | |

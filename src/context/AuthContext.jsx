@@ -4,7 +4,7 @@ import { STORAGE_KEYS } from '../utils/constants';
 
 /**
  * ⚠️ Xác thực chỉ MÔ PHỎNG phía frontend:
- * - Tài khoản đăng ký chỉ lưu tên + email vào LocalStorage.
+ * - Tài khoản đăng ký chỉ lưu thông tin hồ sơ vào LocalStorage.
  * - Mật khẩu chỉ dùng để kiểm tra hợp lệ trên biểu mẫu, KHÔNG được lưu trữ.
  * - Không phải xác thực thật; khi có backend cần thay bằng API (JWT, session...).
  */
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
   };
 
   /** Đăng ký tài khoản mới; mật khẩu không được lưu vào đâu cả */
-  const register = ({ name, email }) => {
+  const register = ({ name, email, phone }) => {
     const normalized = email.trim().toLowerCase();
 
     if (accounts.some((account) => account.email.toLowerCase() === normalized)) {
@@ -51,6 +51,7 @@ export function AuthProvider({ children }) {
     const account = {
       name: name.trim(),
       email: normalized,
+      phone: phone?.trim() || '',
       createdAt: new Date().toISOString(),
     };
     setAccounts((prev) => [...prev, account]);
@@ -58,10 +59,47 @@ export function AuthProvider({ children }) {
     return { ok: true };
   };
 
+  const updateProfile = ({ name, email, phone }) => {
+    const normalizedEmail = email.trim().toLowerCase();
+    const existingAccount = accounts.find(
+      (account) => account.email.toLowerCase() === user?.email.toLowerCase(),
+    );
+
+    if (
+      accounts.some(
+        (account) =>
+          account.email.toLowerCase() === normalizedEmail &&
+          account.email.toLowerCase() !== user?.email.toLowerCase(),
+      )
+    ) {
+      return { ok: false, error: 'Email này đã được sử dụng bởi tài khoản khác.' };
+    }
+
+    const updatedUser = {
+      ...user,
+      name: name.trim(),
+      email: normalizedEmail,
+      phone: phone.trim(),
+    };
+
+    if (existingAccount) {
+      setAccounts((previous) =>
+        previous.map((account) =>
+          account.email.toLowerCase() === user.email.toLowerCase()
+            ? updatedUser
+            : account,
+        ),
+      );
+    }
+
+    setUser(updatedUser);
+    return { ok: true };
+  };
+
   const logout = () => setUser(null);
 
   return (
-    <AuthContext.Provider value={{ user, accounts, login, register, logout }}>
+    <AuthContext.Provider value={{ user, accounts, login, register, updateProfile, logout }}>
       {children}
     </AuthContext.Provider>
   );
