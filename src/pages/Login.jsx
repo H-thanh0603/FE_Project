@@ -15,6 +15,7 @@ export default function Login() {
 
   const [form, setForm] = useState({ email: '', password: '', remember: true });
   const [errors, setErrors] = useState({});
+  const [formError, setFormError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -42,9 +43,14 @@ export default function Login() {
 
     // Giả lập thời gian gọi API xác thực
     setSubmitting(true);
+    setFormError('');
     setTimeout(() => {
-      login(form.email);
+      const result = login(form.email);
       setSubmitting(false);
+      if (!result.ok) {
+        setFormError(result.error);
+        return;
+      }
       navigate('/');
     }, 800);
   };
@@ -109,6 +115,8 @@ export default function Login() {
             Quên mật khẩu?
           </Link>
         </div>
+
+        {formError && <p className="form-banner form-banner--error">{formError}</p>}
 
         <button type="submit" className="btn btn--red" disabled={submitting}>
           {submitting ? (
