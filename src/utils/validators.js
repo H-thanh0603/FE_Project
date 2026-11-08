@@ -12,3 +12,13 @@ export function isPhone(value) {
 export function isNotEmpty(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
+
+/** Mật khẩu tối thiểu 6 ký tự (chỉ kiểm tra phía client, không lưu trữ) */
+export function isPassword(value) {
+  return typeof value === 'string' && value.length >= 6;
+}
+
+/** Hai trường nhập có khớp nhau không (dùng cho xác nhận mật khẩu) */
+export function isMatch(value, confirm) {
+  return value === confirm;
+}
