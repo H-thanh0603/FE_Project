@@ -22,6 +22,7 @@ export function AuthProvider({ children }) {
     if (accounts.length === 0) {
       // Chế độ demo: chấp nhận mọi email, tạo tài khoản tạm không lưu danh sách
       setUser({
+        id: `account-${normalized}`,
         name: normalized.split('@')[0] || 'Khách',
         email: normalized,
         demo: true,
@@ -49,6 +50,7 @@ export function AuthProvider({ children }) {
     }
 
     const account = {
+      id: `account-${normalized}`,
       name: name.trim(),
       email: normalized,
       phone: phone?.trim() || '',
@@ -77,6 +79,7 @@ export function AuthProvider({ children }) {
 
     const updatedUser = {
       ...user,
+      id: user.id ?? `account-${user.email.toLowerCase()}`,
       name: name.trim(),
       email: normalizedEmail,
       phone: phone.trim(),

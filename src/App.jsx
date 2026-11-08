@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
 import Orders from './pages/Orders';
 import Profile from './pages/Profile';
+import Addresses from './pages/Addresses';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="orders" element={<Orders />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="addresses" element={<Addresses />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

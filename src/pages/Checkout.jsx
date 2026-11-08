@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { useAddresses } from '../context/AddressContext';
 import { saveOrder } from '../services/orderService';
 import formatPrice from '../utils/formatPrice';
 import { isEmail, isPhone, isNotEmpty } from '../utils/validators';
@@ -9,12 +11,36 @@ const EMPTY_FORM = { name: '', phone: '', email: '', address: '' };
 
 export default function Checkout() {
   const { items, total, clearCart } = useCart();
-  const [form, setForm] = useState(EMPTY_FORM);
+  const { user } = useAuth();
+  const { addresses } = useAddresses();
+  const defaultAddress = addresses.find((address) => address.isDefault);
+  const [selectedAddressId, setSelectedAddressId] = useState(defaultAddress?.id ?? 'manual');
+  const [form, setForm] = useState(() => ({
+    ...EMPTY_FORM,
+    name: defaultAddress?.name ?? user?.name ?? '',
+    phone: defaultAddress?.phone ?? user?.phone ?? '',
+    email: user?.email ?? '',
+    address: defaultAddress?.address ?? '',
+  }));
   const [error, setError] = useState('');
   const [placedOrder, setPlacedOrder] = useState(null);
 
   const setField = (field) => (event) =>
     setForm((prev) => ({ ...prev, [field]: event.target.value }));
+
+  const selectAddress = (addressId) => {
+    setSelectedAddressId(addressId);
+    if (addressId === 'manual') return;
+
+    const address = addresses.find((item) => item.id === addressId);
+    if (!address) return;
+    setForm((previous) => ({
+      ...previous,
+      name: address.name,
+      phone: address.phone,
+      address: address.address,
+    }));
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -99,6 +125,24 @@ export default function Checkout() {
         {error && <p className="form-error">{error}</p>}
 
         <form className="form" onSubmit={handleSubmit} noValidate>
+          {addresses.length > 0 && (
+            <label>
+              Chọn địa chỉ đã lưu
+              <select
+                className="input"
+                value={selectedAddressId}
+                onChange={(event) => selectAddress(event.target.value)}
+              >
+                <option value="manual">Nhập địa chỉ khác</option>
+                {addresses.map((address) => (
+                  <option key={address.id} value={address.id}>
+                    {address.label} — {address.address}
+                    {address.isDefault ? ' (Mặc định)' : ''}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
           <label>
             Họ và tên
             <input className="input" value={form.name} onChange={setField('name')} />
@@ -129,6 +173,11 @@ export default function Checkout() {
               onChange={setField('address')}
             />
           </label>
+          {user && (
+            <Link to="/addresses" className="checkout-address-link">
+              Quản lý sổ địa chỉ
+            </Link>
+          )}
           <button type="submit" className="btn btn--red">
             Xác nhận đặt hàng
           </button>

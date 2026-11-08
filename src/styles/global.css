@@ -89,6 +89,108 @@ h1, h2, h3, h4 {
   font-weight: 600;
 }
 
+.address-page {
+  max-width: 760px;
+}
+
+.address-page-links,
+.address-form-actions {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  list-style: none;
+}
+
+.address-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: #fff;
+}
+
+.address-card-head,
+.address-card-title,
+.address-card-actions,
+.address-delete-confirm {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.address-card-head {
+  justify-content: space-between;
+}
+
+.address-default-badge {
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  background: var(--color-lime);
+  color: var(--color-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.address-text-button {
+  border: 0;
+  padding: 4px;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.address-text-button:hover {
+  color: var(--color-primary);
+}
+
+.address-text-button--danger {
+  color: var(--color-danger);
+}
+
+.address-delete-confirm {
+  margin-top: var(--spacing-1);
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.address-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+}
+
+.address-form-title {
+  font-size: 1.15rem;
+  text-transform: uppercase;
+}
+
+.address-textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.checkout-address-link {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
 .page-title {
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;

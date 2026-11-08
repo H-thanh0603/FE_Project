@@ -73,6 +73,7 @@ export default function Profile() {
         <div className="profile-links">
           <Link to="/orders" className="btn btn--outline">Đơn hàng</Link>
           <Link to="/wishlist" className="btn btn--outline">Sản phẩm yêu thích</Link>
+          <Link to="/addresses" className="btn btn--outline">Sổ địa chỉ</Link>
         </div>
 
         <form className="form" onSubmit={handleSubmit} noValidate>
