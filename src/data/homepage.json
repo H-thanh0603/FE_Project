@@ -1,0 +1,177 @@
+{
+  "hero": {
+    "eyebrow": "BỘ SƯU TẬP MÙA XUÂN 2025",
+    "titleLines": ["ĐỊNH HÌNH TỪNG", "BƯỚC CHẠY.", "CHINH PHỤC MỌI GIỚI HẠN."],
+    "highlightLine": 1,
+    "description": "Khám phá sự vượt trội của Boost Runner & Nitro Glide 2025 với công nghệ đệm kép tiên tiến, giảm chấn tối đa cho mọi hành trình đáng nhớ.",
+    "primaryCta": "Khám Phá Bộ Sưu Tập",
+    "secondaryCta": "Xem Video Trải Nghiệm",
+    "image": "/images/shoes/hero-nitro-runner.jpg",
+    "showcaseName": "Kinetic Nitro X Pro Runner",
+    "showcaseSubtitle": "Phản hồi động học tức thời",
+    "showcasePrice": 3250000,
+    "showcaseOldPrice": 3900000,
+    "showcaseBadges": ["NITRO RUNNER X", "SERIAL #KNT-908"],
+    "stats": [
+      { "value": "320g", "label": "Siêu nhẹ tối tân", "accent": true },
+      { "value": "ZoomAir Pro", "label": "Hấp thụ lực 85%", "accent": false },
+      { "value": "#1 VOTE", "label": "Best Shoes 2025", "accent": "lime" }
+    ],
+    "colorways": ["Neon Sunset", "Carbon Stealth", "Arctic White"]
+  },
+  "categories": {
+    "eyebrow": "Bộ Lọc Phân Khúc",
+    "title": "Khám Phá Theo Nhu Cầu Chuyển Động",
+    "description": "Tuyển tập các dòng giày được tối ưu hóa theo điều kiện bề mặt, cường độ vận động và tuyên ngôn phong cách riêng biệt.",
+    "items": [
+      {
+        "name": "Chạy Bộ Chuyên Nghiệp",
+        "subtitle": "Road Running, Marathon, Half-Distance",
+        "cta": "Xem Dòng Performance",
+        "badge": "140+ Mẫu",
+        "image": "/images/categories/cat-running.jpg",
+        "dark": false
+      },
+      {
+        "name": "Phong Cách Đường Phố",
+        "subtitle": "Streetwear, Retro Low, Hype Daily Wear",
+        "cta": "Xem Street Style",
+        "badge": "95+ Mẫu",
+        "image": "/images/categories/cat-street.jpg",
+        "dark": false
+      },
+      {
+        "name": "Bóng Rổ Hi-Top",
+        "subtitle": "Cushioning & Maximum Ankle Support",
+        "cta": "Xem Giày Sân Đấu",
+        "badge": "62+ Mẫu",
+        "image": "/images/categories/cat-basketball.jpg",
+        "dark": false
+      },
+      {
+        "name": "Bộ Sưu Tập Giới Hạn",
+        "subtitle": "Collabs, Rare Vault & Deadstock Drops",
+        "cta": "Săn Độc Quyền",
+        "badge": "Bản Giới Hạn",
+        "image": "/images/categories/cat-limited.jpg",
+        "dark": true
+      }
+    ]
+  },
+  "flashDrop": {
+    "badge": "⚡ KINETIC DROP #04",
+    "note": "MỞ BÁN CÓ HẠN • GLOBAL ALLOCATION",
+    "name": "CYBERPUNK BOOST V2",
+    "description": "Phiên bản stealth độc bản đúc vỏ carbon siêu bền, tích hợp chip NFC xác thực quyền sở hữu on-chain và đệm phản xạ năng lượng cao cấp.",
+    "countdownLabel": "Thời Gian Còn Lại Cho Đợt Đặt Trước:",
+    "durationSeconds": 214125,
+    "price": 3390000,
+    "oldPrice": 4200000,
+    "stockLabel": "Chỉ còn 24 đôi",
+    "soldLabel": "Đã đặt: 76/100 đôi",
+    "progressPercent": 76,
+    "progressNote": "Tỷ lệ giữ chỗ: 76%",
+    "cta": "Đặt Trước Ngay / Pre-Order",
+    "verifiedLabel": "AUTHENTIC NFC CHIP VERIFIED",
+    "image": "/images/shoes/drop-cyberpunk.jpg"
+  },
+  "featured": {
+    "eyebrow": "Bộ Sưu Tập Mùa Này",
+    "title": "Sản Phẩm Nổi Bật & Bán Chạy",
+    "tabs": [
+      { "id": "all", "label": "Tất Cả" },
+      { "id": "new", "label": "Mới Về" },
+      { "id": "bestseller", "label": "Bán Chạy Nhất" },
+      { "id": "sale", "label": "Đang Giảm Giá" }
+    ],
+    "sizeLabel": "Chọn kích cỡ:"
+  },
+  "tech": {
+    "eyebrow": "Kinetic Lab Innovation",
+    "title": "Đế Kineti-Foam™ Đa Tầng Thế Hệ Mới",
+    "description": "Nhẹ hơn 30%, đàn hồi gấp 2 lần so với hợp chất EVA truyền thống, kết hợp cùng thân dệt PrimeKnit liền khối cho khả năng đối lưu không khí 360 độ.",
+    "image": "/images/banners/tech-kineti-foam.jpg",
+    "hotspots": [
+      {
+        "title": "Thân Giày PrimeKnit 360°",
+        "description": "Dệt vi sợi đàn hồi, thoát khí tự nhiên, ôm sát mu bàn chân không gây điểm thắt.",
+        "position": "top: 28%; left: 28%",
+        "accent": "primary",
+        "order": 1
+      },
+      {
+        "title": "Lõi Kineti-Foam™ Đệm Kép",
+        "description": "Hấp thụ 94% xung chấn và phản lực tức thì lên tới 85% vào từng nhịp sải chân.",
+        "position": "top: 58%; left: 52%",
+        "accent": "lime",
+        "order": 2
+      },
+      {
+        "title": "Vân Đế Diamond-Traction",
+        "description": "Hợp chất cao su lưu hóa kháng mài mòn chuẩn đường đua quốc tế.",
+        "position": "bottom: 20%; right: 32%",
+        "accent": "primary",
+        "order": 3
+      }
+    ],
+    "specs": [
+      {
+        "icon": "air",
+        "title": "Vải PrimeKnit Kháng Khuẩn",
+        "description": "Lớp lót ion bạc kháng 99.2% vi khuẩn gây mùi, kiểm soát nhiệt độ bàn chân mát hơn 3°C."
+      },
+      {
+        "icon": "speed",
+        "title": "Tấm Đệm Carbon Đúc Nguyên Khối",
+        "description": "Ổn định vòm bàn chân, hạn chế lật cổ chân khi chuyển hướng đột ngột ở vận tốc cao."
+      },
+      {
+        "icon": "eco",
+        "title": "Vật Liệu Tái Chế 40%",
+        "description": "Sử dụng sợi tái chế từ rác thải đại dương, tối ưu độ bền mà vẫn giảm thiểu tác động môi trường."
+      }
+    ]
+  },
+  "trustBadges": [
+    {
+      "icon": "verified",
+      "title": "100% Chính Hãng",
+      "description": "Hoàn tiền 200% ngay lập tức nếu phát hiện sản phẩm giả hoặc không đạt chuẩn kiểm định."
+    },
+    {
+      "icon": "local_shipping",
+      "title": "Giao Siêu Tốc 2H",
+      "description": "Áp dụng cho nội thành Hà Nội & TP. Hồ Chí Minh. Miễn phí vận chuyển toàn quốc từ 1.500.000₫."
+    },
+    {
+      "icon": "published_with_changes",
+      "title": "Đổi Size Miễn Phí 30 Ngày",
+      "description": "Shipper hỗ trợ mang nhiều size đến tận nhà để thử, không tốn thêm bất kỳ phụ phí nào."
+    },
+    {
+      "icon": "shield",
+      "title": "Bảo Hành Đế Trọn Đời",
+      "description": "Bảo hành keo chỉ trọn đời sản phẩm. Tặng kèm gói spa vệ sinh giày chuyên sâu miễn phí trong 1 năm."
+    }
+  ],
+  "community": {
+    "eyebrow": "Cộng Đồng Đam Mê Sneaker",
+    "title": "#KINETICSTREET VIBE",
+    "description": "Gắn thẻ @kinetic.official và hashtag #KineticStreet để xuất hiện trong Lookbook và nhận voucher 100.000₫ hàng tháng.",
+    "posts": [
+      { "image": "/images/community/community-1.jpg", "author": "@duy.sneakerhead", "product": "Pulse Street '88" },
+      { "image": "/images/community/community-2.jpg", "author": "@linh_marathon", "product": "Nitro Runner X" },
+      { "image": "/images/community/community-3.jpg", "author": "@huy.bboycrew", "product": "Cyberpunk Boost V2" },
+      { "image": "/images/community/community-4.jpg", "author": "@hoang_hooper", "product": "Titanium Bounce" },
+      { "image": "/images/community/community-5.jpg", "author": "@tram.minimal", "product": "Air Flow Glide 90" }
+    ]
+  },
+  "newsletter": {
+    "badge": "🎁 ĐẶC QUYỀN THÀNH VIÊN MỚI",
+    "title": "Nhận Voucher 200.000₫ & Quyền Truy Cập Sớm Drop",
+    "description": "Đăng ký để là người đầu tiên nhận thông báo số lượng có hạn trước khi mở bán công khai 15 phút, kèm ưu đãi giảm trực tiếp cho đơn hàng đầu tiên từ 1.500.000₫.",
+    "placeholder": "Nhập địa chỉ email của bạn...",
+    "cta": "Đăng Ký Ngay",
+    "perks": ["Không gửi spam", "Huỷ đăng ký bất kỳ lúc nào"]
+  }
+}

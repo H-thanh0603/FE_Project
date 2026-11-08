@@ -1,28 +1,24 @@
-import { Link } from 'react-router-dom';
-import { getProducts } from '../services/productService';
-import ProductCard from '../components/product/ProductCard/ProductCard';
+import HeroSection from '../components/home/HeroSection';
+import CategorySection from '../components/home/CategorySection';
+import FlashDropSection from '../components/home/FlashDropSection';
+import FeaturedProducts from '../components/home/FeaturedProducts';
+import TechSection from '../components/home/TechSection';
+import TrustBadges from '../components/home/TrustBadges';
+import CommunitySection from '../components/home/CommunitySection';
+import NewsletterSection from '../components/home/NewsletterSection';
+import '../components/home/home.css';
 
 export default function Home() {
-  const featured = getProducts().slice(0, 4);
-
   return (
-    <div className="page">
-      <section className="hero">
-        <h1>Bộ sưu tập giày mới 2026</h1>
-        <p>Chọn cho mình đôi giày phù hợp — thoải mái cả ngày dài.</p>
-        <Link to="/products" className="btn btn-primary">
-          Mua ngay
-        </Link>
-      </section>
-
-      <section className="page-section">
-        <h2>Sản phẩm nổi bật</h2>
-        <div className="product-grid">
-          {featured.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-      </section>
+    <div className="page-home">
+      <HeroSection />
+      <CategorySection />
+      <FlashDropSection />
+      <FeaturedProducts />
+      <TechSection />
+      <TrustBadges />
+      <CommunitySection />
+      <NewsletterSection />
     </div>
   );
 }

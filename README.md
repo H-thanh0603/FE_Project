@@ -24,9 +24,10 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Tính năng | Trạng thái | Ghi chú |
 | --- | :---: | --- |
 | Khởi tạo cấu trúc dự án (Vite + React) | ✅ | Cấu hình chạy được với `npm run dev` |
-| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 4 sản phẩm mẫu |
+| Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
+| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 8 sản phẩm + nội dung trang chủ `homepage.json` |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
-| Danh sách yêu thích | ✅ | `WishlistContext` |
+| Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
 | Tìm kiếm, lọc theo thương hiệu | ✅ | Trang Sản phẩm |
 | Chi tiết sản phẩm (chọn size) | ✅ | |
 | Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
@@ -48,6 +49,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | [React Router](https://reactrouter.com/) | Điều hướng giữa các trang |
 | [Context API](https://react.dev/learn/scaling-up-with-reducer-and-context) | Quản lý trạng thái dùng chung (giỏ hàng, yêu thích, tài khoản) |
 | CSS thuần + CSS Variables | Biến giao diện, theme, responsive |
+| Google Fonts | Space Grotesk (tiêu đề), Hanken Grotesk (nội dung), Material Symbols (icon) |
 | JSON + LocalStorage | Mô phỏng dữ liệu và lưu trữ phía người dùng |
 
 > **Axios** chưa cần thiết ở giai đoạn này — chỉ bổ sung khi dự án kết nối backend thật (xem mục [Tiến độ tính năng](#-tiến-độ-tính-năng)).
@@ -69,6 +71,7 @@ FE_Project/
 │   ├── components/          # Component tái sử dụng, chia theo nhóm
 │   │   ├── common/          #   Button, Modal, Pagination, Loading
 │   │   ├── layout/          #   Navbar, Footer, MainLayout.jsx
+│   │   ├── home/            #   8 section trang chủ (hero, flash drop, tabs...)
 │   │   ├── product/         #   ProductCard, ProductFilter, ProductSort, ProductGallery
 │   │   └── cart/            #   CartItem, CartSummary
 │   │
@@ -91,7 +94,8 @@ FE_Project/
 │   │
 │   ├── hooks/               # React Hook tự viết
 │   │   ├── useLocalStorage.js   # Đồng bộ state với LocalStorage
-│   │   └── useDebounce.js       # Debounce cho ô tìm kiếm
+│   │   ├── useDebounce.js       # Debounce cho ô tìm kiếm
+│   │   └── useCountdown.js      # Đếm ngược cho khối Flash Drop
 │   │
 │   ├── services/            # Truy xuất và xử lý dữ liệu
 │   │   ├── productService.js    # Sản phẩm, thương hiệu (hiện đọc JSON)
@@ -99,8 +103,9 @@ FE_Project/
 │   │   └── orderService.js      # Lưu / đọc đơn hàng (LocalStorage)
 │   │
 │   ├── data/                # Dữ liệu JSON mô phỏng
-│   │   ├── products.json
-│   │   └── brands.json
+│   │   ├── products.json        # Danh sách giày
+│   │   ├── brands.json          # Thương hiệu
+│   │   └── homepage.json        # Nội dung các section trang chủ
 │   │
 │   ├── utils/               # Hàm tiện ích dùng chung
 │   │   ├── formatPrice.js       # Định dạng tiền VND
