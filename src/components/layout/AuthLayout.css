@@ -1,0 +1,147 @@
+/* Khung trang xác thực: panel thương hiệu + panel biểu mẫu */
+
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 72vh;
+  margin: var(--spacing-4) 0 var(--spacing-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+@media (min-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ---------- Panel thương hiệu (nền tối) ---------- */
+.auth-brand {
+  display: none;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  background: var(--color-dark);
+  color: #fff;
+  padding: var(--spacing-5);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 900px) {
+  .auth-brand {
+    display: flex;
+  }
+}
+
+/* Quầng sáng đỏ trang trí */
+.auth-brand::after {
+  content: '';
+  position: absolute;
+  right: -20%;
+  bottom: -30%;
+  width: 70%;
+  height: 70%;
+  background: rgba(255, 59, 0, 0.18);
+  filter: blur(70px);
+  pointer-events: none;
+}
+
+.auth-brand-logo {
+  display: inline-flex;
+  z-index: 1;
+}
+
+.auth-brand-logo img {
+  height: 30px;
+  /* Logo SVG chữ màu tối -> đảo trắng trên nền tối */
+  filter: brightness(0) invert(1);
+}
+
+.auth-brand-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  flex: 1;
+  z-index: 1;
+}
+
+.auth-brand-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.auth-brand-desc {
+  color: #dee3ec;
+  font-size: 0.9rem;
+  max-width: 26rem;
+}
+
+.auth-brand-perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  font-size: 0.85rem;
+  color: #dee3ec;
+}
+
+.auth-brand-perks li {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.auth-brand-perks .icon {
+  color: var(--color-lime);
+  font-size: 18px;
+}
+
+.auth-brand-shoe {
+  width: 100%;
+  max-width: 320px;
+  align-self: center;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 30px rgba(255, 59, 0, 0.25));
+}
+
+.auth-brand-foot {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  z-index: 1;
+}
+
+/* ---------- Panel biểu mẫu ---------- */
+.auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: var(--spacing-5) var(--spacing-4);
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.auth-box-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.auth-box-subtitle {
+  color: var(--color-muted);
+  font-size: 0.88rem;
+}

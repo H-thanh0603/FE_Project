@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import AuthLayout from '../components/layout/AuthLayout';
 import { useAuth } from '../context/AuthContext';
 
 /**
@@ -19,37 +20,29 @@ export default function Login() {
   };
 
   return (
-    <div className="container">
-      <div className="page page-narrow">
-        <div className="auth-card">
-          <div className="eyebrow">Chào mừng trở lại</div>
-          <h1 className="section-title" style={{ fontSize: '1.6rem' }}>
-            Đăng Nhập
-          </h1>
-          <p className="page-note">
-            Dự án chưa có backend — nhập tên bất kỳ để mô phỏng đăng nhập.
-          </p>
+    <AuthLayout
+      eyebrow="Chào mừng trở lại"
+      title="Đăng Nhập"
+      subtitle="Dự án chưa có backend — nhập tên bất kỳ để mô phỏng đăng nhập."
+    >
+      <form className="form" onSubmit={handleSubmit}>
+        <label>
+          Tên hiển thị
+          <input
+            className="input"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder="Ví dụ: Minh Anh"
+          />
+        </label>
+        <button type="submit" className="btn btn--dark">
+          Đăng nhập
+        </button>
+      </form>
 
-          <form className="form" onSubmit={handleSubmit}>
-            <label>
-              Tên hiển thị
-              <input
-                className="input"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                placeholder="Ví dụ: Minh Anh"
-              />
-            </label>
-            <button type="submit" className="btn btn--dark">
-              Đăng nhập
-            </button>
-          </form>
-
-          <p className="auth-switch">
-            Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
-          </p>
-        </div>
-      </div>
-    </div>
+      <p className="auth-switch">
+        Chưa có tài khoản? <Link to="/register">Đăng ký</Link>
+      </p>
+    </AuthLayout>
   );
 }
