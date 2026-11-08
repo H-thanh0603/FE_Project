@@ -1,9 +1,12 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts, getBrands } from '../services/productService';
 import useDebounce from '../hooks/useDebounce';
 import ProductCard from '../components/product/ProductCard/ProductCard';
+import Pagination from '../components/common/Pagination/Pagination';
 import homepage from '../data/homepage.json';
+
+const PAGE_SIZE = 8;
 
 export default function Products() {
   const products = getProducts();
@@ -19,6 +22,8 @@ export default function Products() {
   const [saleOnly, setSaleOnly] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const [sort, setSort] = useState('default');
+  const [page, setPage] = useState(1);
   const debouncedSearch = useDebounce(search);
   const sizes = [...new Set(products.flatMap((product) => product.sizes))]
     .sort((a, b) => a - b);
@@ -93,6 +98,46 @@ export default function Products() {
     ],
   );
 
+  const sorted = useMemo(() => {
+    const result = [...filtered];
+
+    switch (sort) {
+      case 'price-asc':
+        return result.sort((a, b) => a.price - b.price);
+      case 'price-desc':
+        return result.sort((a, b) => b.price - a.price);
+      case 'rating-desc':
+        return result.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
+      case 'name-asc':
+        return result.sort((a, b) => a.name.localeCompare(b.name, 'vi'));
+      default:
+        return result;
+    }
+  }, [filtered, sort]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [
+    brand,
+    category,
+    color,
+    debouncedSearch,
+    maxPrice,
+    minPrice,
+    saleOnly,
+    size,
+    sort,
+  ]);
+
+  const totalPages = Math.ceil(sorted.length / PAGE_SIZE);
+  const currentPage = Math.min(page, Math.max(totalPages, 1));
+  const visibleProducts = sorted.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
+  const firstVisibleProduct = sorted.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const lastVisibleProduct = Math.min(currentPage * PAGE_SIZE, sorted.length);
+
   return (
     <div className="container">
       <div className="page">
@@ -134,6 +179,18 @@ export default function Products() {
                 {item.name}
               </option>
             ))}
+          </select>
+          <select
+            className="input"
+            value={sort}
+            onChange={(event) => setSort(event.target.value)}
+            aria-label="Sắp xếp sản phẩm"
+          >
+            <option value="default">Sắp xếp: Mặc định</option>
+            <option value="price-asc">Giá: Thấp đến cao</option>
+            <option value="price-desc">Giá: Cao đến thấp</option>
+            <option value="rating-desc">Đánh giá cao nhất</option>
+            <option value="name-asc">Tên: A đến Z</option>
           </select>
           <button
             type="button"
@@ -247,10 +304,11 @@ export default function Products() {
         )}
 
         <p className="page-note">
-          Hiển thị <strong>{filtered.length}</strong> / {products.length} sản phẩm
+          Hiển thị <strong>{firstVisibleProduct}–{lastVisibleProduct}</strong> / {sorted.length}{' '}
+          sản phẩm phù hợp ({products.length} sản phẩm trong cửa hàng)
         </p>
 
-        {filtered.length === 0 ? (
+        {sorted.length === 0 ? (
           <div className="empty-state">
             <span className="icon">search_off</span>
             <p>Không tìm thấy sản phẩm nào phù hợp.</p>
@@ -261,11 +319,18 @@ export default function Products() {
             )}
           </div>
         ) : (
-          <div className="product-grid">
-            {filtered.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          <>
+            <div className="product-grid">
+              {visibleProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setPage}
+            />
+          </>
         )}
       </div>
     </div>

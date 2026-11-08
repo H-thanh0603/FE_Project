@@ -29,11 +29,11 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
 | Tìm kiếm, lọc theo thương hiệu, danh mục, giá, size, màu và khuyến mãi | ✅ | Trang Sản phẩm |
+| Sắp xếp và phân trang sản phẩm | ✅ | Tính trên kết quả sau khi lọc |
 | Chi tiết sản phẩm (chọn size) | ✅ | |
 | Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
-| Sắp xếp sản phẩm | 📋 | |
 | Đánh giá sản phẩm | 📋 | |
 | Áp dụng mã giảm giá | 📋 | |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
