@@ -32,6 +32,15 @@ export default function Orders() {
                   </span>
                 </div>
                 <p>Người nhận: {order.customer.name}</p>
+                {order.shipping && (
+                  <p>
+                    Giao hàng: {order.shipping.name}
+                    {order.shipping.cost === 0 ? ' — Miễn phí' : ''}
+                  </p>
+                )}
+                {order.payment && (
+                  <p>Thanh toán: {order.payment.name} (mô phỏng)</p>
+                )}
                 <div className="order-card-foot">
                   <span>{order.items.length} sản phẩm</span>
                   <span className="order-card-total">{formatPrice(order.total)}</span>

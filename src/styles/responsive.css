@@ -8,6 +8,15 @@
   .detail {
     grid-template-columns: 1fr;
   }
+
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    position: static;
+    grid-row: 1;
+  }
 }
 
 @media (max-width: 640px) {
@@ -28,6 +37,19 @@
 
   .hero {
     padding: var(--spacing-4);
+  }
+
+  .checkout-steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .checkout-step {
+    padding: var(--spacing-1) 0;
+  }
+
+  .checkout-section {
+    padding: var(--spacing-3);
   }
 }
 

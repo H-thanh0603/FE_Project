@@ -31,7 +31,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Tìm kiếm, lọc theo thương hiệu, danh mục, giá, size, màu và khuyến mãi | ✅ | Trang Sản phẩm |
 | Sắp xếp và phân trang sản phẩm | ✅ | Tính trên kết quả sau khi lọc |
 | Chi tiết sản phẩm (chọn size) | ✅ | |
-| Thanh toán & lịch sử đơn hàng (mô phỏng) | ✅ | Lưu LocalStorage, không có thanh toán thật |
+| Checkout nhiều bước & lịch sử đơn hàng (mô phỏng) | ✅ | Thông tin nhận hàng, giao hàng, thanh toán giả lập và xác nhận đơn; không có giao dịch thật |
 | Đăng nhập / Đăng ký (mô phỏng) | ✅ | Khung AuthLayout hai cột, validate đầy đủ; mật khẩu không được lưu trữ |
 | Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
 | Sổ địa chỉ giao hàng (mô phỏng) | ✅ | Thêm, sửa, xóa, chọn mặc định; chọn nhanh khi checkout |
