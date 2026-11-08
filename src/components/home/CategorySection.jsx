@@ -19,7 +19,7 @@ export default function CategorySection() {
           {categories.items.map((item) => (
             <Link
               key={item.name}
-              to="/products"
+              to={`/products?category=${item.category}`}
               className={`category-card${item.dark ? ' category-card--dark' : ''}`}
             >
               <div className="category-image">

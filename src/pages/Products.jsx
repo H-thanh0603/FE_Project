@@ -1,24 +1,45 @@
 import { useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { getProducts, getBrands } from '../services/productService';
 import useDebounce from '../hooks/useDebounce';
 import ProductCard from '../components/product/ProductCard/ProductCard';
+import homepage from '../data/homepage.json';
 
 export default function Products() {
   const products = getProducts();
   const brands = getBrands();
+  const categories = homepage.categories.items;
+  const categoryIds = categories.map((item) => item.category);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [brand, setBrand] = useState('all');
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search);
+  const requestedCategory = searchParams.get('category');
+  const category = categoryIds.includes(requestedCategory) ? requestedCategory : 'all';
+  const activeCategory = categories.find((item) => item.category === category);
+
+  const setCategory = (value) => {
+    setSearchParams((current) => {
+      const next = new URLSearchParams(current);
+      if (value === 'all') {
+        next.delete('category');
+      } else {
+        next.set('category', value);
+      }
+      return next;
+    });
+  };
 
   const filtered = useMemo(
     () =>
       products.filter(
         (product) =>
+          (category === 'all' || product.category === category) &&
           (brand === 'all' || product.brandId === brand) &&
           product.name.toLowerCase().includes(debouncedSearch.toLowerCase()),
       ),
-    [brand, debouncedSearch],
+    [brand, category, debouncedSearch],
   );
 
   return (
@@ -26,7 +47,7 @@ export default function Products() {
       <div className="page">
         <div>
           <div className="eyebrow">Cửa hàng KINETIC</div>
-          <h1 className="section-title">Tất Cả Sản Phẩm</h1>
+          <h1 className="section-title">{activeCategory?.name ?? 'Tất Cả Sản Phẩm'}</h1>
         </div>
 
         <div className="toolbar">
@@ -47,6 +68,19 @@ export default function Products() {
             {brands.map((b) => (
               <option key={b.id} value={b.id}>
                 {b.name}
+              </option>
+            ))}
+          </select>
+          <select
+            className="input"
+            value={category}
+            onChange={(event) => setCategory(event.target.value)}
+            aria-label="Lọc theo danh mục"
+          >
+            <option value="all">Tất cả danh mục</option>
+            {categories.map((item) => (
+              <option key={item.category} value={item.category}>
+                {item.name}
               </option>
             ))}
           </select>

@@ -24,7 +24,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Tính năng | Trạng thái | Ghi chú |
 | --- | :---: | --- |
 | Khởi tạo cấu trúc dự án (Vite + React) | ✅ | Cấu hình chạy được với `npm run dev` |
-| Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
+| Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục lọc sản phẩm, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
 | Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
