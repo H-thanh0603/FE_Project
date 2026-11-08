@@ -7,72 +7,86 @@ export default function Cart() {
 
   if (items.length === 0) {
     return (
-      <div className="page">
-        <h1 className="page-title">Giỏ hàng</h1>
-        <p>Giỏ hàng của bạn đang trống.</p>
-        <Link to="/products" className="btn btn-primary">
-          Xem sản phẩm
-        </Link>
+      <div className="container">
+        <div className="page">
+          <div className="eyebrow">Giỏ hàng của bạn</div>
+          <h1 className="section-title">Giỏ Hàng Trống</h1>
+          <div className="empty-state">
+            <span className="icon">shopping_bag</span>
+            <p>Chưa có sản phẩm nào trong giỏ hàng.</p>
+          </div>
+          <Link to="/products" className="btn btn--dark" style={{ alignSelf: 'flex-start' }}>
+            Khám phá sản phẩm
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="page">
-      <h1 className="page-title">Giỏ hàng</h1>
+    <div className="container">
+      <div className="page">
+        <div>
+          <div className="eyebrow">Giỏ hàng của bạn</div>
+          <h1 className="section-title">
+            Giỏ Hàng <span className="highlight">({items.length})</span>
+          </h1>
+        </div>
 
-      <ul className="cart-list">
-        {items.map((item) => (
-          <li key={`${item.id}-${item.size}`} className="cart-row">
-            <span className="cart-row-name">
-              {item.name} — size {item.size}
-            </span>
-            <span className="cart-row-price">{formatPrice(item.price)}</span>
+        <ul className="cart-list">
+          {items.map((item) => (
+            <li key={`${item.id}-${item.size}`} className="cart-row">
+              <span className="cart-row-name">
+                {item.name} — size {item.size}
+              </span>
+              <span className="cart-row-price">{formatPrice(item.price)}</span>
 
-            <div className="quantity-controls">
+              <div className="quantity-controls">
+                <button
+                  type="button"
+                  aria-label="Giảm số lượng"
+                  onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
+                >
+                  −
+                </button>
+                <span>{item.quantity}</span>
+                <button
+                  type="button"
+                  aria-label="Tăng số lượng"
+                  onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
+                >
+                  +
+                </button>
+              </div>
+
+              <span className="cart-row-subtotal">
+                {formatPrice(item.price * item.quantity)}
+              </span>
+
               <button
                 type="button"
-                aria-label="Giảm số lượng"
-                onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
+                className="btn btn--light"
+                onClick={() => removeItem(item.id, item.size)}
               >
-                −
+                <span className="icon" style={{ fontSize: 16 }}>delete</span>
+                Xóa
               </button>
-              <span>{item.quantity}</span>
-              <button
-                type="button"
-                aria-label="Tăng số lượng"
-                onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-              >
-                +
-              </button>
-            </div>
+            </li>
+          ))}
+        </ul>
 
-            <span className="cart-row-subtotal">
-              {formatPrice(item.price * item.quantity)}
-            </span>
-
-            <button
-              type="button"
-              className="btn btn-outline"
-              onClick={() => removeItem(item.id, item.size)}
-            >
-              Xóa
+        <div className="cart-footer">
+          <p className="cart-total">
+            Tổng cộng: <strong className="cart-total-value">{formatPrice(total)}</strong>
+          </p>
+          <div className="cart-footer-actions">
+            <button type="button" className="btn btn--outline" onClick={clearCart}>
+              Xóa tất cả
             </button>
-          </li>
-        ))}
-      </ul>
-
-      <div className="cart-footer">
-        <p className="cart-total">
-          Tổng cộng: <strong>{formatPrice(total)}</strong>
-        </p>
-        <div className="cart-footer-actions">
-          <button type="button" className="btn btn-outline" onClick={clearCart}>
-            Xóa tất cả
-          </button>
-          <Link to="/checkout" className="btn btn-primary">
-            Thanh toán
-          </Link>
+            <Link to="/checkout" className="btn btn--red">
+              Thanh toán
+            </Link>
+          </div>
         </div>
       </div>
     </div>

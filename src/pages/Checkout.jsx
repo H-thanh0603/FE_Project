@@ -37,84 +37,103 @@ export default function Checkout() {
 
   if (placedOrder) {
     return (
-      <div className="page">
-        <h1 className="page-title">✓ Đặt hàng thành công</h1>
-        <p>
-          Mã đơn hàng của bạn: <strong>{placedOrder.id}</strong>
-        </p>
-        <p>Xem lại đơn hàng trong trang <Link to="/orders">Đơn hàng</Link>.</p>
-        <Link to="/products" className="btn btn-primary">
-          Tiếp tục mua sắm
-        </Link>
+      <div className="container">
+        <div className="page page-narrow" style={{ maxWidth: 560 }}>
+          <div className="order-success">
+            <span className="icon order-success-icon">check_circle</span>
+            <h1 className="section-title">Đặt Hàng Thành Công</h1>
+            <p>
+              Mã đơn hàng của bạn: <strong>{placedOrder.id}</strong>
+            </p>
+            <p className="page-note">
+              Đơn hàng chỉ là mô phỏng — theo dõi trong trang{' '}
+              <Link to="/orders">Đơn hàng</Link>.
+            </p>
+            <Link to="/products" className="btn btn--dark">
+              Tiếp tục mua sắm
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (items.length === 0) {
     return (
-      <div className="page">
-        <h1 className="page-title">Thanh toán</h1>
-        <p>Giỏ hàng trống, không thể thanh toán.</p>
-        <Link to="/products" className="btn btn-primary">
-          Xem sản phẩm
-        </Link>
+      <div className="container">
+        <div className="page">
+          <div className="eyebrow">Thanh toán</div>
+          <h1 className="section-title">Không Có Sản Phẩm Để Thanh Toán</h1>
+          <div className="empty-state">
+            <span className="icon">remove_shopping_cart</span>
+            <p>Giỏ hàng trống, hãy thêm sản phẩm trước khi thanh toán.</p>
+          </div>
+          <Link to="/products" className="btn btn--dark" style={{ alignSelf: 'flex-start' }}>
+            Xem sản phẩm
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="page">
-      <h1 className="page-title">Thanh toán</h1>
+    <div className="container">
+      <div className="page">
+        <div>
+          <div className="eyebrow">Bước cuối cùng</div>
+          <h1 className="section-title">Thanh Toán</h1>
+        </div>
 
-      <div className="checkout-summary">
-        {items.map((item) => (
-          <p key={`${item.id}-${item.size}`}>
-            {item.name} (size {item.size}) × {item.quantity} —{' '}
-            {formatPrice(item.price * item.quantity)}
+        <div className="checkout-summary">
+          {items.map((item) => (
+            <p key={`${item.id}-${item.size}`}>
+              {item.name} (size {item.size}) × {item.quantity} —{' '}
+              <strong>{formatPrice(item.price * item.quantity)}</strong>
+            </p>
+          ))}
+          <p className="cart-total">
+            Tổng cộng: <strong className="cart-total-value">{formatPrice(total)}</strong>
           </p>
-        ))}
-        <p className="cart-total">
-          Tổng cộng: <strong>{formatPrice(total)}</strong>
-        </p>
+        </div>
+
+        {error && <p className="form-error">{error}</p>}
+
+        <form className="form" onSubmit={handleSubmit} noValidate>
+          <label>
+            Họ và tên
+            <input className="input" value={form.name} onChange={setField('name')} />
+          </label>
+          <label>
+            Số điện thoại
+            <input
+              className="input"
+              type="tel"
+              value={form.phone}
+              onChange={setField('phone')}
+            />
+          </label>
+          <label>
+            Email
+            <input
+              className="input"
+              type="email"
+              value={form.email}
+              onChange={setField('email')}
+            />
+          </label>
+          <label>
+            Địa chỉ giao hàng
+            <input
+              className="input"
+              value={form.address}
+              onChange={setField('address')}
+            />
+          </label>
+          <button type="submit" className="btn btn--red">
+            Xác nhận đặt hàng
+          </button>
+        </form>
       </div>
-
-      {error && <p className="form-error">{error}</p>}
-
-      <form className="form" onSubmit={handleSubmit} noValidate>
-        <label>
-          Họ và tên
-          <input className="input" value={form.name} onChange={setField('name')} />
-        </label>
-        <label>
-          Số điện thoại
-          <input
-            className="input"
-            type="tel"
-            value={form.phone}
-            onChange={setField('phone')}
-          />
-        </label>
-        <label>
-          Email
-          <input
-            className="input"
-            type="email"
-            value={form.email}
-            onChange={setField('email')}
-          />
-        </label>
-        <label>
-          Địa chỉ giao hàng
-          <input
-            className="input"
-            value={form.address}
-            onChange={setField('address')}
-          />
-        </label>
-        <button type="submit" className="btn btn-primary">
-          Xác nhận đặt hàng
-        </button>
-      </form>
     </div>
   );
 }
