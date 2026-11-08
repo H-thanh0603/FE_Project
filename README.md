@@ -25,7 +25,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | --- | :---: | --- |
 | Khởi tạo cấu trúc dự án (Vite + React) | ✅ | Cấu hình chạy được với `npm run dev` |
 | Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
-| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 8 sản phẩm + nội dung trang chủ `homepage.json` |
+| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
 | Tìm kiếm, lọc theo thương hiệu | ✅ | Trang Sản phẩm |
@@ -173,6 +173,7 @@ Sau đó mở địa chỉ mà Vite hiển thị trên terminal — thông thư�
 - **Hook / hàm tiện ích**: `camelCase`; tên hook luôn bắt đầu bằng `use`.
 - **Context**: tách `Provider` và custom hook (ví dụ `useCart()`) để component chỉ dùng hook, không import context trực tiếp.
 - **Dữ liệu**: component chỉ truy cập dữ liệu qua `services/`, không import trực tiếp JSON — giúp sau này thay bằng API thật mà không sửa UI.
+- **Catalog**: mỗi sản phẩm có một `category` chính (`running`, `streetwear`, `basketball`, `limited`) và mảng `tags` riêng cho nhãn như `new`, `bestseller`, `sale`; ảnh chưa có dùng chuỗi rỗng và hiển thị placeholder.
 - **LocalStorage**: chỉ dùng khóa khai báo trong `utils/constants.js`.
 - **Style**: dùng CSS Variables trong `styles/variables.css`, tránh hardcode màu và khoảng cách.
 - **Tài nguyên tĩnh**: ảnh giày đặt trong `public/images/shoes/`, tham chiếu bằng `/images/shoes/ten-anh.jpg`.
