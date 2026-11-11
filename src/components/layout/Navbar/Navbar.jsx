@@ -1,12 +1,14 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
+import { useNotifications } from '../../../context/NotificationContext';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
 export default function Navbar() {
   const { itemCount } = useCart();
   const { user, logout } = useAuth();
+  const { unreadCount } = useNotifications();
 
   return (
     <>
@@ -39,6 +41,10 @@ export default function Navbar() {
           </nav>
 
           <div className="nav-actions">
+            <Link to="/notifications" className="notif-link" aria-label="Thông báo">
+              <span className="icon">notifications</span>
+              {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
+            </Link>
             <Link to="/cart" className="cart-link">
               <span className="icon">shopping_bag</span>
               Giỏ hàng
