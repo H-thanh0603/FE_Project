@@ -39,8 +39,9 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
 | Sổ địa chỉ giao hàng (mô phỏng) | ✅ | Thêm, sửa, xóa, chọn mặc định; chọn nhanh khi checkout |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
+| Đặt lại mật khẩu (mô phỏng) | ✅ | Trang `/reset-password`, nối từ luồng quên mật khẩu; mật khẩu mới không được lưu |
 | Đánh giá sản phẩm | 📋 | |
-| Áp dụng mã giảm giá | 📋 | |
+| Áp dụng mã giảm giá (mô phỏng) | ✅ | `couponService` + `CouponInput`; ô nhập mã ở giỏ hàng và checkout, giảm giá lưu vào đơn |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
 
 ---
