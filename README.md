@@ -54,7 +54,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | [React Router](https://reactrouter.com/) | Điều hướng giữa các trang |
 | [Context API](https://react.dev/learn/scaling-up-with-reducer-and-context) | Quản lý trạng thái dùng chung (giỏ hàng, yêu thích, tài khoản) |
 | CSS thuần + CSS Variables | Biến giao diện, theme, responsive |
-| Google Fonts | Space Grotesk (tiêu đề), Hanken Grotesk (nội dung), Material Symbols (icon) |
+| Google Fonts | Be Vietnam Pro (toàn bộ giao diện), Material Symbols (icon) |
 | JSON + LocalStorage | Mô phỏng dữ liệu và lưu trữ phía người dùng |
 
 > **Axios** chưa cần thiết ở giai đoạn này — chỉ bổ sung khi dự án kết nối backend thật (xem mục [Tiến độ tính năng](#-tiến-độ-tính-năng)).

@@ -19,8 +19,8 @@
   --color-danger-text: #93000a;
 
   /* Font chữ */
-  --font-display: 'Space Grotesk', 'Segoe UI', Arial, sans-serif; /* Tiêu đề, nhãn */
-  --font-body: 'Hanken Grotesk', 'Segoe UI', Arial, sans-serif;   /* Nội dung */
+  --font-display: 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif; /* Tiêu đề, nhãn */
+  --font-body: 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif;   /* Nội dung */
   --font-family: var(--font-body);
   --font-icons: 'Material Symbols Rounded';
 
