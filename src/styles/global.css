@@ -1332,6 +1332,19 @@ h1, h2, h3, h4 {
   gap: var(--spacing-2);
 }
 
+.cart-coupon {
+  margin-bottom: var(--spacing-3);
+}
+
+.cart-discount-note {
+  display: block;
+  margin-top: var(--spacing-1);
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
 .checkout-summary {
   background: var(--color-surface);
   border: 1px solid var(--color-border);

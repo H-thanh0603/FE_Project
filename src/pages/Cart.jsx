@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import CouponInput from '../components/cart/CouponInput/CouponInput';
 import formatPrice from '../utils/formatPrice';
 
 export default function Cart() {
-  const { items, updateQuantity, removeItem, total, clearCart } = useCart();
+  const { items, updateQuantity, removeItem, total, clearCart, discount } = useCart();
 
   if (items.length === 0) {
     return (
@@ -75,9 +76,16 @@ export default function Cart() {
           ))}
         </ul>
 
+        <div className="cart-coupon">
+          <CouponInput />
+        </div>
+
         <div className="cart-footer">
           <p className="cart-total">
-            Tổng cộng: <strong className="cart-total-value">{formatPrice(total)}</strong>
+            Tổng cộng: <strong className="cart-total-value">{formatPrice(total - discount)}</strong>
+            {discount > 0 && (
+              <span className="cart-discount-note">đã giảm {formatPrice(discount)}</span>
+            )}
           </p>
           <div className="cart-footer-actions">
             <button type="button" className="btn btn--outline" onClick={clearCart}>
