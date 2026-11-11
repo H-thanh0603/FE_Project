@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
+import { useToast } from '../../../context/ToastContext';
 import { getBrandName } from '../../../services/productService';
 import formatPrice from '../../../utils/formatPrice';
 import { getProductBadge } from '../../../utils/productLabels';
@@ -10,12 +11,14 @@ import './ProductCard.css';
 export default function ProductCard({ product }) {
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { showToast } = useToast();
   const [size, setSize] = useState(product.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
 
   const handleAdd = () => {
     addItem(product, size);
     setJustAdded(true);
+    showToast(`Đã thêm ${product.name} (size ${size}) vào giỏ.`);
     setTimeout(() => setJustAdded(false), 1500);
   };
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../../../context/CartContext';
+import { useToast } from '../../../context/ToastContext';
 import formatPrice from '../../../utils/formatPrice';
 import './CouponInput.css';
 
@@ -8,6 +9,7 @@ import './CouponInput.css';
  */
 export default function CouponInput() {
   const { coupon, discount, applyCoupon, removeCoupon } = useCart();
+  const { showToast } = useToast();
   const [code, setCode] = useState('');
   const [error, setError] = useState('');
 
@@ -20,6 +22,7 @@ export default function CouponInput() {
     }
     setError('');
     setCode('');
+    showToast(`Đã áp dụng mã ${result.coupon.code}.`);
   };
 
   if (coupon) {
