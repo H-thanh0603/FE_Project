@@ -1556,6 +1556,15 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
+.checkout-coupon {
+  margin-top: var(--spacing-3);
+}
+
+.checkout-discount strong,
+.order-detail-discount strong {
+  color: var(--color-primary);
+}
+
 .checkout-review {
   display: flex;
   flex-direction: column;

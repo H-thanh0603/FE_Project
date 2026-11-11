@@ -4,6 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useAddresses } from '../context/AddressContext';
 import { saveOrder } from '../services/orderService';
+import CouponInput from '../components/cart/CouponInput/CouponInput';
 import formatPrice from '../utils/formatPrice';
 import { isEmail, isPhone, isNotEmpty } from '../utils/validators';
 
@@ -50,7 +51,7 @@ function getCustomerError(form) {
 }
 
 export default function Checkout() {
-  const { items, total, clearCart } = useCart();
+  const { items, total, clearCart, coupon, discount } = useCart();
   const { user } = useAuth();
   const { addresses } = useAddresses();
   const defaultAddress = addresses.find((address) => address.isDefault);
@@ -74,7 +75,7 @@ export default function Checkout() {
     shippingId === 'standard' && total >= FREE_SHIPPING_THRESHOLD
       ? 0
       : shippingMethod.fee;
-  const orderTotal = total + shippingCost;
+  const orderTotal = total - discount + shippingCost;
 
   const setField = (field) => (event) => {
     setForm((previous) => ({ ...previous, [field]: event.target.value }));
@@ -134,6 +135,10 @@ export default function Checkout() {
       customer: { ...form },
       items: [...items],
       subtotal: total,
+      discount: {
+        code: coupon?.code ?? null,
+        amount: discount,
+      },
       shipping: {
         id: shippingMethod.id,
         name: shippingMethod.name,
@@ -441,8 +446,17 @@ export default function Checkout() {
                 </li>
               ))}
             </ul>
+            <div className="checkout-coupon">
+              <CouponInput />
+            </div>
             <div className="checkout-totals">
               <p><span>Tạm tính</span><strong>{formatPrice(total)}</strong></p>
+              {discount > 0 && (
+                <p className="checkout-discount">
+                  <span>Giảm giá{coupon ? ` (${coupon.code})` : ''}</span>
+                  <strong>-{formatPrice(discount)}</strong>
+                </p>
+              )}
               <p>
                 <span>Phí giao hàng</span>
                 <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>

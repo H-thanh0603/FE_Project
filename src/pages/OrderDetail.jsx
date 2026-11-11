@@ -144,6 +144,12 @@ export default function OrderDetail() {
 
             <div className="order-detail-totals">
               <p><span>Tạm tính</span><strong>{formatPrice(subtotal)}</strong></p>
+              {order.discount?.amount > 0 && (
+                <p className="order-detail-discount">
+                  <span>Giảm giá{order.discount.code ? ` (${order.discount.code})` : ''}</span>
+                  <strong>-{formatPrice(order.discount.amount)}</strong>
+                </p>
+              )}
               <p>
                 <span>Giao hàng{order.shipping?.name ? ` — ${order.shipping.name}` : ''}</span>
                 <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>
