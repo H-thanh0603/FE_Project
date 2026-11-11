@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { useAddresses } from '../context/AddressContext';
+import { useNotifications } from '../context/NotificationContext';
 import { saveOrder } from '../services/orderService';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
 import formatPrice from '../utils/formatPrice';
@@ -54,6 +55,7 @@ export default function Checkout() {
   const { items, total, clearCart, coupon, discount } = useCart();
   const { user } = useAuth();
   const { addresses } = useAddresses();
+  const { pushNotification } = useNotifications();
   const defaultAddress = addresses.find((address) => address.isDefault);
   const [selectedAddressId, setSelectedAddressId] = useState(defaultAddress?.id ?? 'manual');
   const [form, setForm] = useState(() => ({
@@ -155,6 +157,11 @@ export default function Checkout() {
     clearCart();
     setError('');
     setPlacedOrder(newOrder);
+    pushNotification({
+      title: 'Đặt hàng thành công',
+      message: `Đơn ${newOrder.id} đã được tạo và đang chờ xác nhận.`,
+      link: `/orders/${encodeURIComponent(newOrder.id)}`,
+    });
   };
 
   if (placedOrder) {
