@@ -42,6 +42,8 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Đặt lại mật khẩu (mô phỏng) | ✅ | Trang `/reset-password`, nối từ luồng quên mật khẩu; mật khẩu mới không được lưu |
 | Đánh giá sản phẩm | 📋 | |
 | Áp dụng mã giảm giá (mô phỏng) | ✅ | `couponService` + `CouponInput`; ô nhập mã ở giỏ hàng và checkout, giảm giá lưu vào đơn |
+| Thông báo nổi (toast) | ✅ | `ToastContext` + `ToastStack`; báo khi thêm vào giỏ, áp mã giảm giá |
+| Thông báo trong ứng dụng (mô phỏng) | ✅ | Chuông trên Navbar kèm số chưa đọc, trang `/notifications`; sinh khi đặt, hủy, đổi trạng thái đơn |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
 
 ---
