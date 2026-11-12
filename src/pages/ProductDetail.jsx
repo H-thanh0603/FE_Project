@@ -20,6 +20,7 @@ export default function ProductDetail() {
   const { showToast } = useToast();
   const { recordView } = useRecentlyViewed();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
+  const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
@@ -49,9 +50,10 @@ export default function ProductDetail() {
   const badge = getProductBadge(product);
 
   const handleAddToCart = () => {
-    addItem(product, size);
+    addItem(product, size, quantity);
     setJustAdded(true);
-    showToast(`Đã thêm ${product.name} (size ${size}) vào giỏ.`);
+    const qtyText = quantity > 1 ? `${quantity}x ` : '';
+    showToast(`Đã thêm ${qtyText}${product.name} (size ${size}) vào giỏ.`);
     setTimeout(() => setJustAdded(false), 1500);
   };
 
@@ -123,6 +125,30 @@ export default function ProductDetail() {
                     {s}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            <div className="detail-qty-group">
+              <div className="shop-card-sizes-label">Số lượng</div>
+              <div className="detail-qty-selector">
+                <button
+                  type="button"
+                  className="detail-qty-btn"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  disabled={quantity <= 1}
+                  aria-label="Giảm số lượng"
+                >
+                  −
+                </button>
+                <span className="detail-qty-val">{quantity}</span>
+                <button
+                  type="button"
+                  className="detail-qty-btn"
+                  onClick={() => setQuantity((q) => Math.min(10, q + 1))}
+                  aria-label="Tăng số lượng"
+                >
+                  +
+                </button>
               </div>
             </div>
 
