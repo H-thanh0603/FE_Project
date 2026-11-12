@@ -3,6 +3,7 @@ import Navbar from './Navbar/Navbar';
 import Footer from './Footer/Footer';
 import ToastStack from '../common/Toast/ToastStack';
 import ScrollToTop from '../common/ScrollToTop';
+import BackToTop from '../common/BackToTop/BackToTop';
 
 /** Bố cục chung: Navbar phía trên, nội dung trang ở giữa, Footer phía dưới. */
 export default function MainLayout() {
@@ -15,6 +16,7 @@ export default function MainLayout() {
       </main>
       <Footer />
       <ToastStack />
+      <BackToTop />
     </div>
   );
 }
