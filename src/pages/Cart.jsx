@@ -39,9 +39,25 @@ export default function Cart() {
         <ul className="cart-list">
           {items.map((item) => (
             <li key={`${item.id}-${item.size}`} className="cart-row">
-              <span className="cart-row-name">
-                {item.name} — size {item.size}
-              </span>
+              <Link to={`/products/${item.id}`} className="cart-row-image">
+                {item.image ? (
+                  <img src={item.image} alt={item.name} />
+                ) : (
+                  <span className="icon" style={{ color: 'var(--color-muted)' }}>
+                    image
+                  </span>
+                )}
+              </Link>
+
+              <div className="cart-row-info">
+                <Link to={`/products/${item.id}`} className="cart-row-name">
+                  {item.name}
+                </Link>
+                <div className="cart-row-size">
+                  Kích cỡ: <strong>{item.size}</strong>
+                </div>
+              </div>
+
               <span className="cart-row-price">{formatPrice(item.price)}</span>
 
               <div className="quantity-controls">
