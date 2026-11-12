@@ -9,6 +9,7 @@ export const STORAGE_KEYS = {
   RECENTLY_VIEWED: 'shoe_store_recently_viewed',
   COUPON: 'shoe_store_coupon',
   NOTIFICATIONS: 'shoe_store_notifications',
+  THEME: 'shoe_store_theme',
 };
 
 // Đơn vị tiền tệ hiển thị

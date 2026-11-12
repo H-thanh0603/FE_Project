@@ -10,6 +10,7 @@ import { AddressProvider } from './context/AddressContext';
 import { RecentlyViewedProvider } from './context/RecentlyViewedContext';
 import { ToastProvider } from './context/ToastContext';
 import { NotificationProvider } from './context/NotificationContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 import './styles/variables.css';
 import './styles/global.css';
@@ -18,21 +19,23 @@ import './styles/responsive.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ToastProvider>
-        <NotificationProvider>
-          <AuthProvider>
-            <AddressProvider>
-              <RecentlyViewedProvider>
-                <CartProvider>
-                  <WishlistProvider>
-                    <App />
-                  </WishlistProvider>
-                </CartProvider>
-              </RecentlyViewedProvider>
-            </AddressProvider>
-          </AuthProvider>
-        </NotificationProvider>
-      </ToastProvider>
+      <ThemeProvider>
+        <ToastProvider>
+          <NotificationProvider>
+            <AuthProvider>
+              <AddressProvider>
+                <RecentlyViewedProvider>
+                  <CartProvider>
+                    <WishlistProvider>
+                      <App />
+                    </WishlistProvider>
+                  </CartProvider>
+                </RecentlyViewedProvider>
+              </AddressProvider>
+            </AuthProvider>
+          </NotificationProvider>
+        </ToastProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
