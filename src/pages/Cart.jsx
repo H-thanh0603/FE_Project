@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
+import FreeShippingProgress from '../components/cart/FreeShippingProgress/FreeShippingProgress';
 import formatPrice from '../utils/formatPrice';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
@@ -35,6 +36,8 @@ export default function Cart() {
             Giỏ Hàng <span className="highlight">({items.length})</span>
           </h1>
         </div>
+
+        <FreeShippingProgress subtotal={total} />
 
         <ul className="cart-list">
           {items.map((item) => (
