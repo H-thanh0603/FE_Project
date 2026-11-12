@@ -5,6 +5,7 @@ import useDebounce from '../hooks/useDebounce';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import ProductCard from '../components/product/ProductCard/ProductCard';
 import Pagination from '../components/common/Pagination/Pagination';
+import QuickViewModal from '../components/product/QuickViewModal/QuickViewModal';
 import homepage from '../data/homepage.json';
 
 const PAGE_SIZE = 8;
@@ -26,6 +27,7 @@ export default function Products() {
   const [maxPrice, setMaxPrice] = useState('');
   const [sort, setSort] = useState('default');
   const [page, setPage] = useState(1);
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
   const debouncedSearch = useDebounce(search);
   const sizes = [...new Set(products.flatMap((product) => product.sizes))]
     .sort((a, b) => a - b);
@@ -324,7 +326,11 @@ export default function Products() {
           <>
             <div className="product-grid">
               {visibleProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onQuickView={setQuickViewProduct}
+                />
               ))}
             </div>
             <Pagination
@@ -334,6 +340,12 @@ export default function Products() {
             />
           </>
         )}
+
+        <QuickViewModal
+          product={quickViewProduct}
+          isOpen={Boolean(quickViewProduct)}
+          onClose={() => setQuickViewProduct(null)}
+        />
       </div>
     </div>
   );
