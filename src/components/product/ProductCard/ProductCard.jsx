@@ -8,7 +8,7 @@ import formatPrice from '../../../utils/formatPrice';
 import { getProductBadge } from '../../../utils/productLabels';
 import './ProductCard.css';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onQuickView }) {
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { showToast } = useToast();
@@ -52,6 +52,20 @@ export default function ProductCard({ product }) {
               </span>
             )}
           </Link>
+          {onQuickView && (
+            <button
+              type="button"
+              className="shop-card-quickview"
+              onClick={(e) => {
+                e.preventDefault();
+                onQuickView(product);
+              }}
+              aria-label={`Xem nhanh ${product.name}`}
+            >
+              <span className="icon">visibility</span>
+              Xem nhanh
+            </button>
+          )}
         </div>
 
         {product.colors?.length > 0 && (

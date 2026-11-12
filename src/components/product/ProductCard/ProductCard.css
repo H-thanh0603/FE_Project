@@ -101,6 +101,48 @@
   color: var(--color-primary);
 }
 
+.shop-card-quickview {
+  position: absolute;
+  bottom: var(--spacing-2);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: var(--color-dark);
+  color: #ffffff;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.shop-card:hover .shop-card-quickview {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.shop-card-quickview:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.shop-card-quickview .icon {
+  font-size: 16px;
+}
+
 .shop-card-colors {
   display: flex;
   gap: 6px;
