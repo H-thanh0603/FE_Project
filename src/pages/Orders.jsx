@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useNotifications } from '../context/NotificationContext';
 import {
   advanceOrderStatus,
   canCancelOrder,
@@ -27,6 +28,7 @@ export default function Orders() {
   const [confirmCancelId, setConfirmCancelId] = useState(null);
   const [actionMessage, setActionMessage] = useState('');
   const { addItem } = useCart();
+  const { pushNotification } = useNotifications();
 
   const handleCancel = (orderId) => {
     const result = cancelOrder(orderId);
@@ -37,6 +39,11 @@ export default function Orders() {
     setOrders(getOrders());
     setConfirmCancelId(null);
     setActionMessage(`Đã hủy đơn ${orderId} (mô phỏng).`);
+    pushNotification({
+      title: 'Đơn hàng đã hủy',
+      message: `Đơn ${orderId} đã được hủy (mô phỏng).`,
+      link: `/orders/${encodeURIComponent(orderId)}`,
+    });
   };
 
   const handleAdvanceStatus = (orderId) => {
@@ -47,6 +54,11 @@ export default function Orders() {
     }
     setOrders(getOrders());
     setActionMessage(`Trạng thái đơn ${orderId} đã được cập nhật (mô phỏng).`);
+    pushNotification({
+      title: 'Cập nhật đơn hàng',
+      message: `Đơn ${orderId} chuyển sang "${getStatusLabel(result.order.status)}".`,
+      link: `/orders/${encodeURIComponent(orderId)}`,
+    });
   };
 
   const handleReorder = (order) => {

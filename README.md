@@ -39,8 +39,16 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Hồ sơ người dùng (mô phỏng) | ✅ | Xem, sửa tên, email, số điện thoại; lưu LocalStorage |
 | Sổ địa chỉ giao hàng (mô phỏng) | ✅ | Thêm, sửa, xóa, chọn mặc định; chọn nhanh khi checkout |
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
-| Đánh giá sản phẩm | 📋 | |
-| Áp dụng mã giảm giá | 📋 | |
+| Đặt lại mật khẩu (mô phỏng) | ✅ | Trang `/reset-password`, nối từ luồng quên mật khẩu; mật khẩu mới không được lưu |
+| Đánh giá sản phẩm | ✅ | Điểm sao trung bình, danh sách nhận xét, form gửi đánh giá lưu LocalStorage |
+| Chế độ Dark Mode (Giao diện tối) | ✅ | Nút chuyển đổi trên Navbar, lưu LocalStorage, tương thích Kinetic CSS Variables |
+| Xem nhanh sản phẩm (Quick View) | ✅ | Nút xem nhanh trên ProductCard, modal xem ảnh, chọn size và mua nhanh |
+| Hướng dẫn đo kích cỡ giày (Size Guide) | ✅ | Modal bảng quy đổi size EU/US/UK/cm và các bước đo chân chuẩn |
+| Thanh tiến độ Freeship & voucher 1-click | ✅ | Giỏ hàng hiển thị thumbnail, tiến độ freeship 1.5tr và áp mã nhanh |
+| Tự động cuộn trang & nút Back to Top | ✅ | ScrollToTop khi đổi route và nút nổi BackToTop cuộn mượt |
+| Áp dụng mã giảm giá (mô phỏng) | ✅ | `couponService` + `CouponInput`; ô nhập mã ở giỏ hàng và checkout, giảm giá lưu vào đơn |
+| Thông báo nổi (toast) | ✅ | `ToastContext` + `ToastStack`; báo khi thêm vào giỏ, áp mã giảm giá |
+| Thông báo trong ứng dụng (mô phỏng) | ✅ | Chuông trên Navbar kèm số chưa đọc, trang `/notifications`; sinh khi đặt, hủy, đổi trạng thái đơn |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
 
 ---

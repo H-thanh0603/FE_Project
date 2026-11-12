@@ -2,11 +2,13 @@ import { useMemo, useState } from 'react';
 import homepage from '../../data/homepage.json';
 import { getProducts } from '../../services/productService';
 import ProductCard from '../product/ProductCard/ProductCard';
+import QuickViewModal from '../product/QuickViewModal/QuickViewModal';
 
 export default function FeaturedProducts() {
   const { featured } = homepage;
   const products = getProducts();
   const [tab, setTab] = useState('all');
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
 
   const filtered = useMemo(
     () =>
@@ -41,9 +43,19 @@ export default function FeaturedProducts() {
 
         <div className="featured-grid">
           {filtered.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onQuickView={setQuickViewProduct}
+            />
           ))}
         </div>
+
+        <QuickViewModal
+          product={quickViewProduct}
+          isOpen={Boolean(quickViewProduct)}
+          onClose={() => setQuickViewProduct(null)}
+        />
       </div>
     </section>
   );

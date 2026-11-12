@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { useWishlist } from '../context/WishlistContext';
 import { getProductById } from '../services/productService';
 import ProductCard from '../components/product/ProductCard/ProductCard';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function Wishlist() {
+  useDocumentTitle('Danh sách yêu thích');
   const { productIds } = useWishlist();
   const products = productIds.map(getProductById).filter(Boolean);
 

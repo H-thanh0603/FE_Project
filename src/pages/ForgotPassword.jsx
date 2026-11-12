@@ -35,6 +35,12 @@ export default function ForgotPassword() {
             Đã gửi hướng dẫn tới <strong>{email}</strong> (mô phỏng).
           </p>
           <p className="page-note">Kiểm tra hộp thư đến và làm theo các bước đặt lại mật khẩu.</p>
+          <Link
+            to={`/reset-password?email=${encodeURIComponent(email)}`}
+            className="btn btn--red"
+          >
+            Đặt lại mật khẩu ngay
+          </Link>
           <Link to="/login" className="btn btn--dark">
             Về trang đăng nhập
           </Link>

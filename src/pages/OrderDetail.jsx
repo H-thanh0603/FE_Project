@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useNotifications } from '../context/NotificationContext';
 import {
   advanceOrderStatus,
   canCancelOrder,
@@ -45,6 +46,7 @@ export default function OrderDetail() {
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [actionMessage, setActionMessage] = useState('');
   const { addItem } = useCart();
+  const { pushNotification } = useNotifications();
 
   useEffect(() => {
     setOrder(getOrderById(id));
@@ -61,6 +63,11 @@ export default function OrderDetail() {
     setOrder(result.order);
     setConfirmCancel(false);
     setActionMessage('Đơn hàng đã được hủy (mô phỏng).');
+    pushNotification({
+      title: 'Đơn hàng đã hủy',
+      message: `Đơn ${id} đã được hủy (mô phỏng).`,
+      link: `/orders/${encodeURIComponent(id)}`,
+    });
   };
 
   const handleAdvanceStatus = () => {
@@ -71,6 +78,11 @@ export default function OrderDetail() {
     }
     setOrder(result.order);
     setActionMessage('Trạng thái đơn hàng đã được cập nhật (mô phỏng).');
+    pushNotification({
+      title: 'Cập nhật đơn hàng',
+      message: `Đơn ${id} chuyển sang "${ORDER_STATUS_LABELS[result.order.status] ?? 'trạng thái mới'}".`,
+      link: `/orders/${encodeURIComponent(id)}`,
+    });
   };
 
   const handleReorder = () => {
@@ -144,6 +156,12 @@ export default function OrderDetail() {
 
             <div className="order-detail-totals">
               <p><span>Tạm tính</span><strong>{formatPrice(subtotal)}</strong></p>
+              {order.discount?.amount > 0 && (
+                <p className="order-detail-discount">
+                  <span>Giảm giá{order.discount.code ? ` (${order.discount.code})` : ''}</span>
+                  <strong>-{formatPrice(order.discount.amount)}</strong>
+                </p>
+              )}
               <p>
                 <span>Giao hàng{order.shipping?.name ? ` — ${order.shipping.name}` : ''}</span>
                 <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>

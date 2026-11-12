@@ -2,20 +2,23 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
+import { useToast } from '../../../context/ToastContext';
 import { getBrandName } from '../../../services/productService';
 import formatPrice from '../../../utils/formatPrice';
 import { getProductBadge } from '../../../utils/productLabels';
 import './ProductCard.css';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onQuickView }) {
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { showToast } = useToast();
   const [size, setSize] = useState(product.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
 
   const handleAdd = () => {
     addItem(product, size);
     setJustAdded(true);
+    showToast(`Đã thêm ${product.name} (size ${size}) vào giỏ.`);
     setTimeout(() => setJustAdded(false), 1500);
   };
 
@@ -49,6 +52,20 @@ export default function ProductCard({ product }) {
               </span>
             )}
           </Link>
+          {onQuickView && (
+            <button
+              type="button"
+              className="shop-card-quickview"
+              onClick={(e) => {
+                e.preventDefault();
+                onQuickView(product);
+              }}
+              aria-label={`Xem nhanh ${product.name}`}
+            >
+              <span className="icon">visibility</span>
+              Xem nhanh
+            </button>
+          )}
         </div>
 
         {product.colors?.length > 0 && (

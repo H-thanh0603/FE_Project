@@ -3,19 +3,27 @@ import { useParams, Link } from 'react-router-dom';
 import { getProductById, getBrandName } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
+import { useToast } from '../context/ToastContext';
 import { useRecentlyViewed } from '../context/RecentlyViewedContext';
 import RecentlyViewed from '../components/product/RecentlyViewed';
 import formatPrice from '../utils/formatPrice';
 import { getProductBadge } from '../utils/productLabels';
+import useDocumentTitle from '../hooks/useDocumentTitle';
+import SizeGuideModal from '../components/product/SizeGuideModal/SizeGuideModal';
+import ProductReviews from '../components/product/ProductReviews/ProductReviews';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const product = getProductById(id);
+  useDocumentTitle(product ? product.name : 'Chi tiết sản phẩm');
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { showToast } = useToast();
   const { recordView } = useRecentlyViewed();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
+  const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   useEffect(() => {
     if (product) recordView(product.id);
@@ -43,8 +51,10 @@ export default function ProductDetail() {
   const badge = getProductBadge(product);
 
   const handleAddToCart = () => {
-    addItem(product, size);
+    addItem(product, size, quantity);
     setJustAdded(true);
+    const qtyText = quantity > 1 ? `${quantity}x ` : '';
+    showToast(`Đã thêm ${qtyText}${product.name} (size ${size}) vào giỏ.`);
     setTimeout(() => setJustAdded(false), 1500);
   };
 
@@ -94,7 +104,17 @@ export default function ProductDetail() {
             <p className="detail-description">{product.description}</p>
 
             <div className="detail-block">
-              <div className="shop-card-sizes-label">Chọn kích cỡ</div>
+              <div className="detail-sizes-header">
+                <div className="shop-card-sizes-label">Chọn kích cỡ</div>
+                <button
+                  type="button"
+                  className="size-guide-trigger"
+                  onClick={() => setIsSizeGuideOpen(true)}
+                >
+                  <span className="icon" style={{ fontSize: 16 }}>straighten</span>
+                  Hướng dẫn chọn size
+                </button>
+              </div>
               <div className="detail-sizes">
                 {product.sizes.map((s) => (
                   <button
@@ -106,6 +126,30 @@ export default function ProductDetail() {
                     {s}
                   </button>
                 ))}
+              </div>
+            </div>
+
+            <div className="detail-qty-group">
+              <div className="shop-card-sizes-label">Số lượng</div>
+              <div className="detail-qty-selector">
+                <button
+                  type="button"
+                  className="detail-qty-btn"
+                  onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                  disabled={quantity <= 1}
+                  aria-label="Giảm số lượng"
+                >
+                  −
+                </button>
+                <span className="detail-qty-val">{quantity}</span>
+                <button
+                  type="button"
+                  className="detail-qty-btn"
+                  onClick={() => setQuantity((q) => Math.min(10, q + 1))}
+                  aria-label="Tăng số lượng"
+                >
+                  +
+                </button>
               </div>
             </div>
 
@@ -127,8 +171,13 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
+        <ProductReviews productId={product.id} fallbackRating={product.rating || 5} />
       </div>
       <RecentlyViewed excludeProductId={product.id} />
+      <SizeGuideModal
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+      />
     </div>
   );
 }

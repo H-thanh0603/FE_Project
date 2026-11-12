@@ -7,9 +7,12 @@ import TrustBadges from '../components/home/TrustBadges';
 import CommunitySection from '../components/home/CommunitySection';
 import NewsletterSection from '../components/home/NewsletterSection';
 import RecentlyViewed from '../components/product/RecentlyViewed';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import '../components/home/home.css';
 
 export default function Home() {
+  useDocumentTitle('Trang chủ — Giày Thể Thao Cao Cấp');
+
   return (
     <div className="page-home">
       <HeroSection />
