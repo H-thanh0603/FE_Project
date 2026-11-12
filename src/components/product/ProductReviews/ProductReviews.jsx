@@ -1,14 +1,62 @@
+import { useState, useEffect } from 'react';
+import { getProductReviews, addProductReview } from '../../../services/reviewService';
+import { useAuth } from '../../../context/AuthContext';
+import { useToast } from '../../../context/ToastContext';
 import './ProductReviews.css';
 
 /**
- * Hiển thị khối tóm tắt và danh sách nhận xét đánh giá của sản phẩm.
+ * Khối đánh giá sản phẩm: hiển thị danh sách đánh giá và form cho người dùng viết nhận xét.
  * @param {Object} props
- * @param {Array} props.reviews - Danh sách bài đánh giá
- * @param {number} [props.averageRating=5.0] - Điểm trung bình
+ * @param {string} props.productId
+ * @param {number} [props.fallbackRating=5.0]
  */
-export default function ProductReviews({ reviews = [], averageRating = 5.0 }) {
+export default function ProductReviews({ productId, fallbackRating = 5.0 }) {
+  const { user } = useAuth();
+  const { showToast } = useToast();
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(5);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [author, setAuthor] = useState('');
+  const [comment, setComment] = useState('');
+
+  useEffect(() => {
+    if (productId) {
+      setReviews(getProductReviews(productId));
+    }
+  }, [productId]);
+
+  useEffect(() => {
+    if (user?.name) {
+      setAuthor(user.name);
+    }
+  }, [user]);
+
+  const averageRating =
+    reviews.length > 0
+      ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+      : fallbackRating;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!comment.trim()) {
+      showToast('Vui lòng nhập nội dung nhận xét.');
+      return;
+    }
+
+    const newRev = addProductReview({
+      productId,
+      author: author.trim() || user?.name || 'Khách hàng',
+      rating,
+      comment,
+    });
+
+    setReviews((prev) => [newRev, ...prev]);
+    setComment('');
+    showToast('Cảm ơn bạn đã gửi đánh giá cho sản phẩm!');
+  };
+
   return (
-    <div className="product-reviews-container">
+    <section className="product-reviews-section">
       <div className="reviews-summary-card">
         <div className="reviews-score-block">
           <span className="reviews-score-num">{averageRating.toFixed(1)}</span>
@@ -28,10 +76,10 @@ export default function ProductReviews({ reviews = [], averageRating = 5.0 }) {
         <div className="reviews-summary-info">
           <div className="eyebrow">Trải nghiệm thực tế</div>
           <h3 className="section-title" style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>
-            Đánh giá từ khách hàng đã mua
+            Đánh giá từ khách hàng
           </h3>
           <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--color-muted)' }}>
-            100% đánh giá từ khách hàng đã sở hữu và trải nghiệm sản phẩm thực tế.
+            100% đánh giá từ khách hàng đã trải nghiệm và mua sắm sản phẩm.
           </p>
         </div>
       </div>
@@ -79,6 +127,68 @@ export default function ProductReviews({ reviews = [], averageRating = 5.0 }) {
           ))
         )}
       </div>
-    </div>
+
+      <form className="review-form-card" onSubmit={handleSubmit}>
+        <div className="review-form-title">
+          <span className="icon">edit_note</span>
+          Viết nhận xét của bạn
+        </div>
+
+        <div className="review-star-picker">
+          <span style={{ fontSize: '0.875rem', fontWeight: 600, marginRight: '0.5rem' }}>
+            Đánh giá của bạn:
+          </span>
+          {[1, 2, 3, 4, 5].map((star) => {
+            const active = star <= (hoverRating || rating);
+            return (
+              <button
+                key={star}
+                type="button"
+                className={`star-pick-btn${active ? ' active' : ''}`}
+                onMouseEnter={() => setHoverRating(star)}
+                onMouseLeave={() => setHoverRating(0)}
+                onClick={() => setRating(star)}
+                aria-label={`Chọn ${star} sao`}
+              >
+                <span className={`icon${active ? ' icon--fill' : ''}`} style={{ fontSize: 24 }}>
+                  star
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="review-form-inputs">
+          {!user && (
+            <input
+              type="text"
+              className="input"
+              placeholder="Tên của bạn (vd: Nguyễn Văn A)"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              required
+            />
+          )}
+
+          <textarea
+            className="input review-textarea"
+            placeholder="Chia sẻ cảm nhận chi tiết về form dáng, độ êm, độ bám đường của đôi giày..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            rows={3}
+            required
+          />
+
+          <button
+            type="submit"
+            className="btn btn--dark"
+            style={{ alignSelf: 'flex-start' }}
+          >
+            <span className="icon">send</span>
+            Gửi đánh giá
+          </button>
+        </div>
+      </form>
+    </section>
   );
 }

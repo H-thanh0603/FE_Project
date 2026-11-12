@@ -125,6 +125,65 @@
   margin: 0;
 }
 
+/* Form viết đánh giá */
+.review-form-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+.review-form-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.review-star-picker {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-3);
+}
+
+.star-pick-btn {
+  background: none;
+  border: none;
+  color: #d1d5db;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star-pick-btn:hover {
+  transform: scale(1.2);
+}
+
+.star-pick-btn.active {
+  color: #ff9800;
+}
+
+.review-form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.review-textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
 @media (max-width: 640px) {
   .reviews-score-block {
     border-right: none;

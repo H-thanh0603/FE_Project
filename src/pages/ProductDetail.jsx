@@ -10,6 +10,7 @@ import formatPrice from '../utils/formatPrice';
 import { getProductBadge } from '../utils/productLabels';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import SizeGuideModal from '../components/product/SizeGuideModal/SizeGuideModal';
+import ProductReviews from '../components/product/ProductReviews/ProductReviews';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -170,6 +171,7 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
+        <ProductReviews productId={product.id} fallbackRating={product.rating || 5} />
       </div>
       <RecentlyViewed excludeProductId={product.id} />
       <SizeGuideModal
