@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
+import CouponSuggestions from '../components/cart/CouponSuggestions/CouponSuggestions';
 import FreeShippingProgress from '../components/cart/FreeShippingProgress/FreeShippingProgress';
 import formatPrice from '../utils/formatPrice';
 import useDocumentTitle from '../hooks/useDocumentTitle';
@@ -99,6 +100,7 @@ export default function Cart() {
 
         <div className="cart-coupon">
           <CouponInput />
+          <CouponSuggestions />
         </div>
 
         <div className="cart-footer">
