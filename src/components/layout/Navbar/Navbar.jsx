@@ -2,6 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
 import { useNotifications } from '../../../context/NotificationContext';
+import { useTheme } from '../../../context/ThemeContext';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
@@ -9,6 +10,7 @@ export default function Navbar() {
   const { itemCount } = useCart();
   const { user, logout } = useAuth();
   const { unreadCount } = useNotifications();
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <>
@@ -41,6 +43,15 @@ export default function Navbar() {
           </nav>
 
           <div className="nav-actions">
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+              title={isDark ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối'}
+            >
+              <span className="icon">{isDark ? 'light_mode' : 'dark_mode'}</span>
+            </button>
             <Link to="/notifications" className="notif-link" aria-label="Thông báo">
               <span className="icon">notifications</span>
               {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
