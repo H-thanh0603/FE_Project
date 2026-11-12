@@ -2,8 +2,10 @@ import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
 import formatPrice from '../utils/formatPrice';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function Cart() {
+  useDocumentTitle('Giỏ hàng');
   const { items, updateQuantity, removeItem, total, clearCart, discount } = useCart();
 
   if (items.length === 0) {

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts, getBrands } from '../services/productService';
 import useDebounce from '../hooks/useDebounce';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import ProductCard from '../components/product/ProductCard/ProductCard';
 import Pagination from '../components/common/Pagination/Pagination';
 import homepage from '../data/homepage.json';
@@ -9,6 +10,7 @@ import homepage from '../data/homepage.json';
 const PAGE_SIZE = 8;
 
 export default function Products() {
+  useDocumentTitle('Tất cả sản phẩm');
   const products = getProducts();
   const brands = getBrands();
   const categories = homepage.categories.items;

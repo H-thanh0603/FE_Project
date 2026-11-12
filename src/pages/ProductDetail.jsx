@@ -8,10 +8,12 @@ import { useRecentlyViewed } from '../context/RecentlyViewedContext';
 import RecentlyViewed from '../components/product/RecentlyViewed';
 import formatPrice from '../utils/formatPrice';
 import { getProductBadge } from '../utils/productLabels';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function ProductDetail() {
   const { id } = useParams();
   const product = getProductById(id);
+  useDocumentTitle(product ? product.name : 'Chi tiết sản phẩm');
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
   const { showToast } = useToast();
