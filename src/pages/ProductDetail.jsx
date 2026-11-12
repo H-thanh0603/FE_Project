@@ -9,6 +9,7 @@ import RecentlyViewed from '../components/product/RecentlyViewed';
 import formatPrice from '../utils/formatPrice';
 import { getProductBadge } from '../utils/productLabels';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import SizeGuideModal from '../components/product/SizeGuideModal/SizeGuideModal';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ export default function ProductDetail() {
   const { recordView } = useRecentlyViewed();
   const [size, setSize] = useState(product?.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
+  const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
   useEffect(() => {
     if (product) recordView(product.id);
@@ -99,7 +101,17 @@ export default function ProductDetail() {
             <p className="detail-description">{product.description}</p>
 
             <div className="detail-block">
-              <div className="shop-card-sizes-label">Chọn kích cỡ</div>
+              <div className="detail-sizes-header">
+                <div className="shop-card-sizes-label">Chọn kích cỡ</div>
+                <button
+                  type="button"
+                  className="size-guide-trigger"
+                  onClick={() => setIsSizeGuideOpen(true)}
+                >
+                  <span className="icon" style={{ fontSize: 16 }}>straighten</span>
+                  Hướng dẫn chọn size
+                </button>
+              </div>
               <div className="detail-sizes">
                 {product.sizes.map((s) => (
                   <button
@@ -134,6 +146,10 @@ export default function ProductDetail() {
         </div>
       </div>
       <RecentlyViewed excludeProductId={product.id} />
+      <SizeGuideModal
+        isOpen={isSizeGuideOpen}
+        onClose={() => setIsSizeGuideOpen(false)}
+      />
     </div>
   );
 }
