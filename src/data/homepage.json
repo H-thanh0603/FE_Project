@@ -107,7 +107,6 @@
     "eyebrow": "Bộ Sưu Tập Mùa Này",
     "title": "Sản Phẩm Nổi Bật & Bán Chạy",
     "tabs": [
-      { "id": "all", "label": "Tất Cả" },
       { "id": "new", "label": "Mới Về" },
       { "id": "bestseller", "label": "Bán Chạy Nhất" },
       { "id": "sale", "label": "Đang Giảm Giá" }
