@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { getProductById, getBrandName } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -14,6 +14,7 @@ import ProductReviews from '../components/product/ProductReviews/ProductReviews'
 
 export default function ProductDetail() {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const product = getProductById(id);
   useDocumentTitle(product ? product.name : 'Chi tiết sản phẩm');
   const { addItem } = useCart();
@@ -25,9 +26,20 @@ export default function ProductDetail() {
   const [justAdded, setJustAdded] = useState(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
+  const colorways = product?.colorways ?? [];
+  const requestedColor = searchParams.get('color');
+  const activeColorway =
+    colorways.find((colorway) => colorway.name === requestedColor) ?? colorways[0] ?? null;
+
   useEffect(() => {
     if (product) recordView(product.id);
   }, [product, recordView]);
+
+  const handleColorSelect = (colorway) => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.set('color', colorway.name);
+    setSearchParams(nextParams, { replace: true });
+  };
 
   if (!product) {
     return (
@@ -76,8 +88,11 @@ export default function ProductDetail() {
                 {badge.label}
               </span>
             )}
-            {product.image ? (
-              <img src={product.image} alt={product.name} />
+            {product.image || activeColorway?.image ? (
+              <img
+                src={activeColorway?.image || product.image}
+                alt={`${product.name}${activeColorway ? ` - ${activeColorway.name}` : ''}`}
+              />
             ) : (
               <span className="detail-image-placeholder icon" aria-label="Chưa có ảnh sản phẩm">
                 image
@@ -102,6 +117,32 @@ export default function ProductDetail() {
               {onSale && <span className="shop-card-old-price">{formatPrice(product.oldPrice)}</span>}
             </p>
             <p className="detail-description">{product.description}</p>
+
+            {colorways.length > 0 && (
+              <div className="detail-block">
+                <div className="shop-card-sizes-label">Chọn phối màu</div>
+                <div className="detail-colorways">
+                  {colorways.map((colorway) => (
+                    <button
+                      key={colorway.name}
+                      type="button"
+                      className={`detail-colorway${activeColorway?.name === colorway.name ? ' selected' : ''}`}
+                      aria-pressed={activeColorway?.name === colorway.name}
+                      onClick={() => handleColorSelect(colorway)}
+                    >
+                      <span className={`detail-colorway-dot detail-colorway-dot--${colorway.swatch}`} />
+                      {colorway.name}
+                    </button>
+                  ))}
+                </div>
+                {activeColorway && (
+                  <div className="detail-colorway-info">
+                    <p className="detail-colorway-desc">{activeColorway.description}</p>
+                    <span className="detail-colorway-sku">Mã phối màu: {activeColorway.sku}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="detail-block">
               <div className="detail-sizes-header">

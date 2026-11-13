@@ -22,17 +22,23 @@
       {
         "name": "Neon Sunset",
         "image": "/images/shoes/hero-nitro-runner.jpg",
-        "swatch": "red"
+        "swatch": "red",
+        "sku": "KNT-RUN-009-NS",
+        "description": "Sắc cam neon rực rỡ, bật nổi trên nền lưới trắng."
       },
       {
         "name": "Carbon Stealth",
         "image": "/images/shoes/hero-nitro-runner-carbon-stealth.jpg",
-        "swatch": "black"
+        "swatch": "black",
+        "sku": "KNT-RUN-009-CS",
+        "description": "Tông đen/xám carbon mạnh mẽ, dễ phối cùng trang phục tối."
       },
       {
         "name": "Arctic White",
         "image": "/images/shoes/hero-nitro-runner-arctic-white.jpg",
-        "swatch": "white"
+        "swatch": "white",
+        "sku": "KNT-RUN-009-AW",
+        "description": "Sắc trắng bạc tinh khiết, nhẹ nhàng và thanh thoát."
       }
     ]
   },

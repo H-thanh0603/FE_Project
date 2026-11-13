@@ -61,10 +61,10 @@ export default function HeroSection() {
 
         <div className="hero-showcase">
           <Link
-            to={`/products/${hero.productId}`}
+            to={`/products/${hero.productId}?color=${encodeURIComponent(selectedColorway.name)}`}
             className="hero-showcase-frame"
             style={fading ? { opacity: 0.5 } : undefined}
-            aria-label={`Xem chi tiết ${hero.showcaseName}`}
+            aria-label={`Xem chi tiết ${hero.showcaseName} - ${selectedColorway.name}`}
           >
             <span className="hero-flag hero-flag--left">{hero.showcaseBadges[0]}</span>
             <span className="hero-flag hero-flag--right">{hero.showcaseBadges[1]}</span>
@@ -74,10 +74,15 @@ export default function HeroSection() {
             />
             <div className="hero-float-card">
               <div className="hero-float-info">
-                <span className="hero-float-dot" />
+                <span className={`hero-float-dot hero-float-dot--${selectedColorway.swatch}`} />
                 <div>
-                  <div className="hero-float-name">{hero.showcaseName}</div>
-                  <div className="hero-float-sub">{hero.showcaseSubtitle}</div>
+                  <div className="hero-float-name">
+                    {hero.showcaseName}
+                    <span className="hero-float-color">{selectedColorway.name}</span>
+                  </div>
+                  <div className="hero-float-sub">
+                    {selectedColorway.description || hero.showcaseSubtitle}
+                  </div>
                 </div>
               </div>
               <div className="hero-float-price">
