@@ -195,13 +195,20 @@ export default function ProductDetail() {
             </div>
 
             <div className="detail-actions">
-              <button type="button" className="btn btn--dark" onClick={handleAddToCart}>
+              <button
+                type="button"
+                className="btn btn--dark"
+                title={justAdded ? 'Đã thêm vào giỏ hàng' : 'Thêm sản phẩm vào giỏ hàng'}
+                onClick={handleAddToCart}
+              >
                 <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>
                 {justAdded ? 'Đã thêm vào giỏ' : 'Thêm vào giỏ'}
               </button>
               <button
                 type="button"
                 className="btn btn--outline"
+                aria-label={wishlisted ? 'Bỏ khỏi danh sách yêu thích' : 'Thêm vào danh sách yêu thích'}
+                title={wishlisted ? 'Bỏ khỏi danh sách yêu thích' : 'Thêm vào danh sách yêu thích'}
                 onClick={() => toggleWishlist(product.id)}
               >
                 <span className={`icon${wishlisted ? ' icon--fill' : ''}`} style={{ color: wishlisted ? 'var(--color-primary)' : 'inherit' }}>

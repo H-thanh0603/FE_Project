@@ -86,6 +86,7 @@ export default function QuickViewModal({ product, isOpen, onClose }) {
             <button
               type="button"
               className="btn btn--dark"
+              title={justAdded ? 'Đã thêm vào giỏ hàng' : 'Thêm sản phẩm vào giỏ hàng'}
               onClick={handleAddToCart}
             >
               <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>

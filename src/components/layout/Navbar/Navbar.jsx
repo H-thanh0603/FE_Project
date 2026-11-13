@@ -21,7 +21,7 @@ export default function Navbar() {
 
       <header className="navbar">
         <div className="container navbar-inner">
-          <Link to="/" className="logo">
+          <Link to="/" className="logo" title="Về trang chủ KINETIC">
             <img src="/images/logo.svg" alt="KINETIC" />
           </Link>
 
@@ -32,7 +32,11 @@ export default function Navbar() {
             <NavLink to="/products" className={navLinkClass}>
               Sản phẩm
             </NavLink>
-            <NavLink to="/wishlist" className={navLinkClass}>
+            <NavLink
+              to="/wishlist"
+              className={navLinkClass}
+              title="Xem danh sách sản phẩm yêu thích"
+            >
               Yêu thích
             </NavLink>
             <NavLink to="/orders" className={navLinkClass}>
@@ -41,7 +45,12 @@ export default function Navbar() {
           </nav>
 
           <div className="nav-actions">
-            <Link to="/notifications" className="notif-link" aria-label="Thông báo">
+            <Link
+              to="/notifications"
+              className="notif-link"
+              aria-label={unreadCount > 0 ? `Thông báo, ${unreadCount} chưa đọc` : 'Thông báo'}
+              title={unreadCount > 0 ? `Xem thông báo (${unreadCount} chưa đọc)` : 'Xem thông báo'}
+            >
               <span className="icon">notifications</span>
               {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
             </Link>
