@@ -64,7 +64,12 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-showcase">
-          <div className="hero-showcase-frame" style={fading ? { opacity: 0.5 } : undefined}>
+          <Link
+            to={`/products/${hero.productId}`}
+            className="hero-showcase-frame"
+            style={fading ? { opacity: 0.5 } : undefined}
+            aria-label={`Xem chi tiết ${hero.showcaseName}`}
+          >
             <span className="hero-flag hero-flag--left">{hero.showcaseBadges[0]}</span>
             <span className="hero-flag hero-flag--right">{hero.showcaseBadges[1]}</span>
             <img src={hero.image} alt={hero.showcaseName} />
@@ -81,7 +86,7 @@ export default function HeroSection() {
                 <span className="hero-float-old">{formatPrice(hero.showcaseOldPrice)}</span>
               </div>
             </div>
-          </div>
+          </Link>
 
           <div className="colorway-row">
             <span className="colorway-label">Phối màu sẵn có:</span>

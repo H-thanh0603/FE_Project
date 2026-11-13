@@ -7,6 +7,7 @@
     "primaryCta": "Khám Phá Bộ Sưu Tập",
     "secondaryCta": "Xem Video Trải Nghiệm",
     "image": "/images/shoes/hero-nitro-runner.jpg",
+    "productId": "kinetic-nitro-x-pro-runner",
     "showcaseName": "Kinetic Nitro X Pro Runner",
     "showcaseSubtitle": "Phản hồi động học tức thời",
     "showcasePrice": 3250000,
@@ -77,7 +78,8 @@
     "progressNote": "Tỷ lệ giữ chỗ: 76%",
     "cta": "Đặt Trước Ngay / Pre-Order",
     "verifiedLabel": "AUTHENTIC NFC CHIP VERIFIED",
-    "image": "/images/shoes/drop-cyberpunk.jpg"
+    "image": "/images/shoes/drop-cyberpunk.jpg",
+    "productId": "cyberpunk-boost-v2"
   },
   "featured": {
     "eyebrow": "Bộ Sưu Tập Mùa Này",

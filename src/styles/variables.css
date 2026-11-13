@@ -48,20 +48,3 @@
   --shadow-modal: 0 24px 48px rgba(15, 16, 18, 0.24);
 }
 
-/* Chế độ Dark Mode theo chuẩn Kinetic Brutalism */
-[data-theme="dark"] {
-  --color-dark: #f0f0f3;
-  --color-text: #f0f2f5;
-  --color-muted: #9aa0a6;
-  --color-bg: #0f1012;
-  --color-surface: #1a1c20;
-  --color-surface-raised: #18191c;
-  --color-border: rgba(255, 255, 255, 0.14);
-  --color-border-strong: rgba(255, 255, 255, 0.5);
-  --color-danger: #ff5449;
-  --color-danger-bg: #410002;
-  --color-danger-text: #ffb4ab;
-  --shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
-  --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.6), 4px 4px 0px rgba(255, 255, 255, 0.2);
-  --shadow-modal: 0 24px 48px rgba(0, 0, 0, 0.6);
-}

@@ -1045,31 +1045,6 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
-.theme-toggle-btn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  padding: 0;
-}
-
-.theme-toggle-btn:hover {
-  background: var(--color-dark);
-  color: #fff;
-  border-color: var(--color-dark);
-}
-
-.theme-toggle-btn .icon {
-  font-size: 20px;
-}
-
 .notif-badge {
   position: absolute;
   top: -8px;
