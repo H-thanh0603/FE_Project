@@ -1036,26 +1036,6 @@
   color: var(--color-muted);
 }
 
-.newsletter-perks {
-  display: flex;
-  gap: var(--spacing-3);
-  flex-wrap: wrap;
-  margin-top: var(--spacing-3);
-  color: #dee3ec;
-  font-size: 0.8rem;
-}
-
-.newsletter-perk {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.newsletter-perk .icon {
-  color: var(--color-lime);
-  font-size: 16px;
-}
-
 .newsletter-success {
   color: var(--color-lime);
   font-weight: 600;

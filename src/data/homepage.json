@@ -194,11 +194,10 @@
     ]
   },
   "newsletter": {
-    "badge": "🎁 ĐẶC QUYỀN THÀNH VIÊN MỚI",
+    "badge": "ĐẶC QUYỀN THÀNH VIÊN MỚI",
     "title": "Nhận Voucher 200.000₫ & Quyền Truy Cập Sớm Drop",
     "description": "Đăng ký để là người đầu tiên nhận thông báo số lượng có hạn trước khi mở bán công khai 15 phút, kèm ưu đãi giảm trực tiếp cho đơn hàng đầu tiên từ 1.500.000₫.",
     "placeholder": "Nhập địa chỉ email của bạn...",
-    "cta": "Đăng Ký Ngay",
-    "perks": ["Không gửi spam", "Huỷ đăng ký bất kỳ lúc nào"]
+    "cta": "Đăng Ký Ngay"
   }
 }
