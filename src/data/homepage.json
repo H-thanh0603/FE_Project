@@ -7,6 +7,7 @@
     "primaryCta": "Khám Phá Bộ Sưu Tập",
     "secondaryCta": "Xem Video Trải Nghiệm",
     "image": "/images/shoes/hero-nitro-runner.jpg",
+    "productId": "kinetic-nitro-x-pro-runner",
     "showcaseName": "Kinetic Nitro X Pro Runner",
     "showcaseSubtitle": "Phản hồi động học tức thời",
     "showcasePrice": 3250000,
@@ -17,7 +18,29 @@
       { "value": "ZoomAir Pro", "label": "Hấp thụ lực 85%", "accent": false },
       { "value": "#1 VOTE", "label": "Best Shoes 2025", "accent": "lime" }
     ],
-    "colorways": ["Neon Sunset", "Carbon Stealth", "Arctic White"]
+    "colorways": [
+      {
+        "name": "Neon Sunset",
+        "image": "/images/shoes/hero-nitro-runner.jpg",
+        "swatch": "red",
+        "sku": "KNT-RUN-009-NS",
+        "description": "Sắc cam neon rực rỡ, bật nổi trên nền lưới trắng."
+      },
+      {
+        "name": "Carbon Stealth",
+        "image": "/images/shoes/hero-nitro-runner-carbon-stealth.jpg",
+        "swatch": "black",
+        "sku": "KNT-RUN-009-CS",
+        "description": "Tông đen/xám carbon mạnh mẽ, dễ phối cùng trang phục tối."
+      },
+      {
+        "name": "Arctic White",
+        "image": "/images/shoes/hero-nitro-runner-arctic-white.jpg",
+        "swatch": "white",
+        "sku": "KNT-RUN-009-AW",
+        "description": "Sắc trắng bạc tinh khiết, nhẹ nhàng và thanh thoát."
+      }
+    ]
   },
   "categories": {
     "eyebrow": "Bộ Lọc Phân Khúc",
@@ -77,13 +100,13 @@
     "progressNote": "Tỷ lệ giữ chỗ: 76%",
     "cta": "Đặt Trước Ngay / Pre-Order",
     "verifiedLabel": "AUTHENTIC NFC CHIP VERIFIED",
-    "image": "/images/shoes/drop-cyberpunk.jpg"
+    "image": "/images/shoes/drop-cyberpunk.jpg",
+    "productId": "cyberpunk-boost-v2"
   },
   "featured": {
     "eyebrow": "Bộ Sưu Tập Mùa Này",
     "title": "Sản Phẩm Nổi Bật & Bán Chạy",
     "tabs": [
-      { "id": "all", "label": "Tất Cả" },
       { "id": "new", "label": "Mới Về" },
       { "id": "bestseller", "label": "Bán Chạy Nhất" },
       { "id": "sale", "label": "Đang Giảm Giá" }
@@ -171,11 +194,10 @@
     ]
   },
   "newsletter": {
-    "badge": "🎁 ĐẶC QUYỀN THÀNH VIÊN MỚI",
+    "badge": "ĐẶC QUYỀN THÀNH VIÊN MỚI",
     "title": "Nhận Voucher 200.000₫ & Quyền Truy Cập Sớm Drop",
     "description": "Đăng ký để là người đầu tiên nhận thông báo số lượng có hạn trước khi mở bán công khai 15 phút, kèm ưu đãi giảm trực tiếp cho đơn hàng đầu tiên từ 1.500.000₫.",
     "placeholder": "Nhập địa chỉ email của bạn...",
-    "cta": "Đăng Ký Ngay",
-    "perks": ["Không gửi spam", "Huỷ đăng ký bất kỳ lúc nào"]
+    "cta": "Đăng Ký Ngay"
   }
 }

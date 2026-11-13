@@ -293,6 +293,17 @@ h1, h2, h3, h4 {
   letter-spacing: 0.12em;
 }
 
+/* Tạo khoảng thở giữa nhãn nhỏ và tiêu đề lớn phía dưới */
+.eyebrow + h1,
+.eyebrow + h2,
+.eyebrow + h3,
+.eyebrow + h4,
+.eyebrow + h5,
+.eyebrow + h6,
+.eyebrow + .section-title {
+  margin-top: 0.375rem; /* 6px */
+}
+
 .section-title {
   font-size: clamp(1.6rem, 3.4vw, 2.75rem);
   font-weight: 700;
@@ -542,16 +553,29 @@ h1, h2, h3, h4 {
   flex-wrap: wrap;
 }
 
-.product-filter-sale {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1);
-  min-height: 44px;
-  font-size: 0.88rem;
+.product-status-chip {
+  padding: 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.product-filter-sale input {
-  accent-color: var(--color-primary);
+.product-status-chip:hover {
+  border-color: var(--color-border-strong);
+}
+
+.product-status-chip.selected {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: #fff;
 }
 
 .product-color-option {
@@ -1045,31 +1069,6 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
-.theme-toggle-btn {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-md);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  padding: 0;
-}
-
-.theme-toggle-btn:hover {
-  background: var(--color-dark);
-  color: #fff;
-  border-color: var(--color-dark);
-}
-
-.theme-toggle-btn .icon {
-  font-size: 20px;
-}
-
 .notif-badge {
   position: absolute;
   top: -8px;
@@ -1267,6 +1266,71 @@ h1, h2, h3, h4 {
   align-items: center;
   gap: var(--spacing-2);
   flex-wrap: wrap;
+}
+
+/* Bộ chọn phối màu ở trang chi tiết */
+.detail-colorways {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.detail-colorway {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: #fff;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.detail-colorway:hover,
+.detail-colorway.selected {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: #fff;
+}
+
+.detail-colorway-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  flex: 0 0 auto;
+}
+
+.detail-colorway-dot--red { background: var(--color-primary); border: none; }
+.detail-colorway-dot--black { background: var(--color-dark); border: none; }
+.detail-colorway-dot--white { background: #fff; }
+
+.detail-colorway-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--spacing-1);
+}
+
+.detail-colorway-desc {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.detail-colorway-sku {
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 /* Breadcrumb điều hướng */

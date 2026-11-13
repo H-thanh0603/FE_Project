@@ -5,25 +5,21 @@ import formatPrice from '../../utils/formatPrice';
 
 export default function HeroSection() {
   const hero = homepage.hero;
-  const [selectedColor, setSelectedColor] = useState(hero.colorways[0]);
+  const [selectedColorway, setSelectedColorway] = useState(hero.colorways[0]);
   const [fading, setFading] = useState(false);
 
-  const switchColor = (name) => {
+  const switchColor = (colorway) => {
+    if (colorway.name === selectedColorway.name) return;
+
     setFading(true);
     setTimeout(() => {
-      setSelectedColor(name);
+      setSelectedColorway(colorway);
       setFading(false);
     }, 200);
   };
 
   const accentClass = (accent) =>
     accent === true ? 'hero-stat-value--red' : accent === 'lime' ? 'hero-stat-value--lime' : '';
-
-  const dotClass = (name) => {
-    if (name === 'Neon Sunset') return 'colorway-dot--red';
-    if (name === 'Carbon Stealth') return 'colorway-dot--black';
-    return 'colorway-dot--white';
-  };
 
   return (
     <section className="container">
@@ -64,16 +60,29 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-showcase">
-          <div className="hero-showcase-frame" style={fading ? { opacity: 0.5 } : undefined}>
+          <Link
+            to={`/products/${hero.productId}?color=${encodeURIComponent(selectedColorway.name)}`}
+            className="hero-showcase-frame"
+            style={fading ? { opacity: 0.5 } : undefined}
+            aria-label={`Xem chi tiết ${hero.showcaseName} - ${selectedColorway.name}`}
+          >
             <span className="hero-flag hero-flag--left">{hero.showcaseBadges[0]}</span>
             <span className="hero-flag hero-flag--right">{hero.showcaseBadges[1]}</span>
-            <img src={hero.image} alt={hero.showcaseName} />
+            <img
+              src={selectedColorway.image || hero.image}
+              alt={`${hero.showcaseName} - ${selectedColorway.name}`}
+            />
             <div className="hero-float-card">
               <div className="hero-float-info">
-                <span className="hero-float-dot" />
+                <span className={`hero-float-dot hero-float-dot--${selectedColorway.swatch}`} />
                 <div>
-                  <div className="hero-float-name">{hero.showcaseName}</div>
-                  <div className="hero-float-sub">{hero.showcaseSubtitle}</div>
+                  <div className="hero-float-name">
+                    {hero.showcaseName}
+                    <span className="hero-float-color">{selectedColorway.name}</span>
+                  </div>
+                  <div className="hero-float-sub">
+                    {selectedColorway.description || hero.showcaseSubtitle}
+                  </div>
                 </div>
               </div>
               <div className="hero-float-price">
@@ -81,19 +90,20 @@ export default function HeroSection() {
                 <span className="hero-float-old">{formatPrice(hero.showcaseOldPrice)}</span>
               </div>
             </div>
-          </div>
+          </Link>
 
           <div className="colorway-row">
             <span className="colorway-label">Phối màu sẵn có:</span>
-            {hero.colorways.map((name) => (
+            {hero.colorways.map((colorway) => (
               <button
-                key={name}
+                key={colorway.name}
                 type="button"
-                className={`colorway-btn${selectedColor === name ? ' selected' : ''}`}
-                onClick={() => switchColor(name)}
+                className={`colorway-btn${selectedColorway.name === colorway.name ? ' selected' : ''}`}
+                aria-pressed={selectedColorway.name === colorway.name}
+                onClick={() => switchColor(colorway)}
               >
-                <span className={`colorway-dot ${dotClass(name)}`} />
-                {name}
+                <span className={`colorway-dot colorway-dot--${colorway.swatch}`} />
+                {colorway.name}
               </button>
             ))}
           </div>

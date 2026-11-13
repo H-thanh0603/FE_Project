@@ -37,7 +37,8 @@ export default function ProductCard({ product, onQuickView }) {
           )}
           <button
             type="button"
-            aria-label="Yêu thích"
+            aria-label={wishlisted ? 'Bỏ khỏi danh sách yêu thích' : 'Thêm vào danh sách yêu thích'}
+            title={wishlisted ? 'Bỏ khỏi danh sách yêu thích' : 'Thêm vào danh sách yêu thích'}
             className={`fav-btn${wishlisted ? ' active' : ''}`}
             onClick={() => toggleWishlist(product.id)}
           >
@@ -113,7 +114,13 @@ export default function ProductCard({ product, onQuickView }) {
             </span>
             {onSale && <span className="shop-card-old-price">{formatPrice(product.oldPrice)}</span>}
           </div>
-          <button type="button" className="add-btn" aria-label="Thêm vào giỏ" onClick={handleAdd}>
+          <button
+            type="button"
+            className="add-btn"
+            aria-label={justAdded ? 'Đã thêm vào giỏ hàng' : 'Thêm vào giỏ hàng'}
+            title={justAdded ? 'Đã thêm vào giỏ hàng' : 'Thêm vào giỏ hàng'}
+            onClick={handleAdd}
+          >
             <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>
           </button>
         </div>

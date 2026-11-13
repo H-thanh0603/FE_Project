@@ -25,7 +25,8 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | --- | :---: | --- |
 | Khởi tạo cấu trúc dự án (Vite + React) | ✅ | Cấu hình chạy được với `npm run dev` |
 | Giao diện trang chủ theo thiết kế Kinetic | ✅ | Hero, danh mục lọc sản phẩm, flash drop + countdown, tabs sản phẩm, công nghệ, cam kết, cộng đồng, newsletter |
-| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 24 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
+| Banner trang chủ liên kết chi tiết | ✅ | Ảnh Hero và Flash Drop mở đúng trang sản phẩm tương ứng |
+| Dữ liệu sản phẩm & thương hiệu JSON | ✅ | `src/data/`, 26 sản phẩm thuộc 5 thương hiệu; danh mục và nhãn được chuẩn hóa |
 | Giỏ hàng (thêm / sửa / xóa, lưu LocalStorage) | ✅ | `CartContext` |
 | Danh sách yêu thích | ✅ | `WishlistContext`, tích hợp nút tim trên thẻ sản phẩm |
 | Sản phẩm đã xem gần đây | ✅ | Lưu tối đa 8 sản phẩm trong LocalStorage; hiển thị ở trang chủ và chi tiết |
@@ -41,7 +42,6 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Quên mật khẩu (mô phỏng) | ✅ | Hiển thị thông báo gửi email giả lập |
 | Đặt lại mật khẩu (mô phỏng) | ✅ | Trang `/reset-password`, nối từ luồng quên mật khẩu; mật khẩu mới không được lưu |
 | Đánh giá sản phẩm | ✅ | Điểm sao trung bình, danh sách nhận xét, form gửi đánh giá lưu LocalStorage |
-| Chế độ Dark Mode (Giao diện tối) | ✅ | Nút chuyển đổi trên Navbar, lưu LocalStorage, tương thích Kinetic CSS Variables |
 | Xem nhanh sản phẩm (Quick View) | ✅ | Nút xem nhanh trên ProductCard, modal xem ảnh, chọn size và mua nhanh |
 | Hướng dẫn đo kích cỡ giày (Size Guide) | ✅ | Modal bảng quy đổi size EU/US/UK/cm và các bước đo chân chuẩn |
 | Thanh tiến độ Freeship & voucher 1-click | ✅ | Giỏ hàng hiển thị thumbnail, tiến độ freeship 1.5tr và áp mã nhanh |
@@ -61,7 +61,7 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | [Vite](https://vite.dev/) | Công cụ build và dev server |
 | [React Router](https://reactrouter.com/) | Điều hướng giữa các trang |
 | [Context API](https://react.dev/learn/scaling-up-with-reducer-and-context) | Quản lý trạng thái dùng chung (giỏ hàng, yêu thích, tài khoản) |
-| CSS thuần + CSS Variables | Biến giao diện, theme, responsive |
+| CSS thuần + CSS Variables | Biến giao diện, responsive |
 | Google Fonts | Be Vietnam Pro (toàn bộ giao diện), Material Symbols (icon) |
 | JSON + LocalStorage | Mô phỏng dữ liệu và lưu trữ phía người dùng |
 

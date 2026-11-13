@@ -10,6 +10,23 @@ import homepage from '../data/homepage.json';
 
 const PAGE_SIZE = 8;
 
+const STATUS_FILTERS = [
+  { id: 'all', label: 'Tất cả' },
+  { id: 'bestseller', label: 'Bán chạy / Hot seller' },
+  { id: 'sale', label: 'Đang giảm giá' },
+  { id: 'new', label: 'Hàng mới' },
+  { id: 'limited', label: 'Limited' },
+  { id: 'pro', label: 'Pro Hoops' },
+];
+
+function matchesStatus(product, status) {
+  if (status === 'all') return true;
+  if (status === 'sale') {
+    return product.tags.includes('sale') && product.oldPrice > product.price;
+  }
+  return product.tags.includes(status);
+}
+
 export default function Products() {
   useDocumentTitle('Tất cả sản phẩm');
   const products = getProducts();
@@ -22,7 +39,7 @@ export default function Products() {
   const [search, setSearch] = useState('');
   const [size, setSize] = useState('all');
   const [color, setColor] = useState('all');
-  const [saleOnly, setSaleOnly] = useState(false);
+  const [status, setStatus] = useState('all');
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
   const [sort, setSort] = useState('default');
@@ -47,7 +64,7 @@ export default function Products() {
     search.trim() !== '' ||
     size !== 'all' ||
     color !== 'all' ||
-    saleOnly ||
+    status !== 'all' ||
     minPrice !== '' ||
     maxPrice !== '';
 
@@ -68,7 +85,7 @@ export default function Products() {
     setSearch('');
     setSize('all');
     setColor('all');
-    setSaleOnly(false);
+    setStatus('all');
     setMinPrice('');
     setMaxPrice('');
     setCategory('all');
@@ -84,7 +101,7 @@ export default function Products() {
           product.name.toLowerCase().includes(debouncedSearch.trim().toLowerCase()) &&
           (size === 'all' || product.sizes.includes(Number(size))) &&
           (color === 'all' || product.colors.includes(color)) &&
-          (!saleOnly || (product.tags.includes('sale') && product.oldPrice > product.price)) &&
+          matchesStatus(product, status) &&
           (minPriceValue === null || product.price >= minPriceValue) &&
           (maxPriceValue === null || product.price <= maxPriceValue),
       ),
@@ -97,8 +114,8 @@ export default function Products() {
       maxPriceValue,
       minPriceValue,
       products,
-      saleOnly,
       size,
+      status,
     ],
   );
 
@@ -128,9 +145,9 @@ export default function Products() {
     debouncedSearch,
     maxPrice,
     minPrice,
-    saleOnly,
     size,
     sort,
+    status,
   ]);
 
   const totalPages = Math.ceil(sorted.length / PAGE_SIZE);
@@ -208,6 +225,29 @@ export default function Products() {
 
         <section className="product-filters" aria-label="Bộ lọc sản phẩm">
           <div className="product-filter-row">
+            <div className="product-filter-group">
+              <span className="product-filter-label">Trạng thái</span>
+              <div
+                className="product-filter-options"
+                role="group"
+                aria-label="Lọc theo trạng thái sản phẩm"
+              >
+                {STATUS_FILTERS.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`product-status-chip${status === item.id ? ' selected' : ''}`}
+                    aria-pressed={status === item.id}
+                    onClick={() => setStatus(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="product-filter-row">
             <label className="product-filter-group">
               <span className="product-filter-label">Giá từ (₫)</span>
               <input
@@ -233,14 +273,6 @@ export default function Products() {
                 value={maxPrice}
                 onChange={(event) => setMaxPrice(event.target.value)}
               />
-            </label>
-            <label className="product-filter-sale">
-              <input
-                type="checkbox"
-                checked={saleOnly}
-                onChange={(event) => setSaleOnly(event.target.checked)}
-              />
-              Chỉ xem sản phẩm giảm giá
             </label>
           </div>
 
