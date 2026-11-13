@@ -18,7 +18,23 @@
       { "value": "ZoomAir Pro", "label": "Hấp thụ lực 85%", "accent": false },
       { "value": "#1 VOTE", "label": "Best Shoes 2025", "accent": "lime" }
     ],
-    "colorways": ["Neon Sunset", "Carbon Stealth", "Arctic White"]
+    "colorways": [
+      {
+        "name": "Neon Sunset",
+        "image": "/images/shoes/hero-nitro-runner.jpg",
+        "swatch": "red"
+      },
+      {
+        "name": "Carbon Stealth",
+        "image": "/images/shoes/product-01.jpg",
+        "swatch": "black"
+      },
+      {
+        "name": "Arctic White",
+        "image": "/images/shoes/product-03.jpg",
+        "swatch": "white"
+      }
+    ]
   },
   "categories": {
     "eyebrow": "Bộ Lọc Phân Khúc",
