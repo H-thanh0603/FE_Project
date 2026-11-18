@@ -27,6 +27,7 @@ export default function BackToTop() {
       className={`back-to-top${visible ? ' visible' : ''}`}
       onClick={scrollToTop}
       aria-label="Cuộn lên đầu trang"
+      title="Lên đầu trang"
     >
       <span className="icon">arrow_upward</span>
     </button>

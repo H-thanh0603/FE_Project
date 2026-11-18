@@ -10,21 +10,6 @@ import formatPrice from '../utils/formatPrice';
 import { isEmail, isPhone, isNotEmpty } from '../utils/validators';
 
 const EMPTY_FORM = { name: '', phone: '', email: '', address: '' };
-const FREE_SHIPPING_THRESHOLD = 1500000;
-const SHIPPING_METHODS = [
-  {
-    id: 'standard',
-    name: 'Giao hàng tiêu chuẩn',
-    description: 'Dự kiến nhận trong 3–5 ngày',
-    fee: 30000,
-  },
-  {
-    id: 'express',
-    name: 'Giao hàng nhanh',
-    description: 'Dự kiến nhận trong 1–2 ngày',
-    fee: 60000,
-  },
-];
 const PAYMENT_METHODS = [
   {
     id: 'cod',
@@ -33,13 +18,13 @@ const PAYMENT_METHODS = [
   },
   {
     id: 'bank-transfer',
-    name: 'Chuyển khoản ngân hàng (mô phỏng)',
-    description: 'Không phát sinh giao dịch thật trong đồ án frontend.',
+    name: 'Chuyển khoản ngân hàng',
+    description: 'Bank',
   },
 ];
 const CHECKOUT_STEPS = [
   { id: 'details', label: 'Thông tin nhận hàng' },
-  { id: 'delivery', label: 'Giao hàng & thanh toán' },
+  { id: 'payment', label: 'Thanh toán' },
   { id: 'review', label: 'Xác nhận đơn hàng' },
 ];
 
@@ -66,18 +51,12 @@ export default function Checkout() {
     address: defaultAddress?.address ?? '',
   }));
   const [step, setStep] = useState('details');
-  const [shippingId, setShippingId] = useState('standard');
   const [paymentId, setPaymentId] = useState('cod');
   const [error, setError] = useState('');
   const [placedOrder, setPlacedOrder] = useState(null);
 
-  const shippingMethod = SHIPPING_METHODS.find((method) => method.id === shippingId);
   const paymentMethod = PAYMENT_METHODS.find((method) => method.id === paymentId);
-  const shippingCost =
-    shippingId === 'standard' && total >= FREE_SHIPPING_THRESHOLD
-      ? 0
-      : shippingMethod.fee;
-  const orderTotal = total - discount + shippingCost;
+  const orderTotal = total - discount;
 
   const setField = (field) => (event) => {
     setForm((previous) => ({ ...previous, [field]: event.target.value }));
@@ -107,13 +86,13 @@ export default function Checkout() {
       return;
     }
     setError('');
-    setStep('delivery');
+    setStep('payment');
   };
 
   const continueToReview = (event) => {
     event.preventDefault();
-    if (!shippingMethod || !paymentMethod) {
-      setError('Vui lòng chọn phương thức giao hàng và thanh toán.');
+    if (!paymentMethod) {
+      setError('Vui lòng chọn phương thức thanh toán.');
       return;
     }
     setError('');
@@ -127,9 +106,9 @@ export default function Checkout() {
       setStep('details');
       return;
     }
-    if (!shippingMethod || !paymentMethod) {
-      setError('Vui lòng chọn phương thức giao hàng và thanh toán.');
-      setStep('delivery');
+    if (!paymentMethod) {
+      setError('Vui lòng chọn phương thức thanh toán.');
+      setStep('payment');
       return;
     }
 
@@ -140,11 +119,6 @@ export default function Checkout() {
       discount: {
         code: coupon?.code ?? null,
         amount: discount,
-      },
-      shipping: {
-        id: shippingMethod.id,
-        name: shippingMethod.name,
-        cost: shippingCost,
       },
       payment: {
         id: paymentMethod.id,
@@ -166,7 +140,7 @@ export default function Checkout() {
 
   if (placedOrder) {
     return (
-      <div className="container">
+      <div className="container checkout-success-container">
         <div className="page page-narrow checkout-success">
           <div className="order-success">
             <span className="icon order-success-icon">check_circle</span>
@@ -174,11 +148,10 @@ export default function Checkout() {
             <p>
               Mã đơn hàng của bạn: <strong>{placedOrder.id}</strong>
             </p>
-            <p className="page-note">
-              Đơn hàng và phương thức thanh toán chỉ được mô phỏng, không có giao dịch thật.
-            </p>
-            <Link to="/orders" className="btn btn--outline">Xem đơn hàng</Link>
-            <Link to="/products" className="btn btn--dark">Tiếp tục mua sắm</Link>
+            <div className="order-success-actions">
+              <Link to="/orders" className="btn btn--outline">Xem đơn hàng</Link>
+              <Link to="/products" className="btn btn--dark">Tiếp tục mua sắm</Link>
+            </div>
           </div>
         </div>
       </div>
@@ -239,7 +212,12 @@ export default function Checkout() {
                   <p className="page-note">Nhập chính xác thông tin để giao hàng.</p>
                 </div>
 
-                <form className="form" onSubmit={continueFromDetails} noValidate>
+                <form
+                  id="checkout-details-form"
+                  className="form"
+                  onSubmit={continueFromDetails}
+                  noValidate
+                >
                   {addresses.length > 0 && (
                     <label>
                       Chọn địa chỉ đã lưu
@@ -306,50 +284,19 @@ export default function Checkout() {
                       Quản lý sổ địa chỉ
                     </Link>
                   )}
-                  <button type="submit" className="btn btn--red">
-                    Tiếp tục: giao hàng & thanh toán
-                  </button>
                 </form>
               </section>
             )}
 
-            {step === 'delivery' && (
+            {step === 'payment' && (
               <section className="checkout-section">
                 <div>
-                  <h2 className="checkout-section-title">Giao Hàng & Thanh Toán</h2>
-                  <p className="page-note">Chọn phương thức phù hợp cho đơn hàng.</p>
+                  <h2 className="checkout-section-title">Thanh Toán</h2>
+                  <p className="page-note">Chọn phương thức thanh toán cho đơn hàng.</p>
                 </div>
 
                 <form className="form" onSubmit={continueToReview}>
-                  <fieldset className="checkout-choice-group">
-                    <legend>Phương thức giao hàng</legend>
-                    {SHIPPING_METHODS.map((method) => {
-                      const fee =
-                        method.id === 'standard' && total >= FREE_SHIPPING_THRESHOLD
-                          ? 0
-                          : method.fee;
-                      return (
-                        <label key={method.id} className="checkout-choice">
-                          <input
-                            type="radio"
-                            name="shipping"
-                            value={method.id}
-                            checked={shippingId === method.id}
-                            onChange={() => setShippingId(method.id)}
-                          />
-                          <span className="checkout-choice-copy">
-                            <strong>{method.name}</strong>
-                            <span>{method.description}</span>
-                          </span>
-                          <strong className="checkout-choice-price">
-                            {fee === 0 ? 'Miễn phí' : formatPrice(fee)}
-                          </strong>
-                        </label>
-                      );
-                    })}
-                  </fieldset>
-
-                  <fieldset className="checkout-choice-group">
+                  <fieldset className="checkout-choice-group checkout-payment-options">
                     <legend>Phương thức thanh toán</legend>
                     {PAYMENT_METHODS.map((method) => (
                       <label key={method.id} className="checkout-choice">
@@ -362,13 +309,10 @@ export default function Checkout() {
                         />
                         <span className="checkout-choice-copy">
                           <strong>{method.name}</strong>
-                          <span>{method.description}</span>
+                          {method.description && <span>({method.description})</span>}
                         </span>
                       </label>
                     ))}
-                    <p className="checkout-simulation-note">
-                      Không nhập thông tin thẻ hoặc chuyển khoản thật. Đây chỉ là lựa chọn giao diện.
-                    </p>
                   </fieldset>
 
                   <div className="checkout-actions">
@@ -406,80 +350,96 @@ export default function Checkout() {
                         Chỉnh sửa
                       </button>
                     </div>
-                    <p>{form.name} · {form.phone}</p>
-                    <p>{form.email}</p>
-                    <p>{form.address}</p>
+                    <p>Họ và tên: {form.name}</p>
+                    <p>Số điện thoại: {form.phone}</p>
+                    <p>Email: {form.email}</p>
+                    <p>Địa chỉ: {form.address}</p>
                   </div>
                   <div className="checkout-review-block">
                     <div className="checkout-review-heading">
-                      <strong>Giao hàng & thanh toán</strong>
+                      <strong>Thanh toán</strong>
                       <button
                         type="button"
                         className="address-text-button"
-                        onClick={() => setStep('delivery')}
+                        onClick={() => setStep('payment')}
                       >
                         Chỉnh sửa
                       </button>
                     </div>
-                    <p>{shippingMethod.name}</p>
                     <p>{paymentMethod.name}</p>
+                    {paymentMethod.description && <p>{paymentMethod.description}</p>}
                     <p className="checkout-simulation-note">Phương thức thanh toán chỉ được mô phỏng.</p>
                   </div>
-                </div>
-
-                <div className="checkout-actions">
-                  <button
-                    type="button"
-                    className="btn btn--outline"
-                    onClick={() => setStep('delivery')}
-                  >
-                    Quay lại
-                  </button>
-                  <button type="button" className="btn btn--red" onClick={placeOrder}>
-                    Đặt hàng mô phỏng
-                  </button>
                 </div>
               </section>
             )}
           </div>
 
-          <aside className="checkout-summary" aria-label="Tóm tắt đơn hàng">
-            <h2 className="checkout-section-title">Đơn Hàng Của Bạn</h2>
-            <ul className="checkout-items">
-              {items.map((item) => (
-                <li key={`${item.id}-${item.size}`}>
-                  <span>{item.name} (size {item.size}) × {item.quantity}</span>
-                  <strong>{formatPrice(item.price * item.quantity)}</strong>
-                </li>
-              ))}
-            </ul>
-            <div className="checkout-coupon">
-              <CouponInput />
-            </div>
-            <div className="checkout-totals">
-              <p><span>Tạm tính</span><strong>{formatPrice(total)}</strong></p>
-              {discount > 0 && (
-                <p className="checkout-discount">
-                  <span>Giảm giá{coupon ? ` (${coupon.code})` : ''}</span>
-                  <strong>-{formatPrice(discount)}</strong>
+          {step !== 'payment' && (
+            <aside className="checkout-summary" aria-label="Tóm tắt đơn hàng">
+              <h2 className="checkout-section-title">
+                {step === 'review' ? 'Chi Tiết Đơn Hàng' : 'Đơn Hàng Của Bạn'}
+              </h2>
+              <ul className="checkout-items">
+                {items.map((item) => (
+                  <li key={`${item.id}-${item.size}`}>
+                    <span className="checkout-item-image">
+                      {item.image ? (
+                        <img src={item.image} alt={item.name} />
+                      ) : (
+                        <span className="icon" aria-hidden="true">image</span>
+                      )}
+                    </span>
+                    <span className="checkout-item-copy">
+                      <strong>{item.name}</strong>
+                      <span>Size {item.size} · Số lượng {item.quantity}</span>
+                      <span>{formatPrice(item.price)} / đôi</span>
+                    </span>
+                    <strong>{formatPrice(item.price * item.quantity)}</strong>
+                  </li>
+                ))}
+              </ul>
+              <div className="checkout-coupon">
+                <CouponInput />
+              </div>
+              <div className="checkout-totals">
+                <p><span>Tạm tính</span><strong>{formatPrice(total)}</strong></p>
+                {discount > 0 && (
+                  <p className="checkout-discount">
+                    <span>Giảm giá{coupon ? ` (${coupon.code})` : ''}</span>
+                    <strong>-{formatPrice(discount)}</strong>
+                  </p>
+                )}
+                <p className="checkout-grand-total">
+                  <span>Tổng thanh toán</span>
+                  <strong>{formatPrice(orderTotal)}</strong>
                 </p>
-              )}
-              <p>
-                <span>Phí giao hàng</span>
-                <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>
-              </p>
-              {shippingId === 'standard' && total >= FREE_SHIPPING_THRESHOLD && (
-                <p className="checkout-simulation-note">
-                  Đơn từ {formatPrice(FREE_SHIPPING_THRESHOLD)} được miễn phí giao hàng tiêu chuẩn.
-                </p>
-              )}
-              <p className="checkout-grand-total">
-                <span>Tổng thanh toán</span>
-                <strong>{formatPrice(orderTotal)}</strong>
-              </p>
-            </div>
-          </aside>
+              </div>
+            </aside>
+          )}
         </div>
+
+        {step === 'details' && (
+          <div className="checkout-actions checkout-bottom-actions">
+            <button type="submit" form="checkout-details-form" className="btn btn--red">
+              Tiếp tục: thanh toán
+            </button>
+          </div>
+        )}
+        {step === 'review' && (
+          <div className="checkout-actions checkout-bottom-actions">
+            <button
+              type="button"
+              className="btn btn--outline"
+              onClick={() => setStep('payment')}
+            >
+              Quay lại
+            </button>
+            <button type="button" className="btn btn--red" onClick={placeOrder}>
+              Đặt hàng mô phỏng
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

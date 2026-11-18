@@ -7,14 +7,11 @@ import QuickViewModal from '../product/QuickViewModal/QuickViewModal';
 export default function FeaturedProducts() {
   const { featured } = homepage;
   const products = getProducts();
-  const [tab, setTab] = useState('all');
+  const [tab, setTab] = useState(featured.tabs[0]?.id ?? 'new');
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
   const filtered = useMemo(
-    () =>
-      tab === 'all'
-        ? products
-        : products.filter((product) => product.tags.includes(tab)),
+    () => products.filter((product) => product.tags.includes(tab)),
     [tab],
   );
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import homepage from '../../data/homepage.json';
 import useCountdown from '../../hooks/useCountdown';
 import formatPrice from '../../utils/formatPrice';
@@ -71,10 +72,14 @@ export default function FlashDropSection() {
             </button>
           </div>
 
-          <div className="drop-visual">
+          <Link
+            to={`/products/${drop.productId}`}
+            className="drop-visual"
+            aria-label={`Xem chi tiết ${drop.name}`}
+          >
             <img src={drop.image} alt={drop.name} />
             <span className="drop-verified">{drop.verifiedLabel}</span>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

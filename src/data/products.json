@@ -365,5 +365,60 @@
     "rating": 4.6,
     "reviews": 72,
     "colors": ["#202124", "#d9dce4"]
+  },
+  {
+    "id": "kinetic-nitro-x-pro-runner",
+    "sku": "KNT-RUN-009",
+    "name": "Kinetic Nitro X Pro Runner",
+    "brandId": "kinetic",
+    "category": "running",
+    "tags": ["new", "bestseller", "sale"],
+    "price": 3250000,
+    "oldPrice": 3900000,
+    "sizes": [39, 40, 41, 42, 43, 44],
+    "image": "/images/shoes/hero-nitro-runner.jpg",
+    "description": "Phản hồi động học tức thời với đệm kép Nitro và thân PrimeKnit ôm chân.",
+    "rating": 4.9,
+    "reviews": 156,
+    "colors": ["#ff3b00", "#0f1012", "#dee3ec"],
+    "colorways": [
+      {
+        "name": "Neon Sunset",
+        "image": "/images/shoes/hero-nitro-runner.jpg",
+        "swatch": "red",
+        "sku": "KNT-RUN-009-NS",
+        "description": "Sắc cam neon rực rỡ, bật nổi trên nền lưới trắng."
+      },
+      {
+        "name": "Carbon Stealth",
+        "image": "/images/shoes/hero-nitro-runner-carbon-stealth.jpg",
+        "swatch": "black",
+        "sku": "KNT-RUN-009-CS",
+        "description": "Tông đen/xám carbon mạnh mẽ, dễ phối cùng trang phục tối."
+      },
+      {
+        "name": "Arctic White",
+        "image": "/images/shoes/hero-nitro-runner-arctic-white.jpg",
+        "swatch": "white",
+        "sku": "KNT-RUN-009-AW",
+        "description": "Sắc trắng bạc tinh khiết, nhẹ nhàng và thanh thoát."
+      }
+    ]
+  },
+  {
+    "id": "cyberpunk-boost-v2",
+    "sku": "KNT-LTD-010",
+    "name": "Cyberpunk Boost V2",
+    "brandId": "kinetic",
+    "category": "limited",
+    "tags": ["limited", "new"],
+    "price": 3390000,
+    "oldPrice": 4200000,
+    "sizes": [40, 41, 42, 43, 44],
+    "image": "/images/shoes/drop-cyberpunk.jpg",
+    "description": "Phiên bản stealth đúc vỏ carbon, tích hợp chip NFC xác thực và đệm phản xạ năng lượng.",
+    "rating": 4.9,
+    "reviews": 88,
+    "colors": ["#0f1012", "#ccff00"]
   }
 ]

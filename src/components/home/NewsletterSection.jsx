@@ -48,15 +48,6 @@ export default function NewsletterSection() {
               ✓ Cảm ơn bạn! Mã voucher KINETIC200K đã được gửi vào hòm thư (mô phỏng).
             </p>
           )}
-
-          <div className="newsletter-perks">
-            {newsletter.perks.map((perk) => (
-              <span key={perk} className="newsletter-perk">
-                <span className="icon">check_circle</span>
-                {perk}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </section>

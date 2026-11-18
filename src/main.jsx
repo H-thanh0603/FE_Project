@@ -10,7 +10,6 @@ import { AddressProvider } from './context/AddressContext';
 import { RecentlyViewedProvider } from './context/RecentlyViewedContext';
 import { ToastProvider } from './context/ToastContext';
 import { NotificationProvider } from './context/NotificationContext';
-import { ThemeProvider } from './context/ThemeContext';
 import { CompareProvider } from './context/CompareContext';
 
 import './styles/variables.css';
@@ -20,7 +19,6 @@ import './styles/responsive.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider>
         <ToastProvider>
           <NotificationProvider>
             <AuthProvider>
@@ -38,7 +36,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </AuthProvider>
           </NotificationProvider>
         </ToastProvider>
-      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
 );
