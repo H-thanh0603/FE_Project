@@ -1,0 +1,80 @@
+/* Ô tìm kiếm có gợi ý */
+
+.search-autocomplete {
+  position: relative;
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+
+.search-autocomplete-input {
+  width: 100%;
+  padding-left: 2.1rem;
+}
+
+.search-autocomplete-icon {
+  position: absolute;
+  top: 50%;
+  left: var(--spacing-2);
+  transform: translateY(-50%);
+  color: var(--color-muted);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-1);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+}
+
+.search-suggestion {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  border: 0;
+  padding: var(--spacing-2);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.search-suggestion:hover,
+.search-suggestion.active {
+  background: var(--color-surface);
+}
+
+.search-suggestion .icon {
+  font-size: 18px;
+  color: var(--color-muted);
+}
+
+.search-suggestion-label {
+  font-weight: 600;
+}
+
+.search-suggestion-meta {
+  margin-left: auto;
+  white-space: nowrap;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.search-suggestions-empty {
+  margin: 0;
+  padding: var(--spacing-2);
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
