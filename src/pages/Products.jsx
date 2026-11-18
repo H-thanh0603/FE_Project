@@ -5,6 +5,7 @@ import useDebounce from '../hooks/useDebounce';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import ProductCard from '../components/product/ProductCard/ProductCard';
 import Pagination from '../components/common/Pagination/Pagination';
+import SearchAutocomplete from '../components/common/SearchAutocomplete/SearchAutocomplete';
 import QuickViewModal from '../components/product/QuickViewModal/QuickViewModal';
 import homepage from '../data/homepage.json';
 
@@ -151,12 +152,10 @@ export default function Products() {
         </div>
 
         <div className="toolbar">
-          <input
-            type="search"
-            className="input"
-            placeholder="Tìm kiếm giày..."
+          <SearchAutocomplete
             value={search}
-            onChange={(event) => setSearch(event.target.value)}
+            onChange={setSearch}
+            placeholder="Tìm kiếm giày..."
           />
           <select
             className="input"
