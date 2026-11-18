@@ -11,6 +11,7 @@ import { RecentlyViewedProvider } from './context/RecentlyViewedContext';
 import { ToastProvider } from './context/ToastContext';
 import { NotificationProvider } from './context/NotificationContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { CompareProvider } from './context/CompareContext';
 
 import './styles/variables.css';
 import './styles/global.css';
@@ -27,7 +28,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <RecentlyViewedProvider>
                   <CartProvider>
                     <WishlistProvider>
-                      <App />
+                      <CompareProvider>
+                        <App />
+                      </CompareProvider>
                     </WishlistProvider>
                   </CartProvider>
                 </RecentlyViewedProvider>
