@@ -1,0 +1,15 @@
+.related-products {
+  margin-top: var(--spacing-5);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.related-products-heading {
+  margin-bottom: var(--spacing-4);
+}
+
+@media (max-width: 640px) {
+  .related-products {
+    margin-top: var(--spacing-4);
+  }
+}
