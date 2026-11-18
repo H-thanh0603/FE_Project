@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useWishlist } from '../../../context/WishlistContext';
+import { useCompare, MAX_COMPARE } from '../../../context/CompareContext';
 import { useToast } from '../../../context/ToastContext';
 import { getBrandName } from '../../../services/productService';
 import formatPrice from '../../../utils/formatPrice';
@@ -11,6 +12,7 @@ import './ProductCard.css';
 export default function ProductCard({ product, onQuickView }) {
   const { addItem } = useCart();
   const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isComparing, toggleCompare, isFull } = useCompare();
   const { showToast } = useToast();
   const [size, setSize] = useState(product.sizes[0] ?? null);
   const [justAdded, setJustAdded] = useState(false);
@@ -23,6 +25,7 @@ export default function ProductCard({ product, onQuickView }) {
   };
 
   const wishlisted = isWishlisted(product.id);
+  const comparing = isComparing(product.id);
   const onSale = Boolean(product.oldPrice);
   const badge = getProductBadge(product);
 
@@ -42,6 +45,17 @@ export default function ProductCard({ product, onQuickView }) {
             onClick={() => toggleWishlist(product.id)}
           >
             <span className={`icon${wishlisted ? ' icon--fill' : ''}`}>favorite</span>
+          </button>
+          <button
+            type="button"
+            aria-label={comparing ? `Bỏ so sánh ${product.name}` : `So sánh ${product.name}`}
+            aria-pressed={comparing}
+            className={`fav-btn compare-btn${comparing ? ' active' : ''}`}
+            disabled={!comparing && isFull}
+            title={!comparing && isFull ? `Chỉ so sánh tối đa ${MAX_COMPARE} sản phẩm` : undefined}
+            onClick={() => toggleCompare(product.id)}
+          >
+            <span className="icon">compare_arrows</span>
           </button>
           <Link to={`/products/${product.id}`}>
             {product.image ? (
