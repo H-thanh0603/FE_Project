@@ -148,11 +148,10 @@ export default function Checkout() {
             <p>
               Mã đơn hàng của bạn: <strong>{placedOrder.id}</strong>
             </p>
-            <p className="page-note">
-              Đơn hàng và phương thức thanh toán chỉ được mô phỏng, không có giao dịch thật.
-            </p>
-            <Link to="/orders" className="btn btn--outline">Xem đơn hàng</Link>
-            <Link to="/products" className="btn btn--dark">Tiếp tục mua sắm</Link>
+            <div className="order-success-actions">
+              <Link to="/orders" className="btn btn--outline">Xem đơn hàng</Link>
+              <Link to="/products" className="btn btn--dark">Tiếp tục mua sắm</Link>
+            </div>
           </div>
         </div>
       </div>

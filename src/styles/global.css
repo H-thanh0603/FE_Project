@@ -1922,6 +1922,13 @@ h1, h2, h3, h4 {
   padding: var(--spacing-5) var(--spacing-4);
 }
 
+.order-success-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
 .order-success-icon {
   font-size: 56px;
   color: #647e00;
