@@ -1029,6 +1029,14 @@ h1, h2, h3, h4 {
   color: var(--color-primary);
 }
 
+/* Link có badge số lượng (So sánh) */
+.nav-link:has(.cart-badge) {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
 .nav-actions {
   display: flex;
   align-items: center;

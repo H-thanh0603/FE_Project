@@ -2,6 +2,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
 import { useNotifications } from '../../../context/NotificationContext';
+import { useCompare } from '../../../context/CompareContext';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
@@ -9,6 +10,7 @@ export default function Navbar() {
   const { itemCount } = useCart();
   const { user, logout } = useAuth();
   const { unreadCount } = useNotifications();
+  const { productIds: compareIds } = useCompare();
 
   return (
     <>
@@ -38,6 +40,10 @@ export default function Navbar() {
               title="Xem danh sách sản phẩm yêu thích"
             >
               Yêu thích
+            </NavLink>
+            <NavLink to="/compare" className={navLinkClass}>
+              So sánh
+              {compareIds.length > 0 && <span className="cart-badge">{compareIds.length}</span>}
             </NavLink>
             <NavLink to="/orders" className={navLinkClass}>
               Đơn hàng
