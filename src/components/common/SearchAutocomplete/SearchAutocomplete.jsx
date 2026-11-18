@@ -13,6 +13,7 @@ export default function SearchAutocomplete({
 }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const wrapperRef = useRef(null);
   const products = useMemo(() => getProducts(), []);
   const query = value.trim().toLowerCase();
@@ -42,10 +43,33 @@ export default function SearchAutocomplete({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    setActiveIndex(-1);
+  }, [query]);
+
   const selectSuggestion = (suggestion) => {
     onChange(suggestion.label);
     setIsOpen(false);
+    setActiveIndex(-1);
     navigate(`/products/${suggestion.id}`);
+  };
+
+  const handleKeyDown = (event) => {
+    if (!isOpen) return;
+
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveIndex((index) => Math.min(index + 1, suggestions.length - 1));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveIndex((index) => Math.max(index - 1, -1));
+    } else if (event.key === 'Enter' && activeIndex >= 0 && suggestions[activeIndex]) {
+      event.preventDefault();
+      selectSuggestion(suggestions[activeIndex]);
+    } else if (event.key === 'Escape') {
+      setIsOpen(false);
+      setActiveIndex(-1);
+    }
   };
 
   return (
@@ -55,24 +79,35 @@ export default function SearchAutocomplete({
         type="search"
         className="input search-autocomplete-input"
         placeholder={placeholder}
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-controls="search-suggestions"
+        aria-autocomplete="list"
+        aria-activedescendant={activeIndex >= 0 ? `search-suggestion-${activeIndex}` : undefined}
         value={value}
         onChange={(event) => {
           onChange(event.target.value);
           setIsOpen(true);
         }}
         onFocus={() => setIsOpen(true)}
+        onKeyDown={handleKeyDown}
       />
 
       {isOpen && query && (
-        <div className="search-suggestions">
+        <div className="search-suggestions" id="search-suggestions" role="listbox">
           {suggestions.length === 0 ? (
             <p className="search-suggestions-empty">Không có gợi ý phù hợp.</p>
           ) : (
-            suggestions.map((suggestion) => (
+            suggestions.map((suggestion, index) => (
               <button
                 key={suggestion.id}
+                id={`search-suggestion-${index}`}
                 type="button"
-                className="search-suggestion"
+                role="option"
+                aria-selected={index === activeIndex}
+                className={`search-suggestion${index === activeIndex ? ' active' : ''}`}
+                onMouseEnter={() => setActiveIndex(index)}
+                onMouseDown={(event) => event.preventDefault()}
                 onClick={() => selectSuggestion(suggestion)}
               >
                 <span className="icon">search</span>
