@@ -49,6 +49,9 @@ Trạng thái: ✅ Đã hoàn thành · 🚧 Đang phát triển · 📋 Dự ki
 | Áp dụng mã giảm giá (mô phỏng) | ✅ | `couponService` + `CouponInput`; ô nhập mã ở giỏ hàng và checkout, giảm giá lưu vào đơn |
 | Thông báo nổi (toast) | ✅ | `ToastContext` + `ToastStack`; báo khi thêm vào giỏ, áp mã giảm giá |
 | Thông báo trong ứng dụng (mô phỏng) | ✅ | Chuông trên Navbar kèm số chưa đọc, trang `/notifications`; sinh khi đặt, hủy, đổi trạng thái đơn |
+| So sánh sản phẩm | ✅ | Tick chọn trên ProductCard, tối đa 4 sản phẩm; trang `/compare` dạng bảng, badge trên Navbar |
+| Gợi ý sản phẩm liên quan | ✅ | Ở trang chi tiết, chấm điểm theo thương hiệu, danh mục và nhãn chung |
+| Autocomplete tìm kiếm + lịch sử tìm kiếm | ✅ | Gợi ý khi gõ, điều hướng bằng bàn phím; lưu 5 từ khóa gần nhất trong LocalStorage |
 | Kết nối API backend thật + xác thực (JWT) | 📋 | Thay nội dung các hàm trong `services/` |
 
 ---
@@ -82,10 +85,11 @@ FE_Project/
 │
 ├── src/
 │   ├── components/          # Component tái sử dụng, chia theo nhóm
-│   │   ├── common/          #   Button, Modal, Pagination, Loading
+│   │   ├── common/          #   Button, Modal, Pagination, Loading, SearchAutocomplete
 │   │   ├── layout/          #   Navbar, Footer, MainLayout.jsx
 │   │   ├── home/            #   8 section trang chủ (hero, flash drop, tabs...)
-│   │   ├── product/         #   ProductCard, ProductFilter, ProductSort, ProductGallery
+│   │   ├── product/         #   ProductCard, ProductFilter, RelatedProducts...
+│   │   ├── compare/         #   CompareTable
 │   │   └── cart/            #   CartItem, CartSummary
 │   │
 │   ├── pages/               # Các trang chính của website
@@ -95,6 +99,7 @@ FE_Project/
 │   │   ├── Cart.jsx             # Giỏ hàng
 │   │   ├── Checkout.jsx         # Thanh toán (mô phỏng)
 │   │   ├── Wishlist.jsx         # Sản phẩm yêu thích
+│   │   ├── Compare.jsx          # So sánh sản phẩm
 │   │   ├── Login.jsx            # Đăng nhập giả lập
 │   │   ├── Register.jsx         # Đăng ký (đang phát triển)
 │   │   ├── Orders.jsx           # Lịch sử đơn hàng
@@ -103,11 +108,13 @@ FE_Project/
 │   ├── context/             # Trạng thái dùng chung
 │   │   ├── CartContext.jsx      # Giỏ hàng + custom hook useCart()
 │   │   ├── WishlistContext.jsx  # Yêu thích + useWishlist()
+│   │   ├── CompareContext.jsx   # So sánh sản phẩm + useCompare()
 │   │   └── AuthContext.jsx      # Tài khoản giả lập + useAuth()
 │   │
 │   ├── hooks/               # React Hook tự viết
 │   │   ├── useLocalStorage.js   # Đồng bộ state với LocalStorage
 │   │   ├── useDebounce.js       # Debounce cho ô tìm kiếm
+│   │   ├── useSearchHistory.js  # Lưu / xóa lịch sử từ khóa tìm kiếm
 │   │   └── useCountdown.js      # Đếm ngược cho khối Flash Drop
 │   │
 │   ├── services/            # Truy xuất và xử lý dữ liệu
