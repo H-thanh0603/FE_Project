@@ -3,6 +3,7 @@ import { useCart } from '../../../context/CartContext';
 import { useAuth } from '../../../context/AuthContext';
 import { useNotifications } from '../../../context/NotificationContext';
 import { useTheme } from '../../../context/ThemeContext';
+import { useCompare } from '../../../context/CompareContext';
 
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
@@ -11,6 +12,7 @@ export default function Navbar() {
   const { user, logout } = useAuth();
   const { unreadCount } = useNotifications();
   const { isDark, toggleTheme } = useTheme();
+  const { productIds: compareIds } = useCompare();
 
   return (
     <>
@@ -36,6 +38,10 @@ export default function Navbar() {
             </NavLink>
             <NavLink to="/wishlist" className={navLinkClass}>
               Yêu thích
+            </NavLink>
+            <NavLink to="/compare" className={navLinkClass}>
+              So sánh
+              {compareIds.length > 0 && <span className="cart-badge">{compareIds.length}</span>}
             </NavLink>
             <NavLink to="/orders" className={navLinkClass}>
               Đơn hàng
