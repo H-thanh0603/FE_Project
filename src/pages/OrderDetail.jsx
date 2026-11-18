@@ -162,10 +162,12 @@ export default function OrderDetail() {
                   <strong>-{formatPrice(order.discount.amount)}</strong>
                 </p>
               )}
-              <p>
-                <span>Giao hàng{order.shipping?.name ? ` — ${order.shipping.name}` : ''}</span>
-                <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>
-              </p>
+              {order.shipping && (
+                <p>
+                  <span>Giao hàng{order.shipping.name ? ` — ${order.shipping.name}` : ''}</span>
+                  <strong>{shippingCost === 0 ? 'Miễn phí' : formatPrice(shippingCost)}</strong>
+                </p>
+              )}
               {order.payment && (
                 <p><span>Thanh toán</span><strong>{order.payment.name}</strong></p>
               )}

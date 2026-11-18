@@ -15,7 +15,6 @@
 
   .checkout-summary {
     position: static;
-    grid-row: 1;
   }
 
   .order-detail-grid {
