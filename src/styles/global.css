@@ -1718,8 +1718,9 @@ h1, h2, h3, h4 {
 .checkout-choice-copy {
   display: flex;
   flex: 1;
-  flex-direction: column;
-  gap: 2px;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 4px;
 }
 
 .checkout-choice-copy strong,

@@ -33,8 +33,8 @@ const PAYMENT_METHODS = [
   },
   {
     id: 'bank-transfer',
-    name: 'Chuyển khoản ngân hàng (mô phỏng)',
-    description: 'Không phát sinh giao dịch thật trong đồ án frontend.',
+    name: 'Chuyển khoản ngân hàng',
+    description: 'Bank',
   },
 ];
 const CHECKOUT_STEPS = [
@@ -339,7 +339,7 @@ export default function Checkout() {
                           />
                           <span className="checkout-choice-copy">
                             <strong>{method.name}</strong>
-                            <span>{method.description}</span>
+                            <span>({method.description})</span>
                           </span>
                           <strong className="checkout-choice-price">
                             {fee === 0 ? 'Miễn phí' : formatPrice(fee)}
@@ -362,13 +362,10 @@ export default function Checkout() {
                         />
                         <span className="checkout-choice-copy">
                           <strong>{method.name}</strong>
-                          <span>{method.description}</span>
+                          {method.description && <span>({method.description})</span>}
                         </span>
                       </label>
                     ))}
-                    <p className="checkout-simulation-note">
-                      Không nhập thông tin thẻ hoặc chuyển khoản thật. Đây chỉ là lựa chọn giao diện.
-                    </p>
                   </fieldset>
 
                   <div className="checkout-actions">
