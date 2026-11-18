@@ -143,3 +143,31 @@
   width: 14px;
   height: 14px;
 }
+
+.compare-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+@media (max-width: 640px) {
+  .compare-table th,
+  .compare-table td {
+    padding: var(--spacing-2);
+    font-size: 0.82rem;
+  }
+
+  .compare-table tbody th,
+  .compare-corner {
+    width: 110px;
+    font-size: 0.62rem;
+  }
+
+  .compare-head {
+    min-width: 140px;
+  }
+
+  .compare-table {
+    min-width: 560px;
+  }
+}
