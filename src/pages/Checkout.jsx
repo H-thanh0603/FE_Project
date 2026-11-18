@@ -140,7 +140,7 @@ export default function Checkout() {
 
   if (placedOrder) {
     return (
-      <div className="container">
+      <div className="container checkout-success-container">
         <div className="page page-narrow checkout-success">
           <div className="order-success">
             <span className="icon order-success-icon">check_circle</span>
