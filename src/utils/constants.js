@@ -11,6 +11,7 @@ export const STORAGE_KEYS = {
   NOTIFICATIONS: 'shoe_store_notifications',
   THEME: 'shoe_store_theme',
   REVIEWS: 'shoe_store_reviews',
+  COMPARE: 'shoe_store_compare',
 };
 
 // Đơn vị tiền tệ hiển thị
