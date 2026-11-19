@@ -8,13 +8,17 @@ import CommunitySection from '../components/home/CommunitySection';
 import NewsletterSection from '../components/home/NewsletterSection';
 import RecentlyViewed from '../components/product/RecentlyViewed';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import useScrollReveal from '../hooks/useScrollReveal';
+import { useRef } from 'react';
 import '../components/home/home.css';
 
 export default function Home() {
   useDocumentTitle('Trang chủ — Giày Thể Thao Cao Cấp');
+  const pageRef = useRef(null);
+  useScrollReveal(pageRef, 'section');
 
   return (
-    <div className="page-home">
+    <div className="page-home" ref={pageRef}>
       <HeroSection />
       <CategorySection />
       <FlashDropSection />
