@@ -228,6 +228,21 @@ export default function ProductDetail() {
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
       />
+
+      <div className="sticky-buy-bar" role="region" aria-label="Mua nhanh">
+        <div className="sticky-buy-price">
+          <span>{formatPrice(product.price)}</span>
+          {onSale && <small>{formatPrice(product.oldPrice)}</small>}
+        </div>
+        <button
+          type="button"
+          className="btn btn--dark"
+          onClick={handleAddToCart}
+        >
+          <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>
+          {justAdded ? 'Đã thêm vào giỏ' : 'Thêm vào giỏ'}
+        </button>
+      </div>
     </div>
   );
 }
