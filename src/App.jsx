@@ -1,21 +1,24 @@
+import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
 import Wishlist from './pages/Wishlist';
-import Compare from './pages/Compare';import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import Orders from './pages/Orders';
-import Profile from './pages/Profile';
-import Addresses from './pages/Addresses';
-import NotFound from './pages/NotFound';
-import OrderDetail from './pages/OrderDetail';
-import Notifications from './pages/Notifications';
+
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Compare = lazy(() => import('./pages/Compare'));
+const Login = lazy(() => import('./pages/Login'));
+const Register = lazy(() => import('./pages/Register'));
+const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+const Orders = lazy(() => import('./pages/Orders'));
+const OrderDetail = lazy(() => import('./pages/OrderDetail'));
+const Notifications = lazy(() => import('./pages/Notifications'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Addresses = lazy(() => import('./pages/Addresses'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 export default function App() {
   return (
