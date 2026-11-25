@@ -6,17 +6,37 @@ import { calculateDiscount, validateCoupon } from '../services/couponService';
 
 const CartContext = createContext(null);
 
+function normalizeColorway(colorway) {
+  if (!colorway) return null;
+  if (typeof colorway === 'string') return colorway;
+  return colorway.name ?? null;
+}
+
+function isSameCartItem(item, id, size, colorway) {
+  return (
+    item.id === id &&
+    item.size === size &&
+    (item.colorway ?? null) === (colorway ?? null)
+  );
+}
+
 export function CartProvider({ children }) {
   // Giỏ hàng được lưu trong LocalStorage nên không mất khi tải lại trang
   const [items, setItems] = useLocalStorage(STORAGE_KEYS.CART, []);
   // Mã giảm giá đang áp dụng, lưu lại để không mất khi tải lại trang
   const [coupon, setCoupon] = useLocalStorage(STORAGE_KEYS.COUPON, null);
 
-  /** Thêm giày vào giỏ; trùng sản phẩm + size thì cộng dồn số lượng */
-  const addItem = (product, size, quantity = 1) => {
+  /** Thêm giày vào giỏ; trùng sản phẩm + size + phối màu thì cộng dồn số lượng */
+  const addItem = (product, size, quantity = 1, colorway = null) => {
+    const resolvedColorway = colorway ?? product.colorways?.[0] ?? product.colorway ?? null;
+    const colorwayName = normalizeColorway(resolvedColorway);
+    const image =
+      (typeof resolvedColorway === 'object' && resolvedColorway?.image) ||
+      product.image;
+
     setItems((prev) => {
-      const index = prev.findIndex(
-        (item) => item.id === product.id && item.size === size,
+      const index = prev.findIndex((item) =>
+        isSameCartItem(item, product.id, size, colorwayName),
       );
       if (index >= 0) {
         const next = [...prev];
@@ -29,8 +49,9 @@ export function CartProvider({ children }) {
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.image,
+          image,
           size,
+          ...(colorwayName ? { colorway: colorwayName } : {}),
           quantity,
         },
       ];
@@ -38,18 +59,23 @@ export function CartProvider({ children }) {
   };
 
   /** Cập nhật số lượng; nhỏ hơn hoặc bằng 0 thì xóa khỏi giỏ */
-  const updateQuantity = (id, size, quantity) => {
+  const updateQuantity = (id, size, quantity, colorway = null) => {
+    const colorwayName = normalizeColorway(colorway);
     setItems((prev) =>
       quantity <= 0
-        ? prev.filter((item) => !(item.id === id && item.size === size))
+        ? prev.filter((item) => !isSameCartItem(item, id, size, colorwayName))
         : prev.map((item) =>
-            item.id === id && item.size === size ? { ...item, quantity } : item,
+            isSameCartItem(item, id, size, colorwayName) ? { ...item, quantity } : item,
           ),
     );
   };
 
-  const removeItem = (id, size) =>
-    setItems((prev) => prev.filter((item) => !(item.id === id && item.size === size)));
+  const removeItem = (id, size, colorway = null) => {
+    const colorwayName = normalizeColorway(colorway);
+    setItems((prev) =>
+      prev.filter((item) => !isSameCartItem(item, id, size, colorwayName)),
+    );
+  };
 
   const clearCart = () => {
     setItems([]);

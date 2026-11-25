@@ -80,10 +80,11 @@ export default function ProductDetail() {
   const badge = getProductBadge(product);
 
   const handleAddToCart = () => {
-    addItem(product, size, quantity);
+    addItem(product, size, quantity, activeColorway);
     setJustAdded(true);
     const qtyText = quantity > 1 ? `${quantity}x ` : '';
-    showToast(`Đã thêm ${qtyText}${product.name} (size ${size}) vào giỏ.`);
+    const colorText = activeColorway ? ` - ${activeColorway.name}` : '';
+    showToast(`Đã thêm ${qtyText}${product.name}${colorText} (size ${size}) vào giỏ.`);
     if (justAddedTimerRef.current) clearTimeout(justAddedTimerRef.current);
     justAddedTimerRef.current = setTimeout(() => {
       setJustAdded(false);

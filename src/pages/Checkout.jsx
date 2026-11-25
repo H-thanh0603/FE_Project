@@ -382,7 +382,7 @@ export default function Checkout() {
               </h2>
               <ul className="checkout-items">
                 {items.map((item) => (
-                  <li key={`${item.id}-${item.size}`}>
+                  <li key={`${item.id}-${item.size}-${item.colorway ?? ''}`}>
                     <span className="checkout-item-image">
                       {item.image ? (
                         <img src={item.image} alt={item.name} />
@@ -392,7 +392,9 @@ export default function Checkout() {
                     </span>
                     <span className="checkout-item-copy">
                       <strong>{item.name}</strong>
-                      <span>Size {item.size} · Số lượng {item.quantity}</span>
+                      <span>
+                        {item.colorway ? `${item.colorway} · ` : ''}Size {item.size} · Số lượng {item.quantity}
+                      </span>
                       <span>{formatPrice(item.price)} / đôi</span>
                     </span>
                     <strong>{formatPrice(item.price * item.quantity)}</strong>
