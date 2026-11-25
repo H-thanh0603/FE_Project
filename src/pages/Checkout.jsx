@@ -19,7 +19,7 @@ const PAYMENT_METHODS = [
   {
     id: 'bank-transfer',
     name: 'Chuyển khoản ngân hàng',
-    description: 'Bank',
+    description: 'Chuyển khoản trực tiếp qua tài khoản ngân hàng (mô phỏng).',
   },
 ];
 const CHECKOUT_STEPS = [
