@@ -36,7 +36,7 @@ export function findCoupon(code) {
 
 /** Số tiền được giảm; không vượt quá tạm tính để tổng đơn không bị âm */
 export function calculateDiscount(coupon, subtotal) {
-  if (!coupon) return 0;
+  if (!coupon || subtotal < (coupon.minSubtotal ?? 0)) return 0;
   const raw =
     coupon.type === 'percent'
       ? Math.round((subtotal * coupon.value) / 100)

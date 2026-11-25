@@ -86,7 +86,7 @@ export default function OrderDetail() {
   };
 
   const handleReorder = () => {
-    order.items.forEach((item) => addItem(item, item.size, item.quantity));
+    order.items.forEach((item) => addItem(item, item.size, item.quantity, item.colorway));
     setActionMessage('Đã thêm sản phẩm từ đơn hàng vào giỏ.');
   };
 
@@ -141,10 +141,12 @@ export default function OrderDetail() {
             <h2 className="order-detail-panel-title">Sản Phẩm Đã Đặt</h2>
             <ul className="order-detail-items">
               {order.items.map((item) => (
-                <li key={`${item.id}-${item.size}`} className="order-detail-item">
+                <li key={`${item.id}-${item.size}-${item.colorway ?? ''}`} className="order-detail-item">
                   <div className="order-detail-item-info">
                     <strong>{item.name}</strong>
-                    <span>Size {item.size} · Số lượng {item.quantity}</span>
+                    <span>
+                      {item.colorway ? `${item.colorway} · ` : ''}Size {item.size} · Số lượng {item.quantity}
+                    </span>
                   </div>
                   <div className="order-detail-item-price">
                     <span>{formatPrice(item.price)} / đôi</span>

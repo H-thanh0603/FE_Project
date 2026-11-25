@@ -62,7 +62,7 @@ export default function Orders() {
   };
 
   const handleReorder = (order) => {
-    order.items.forEach((item) => addItem(item, item.size, item.quantity));
+    order.items.forEach((item) => addItem(item, item.size, item.quantity, item.colorway));
     setActionMessage(`Đã thêm ${order.items.length} dòng sản phẩm từ đơn ${order.id} vào giỏ.`);
   };
 

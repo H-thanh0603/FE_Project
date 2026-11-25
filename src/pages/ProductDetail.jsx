@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { getProductById, getBrandName } from '../services/productService';
 import { useCart } from '../context/CartContext';
@@ -26,11 +26,27 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const justAddedTimerRef = useRef(null);
 
   const colorways = product?.colorways ?? [];
   const requestedColor = searchParams.get('color');
   const activeColorway =
     colorways.find((colorway) => colorway.name === requestedColor) ?? colorways[0] ?? null;
+
+  useEffect(() => {
+    setSize(product?.sizes?.[0] ?? null);
+    setQuantity(1);
+    setJustAdded(false);
+    setIsSizeGuideOpen(false);
+    if (justAddedTimerRef.current) {
+      clearTimeout(justAddedTimerRef.current);
+      justAddedTimerRef.current = null;
+    }
+  }, [product?.id]);
+
+  useEffect(() => () => {
+    if (justAddedTimerRef.current) clearTimeout(justAddedTimerRef.current);
+  }, []);
 
   useEffect(() => {
     if (product) recordView(product.id);
@@ -64,11 +80,16 @@ export default function ProductDetail() {
   const badge = getProductBadge(product);
 
   const handleAddToCart = () => {
-    addItem(product, size, quantity);
+    addItem(product, size, quantity, activeColorway);
     setJustAdded(true);
     const qtyText = quantity > 1 ? `${quantity}x ` : '';
-    showToast(`Đã thêm ${qtyText}${product.name} (size ${size}) vào giỏ.`);
-    setTimeout(() => setJustAdded(false), 1500);
+    const colorText = activeColorway ? ` - ${activeColorway.name}` : '';
+    showToast(`Đã thêm ${qtyText}${product.name}${colorText} (size ${size}) vào giỏ.`);
+    if (justAddedTimerRef.current) clearTimeout(justAddedTimerRef.current);
+    justAddedTimerRef.current = setTimeout(() => {
+      setJustAdded(false);
+      justAddedTimerRef.current = null;
+    }, 1500);
   };
 
   return (
@@ -228,6 +249,21 @@ export default function ProductDetail() {
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
       />
+
+      <div className="sticky-buy-bar" role="region" aria-label="Mua nhanh">
+        <div className="sticky-buy-price">
+          <span>{formatPrice(product.price)}</span>
+          {onSale && <small>{formatPrice(product.oldPrice)}</small>}
+        </div>
+        <button
+          type="button"
+          className="btn btn--dark"
+          onClick={handleAddToCart}
+        >
+          <span className="icon">{justAdded ? 'check' : 'shopping_bag'}</span>
+          {justAdded ? 'Đã thêm vào giỏ' : 'Thêm vào giỏ'}
+        </button>
+      </div>
     </div>
   );
 }

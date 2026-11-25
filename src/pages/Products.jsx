@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { getProducts, getBrands } from '../services/productService';
 import useDebounce from '../hooks/useDebounce';
+import ProductCardSkeleton from '../components/common/Skeleton/ProductCardSkeleton';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import ProductCard from '../components/product/ProductCard/ProductCard';
 import Pagination from '../components/common/Pagination/Pagination';
@@ -46,7 +47,10 @@ export default function Products() {
   const [sort, setSort] = useState('default');
   const [page, setPage] = useState(1);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
   const debouncedSearch = useDebounce(search);
+  const firstRender = useRef(true);
+  const firstLoad = useRef(true);
   const sizes = [...new Set(products.flatMap((product) => product.sizes))]
     .sort((a, b) => a - b);
   const colors = [...new Set(products.flatMap((product) => product.colors))];
@@ -137,8 +141,24 @@ export default function Products() {
     }
   }, [filtered, sort]);
 
+  // Reset về trang 1 mỗi khi filter thay đổi (bỏ qua lần render đầu).
   useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     setPage(1);
+  }, [brand, category, color, debouncedSearch, maxPrice, minPrice, size, sort, status]);
+
+  // Hiện skeleton trong lúc đổi filter hoặc chuyển trang.
+  useEffect(() => {
+    if (firstLoad.current) {
+      firstLoad.current = false;
+      return undefined;
+    }
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 350);
+    return () => clearTimeout(timer);
   }, [
     brand,
     category,
@@ -146,6 +166,7 @@ export default function Products() {
     debouncedSearch,
     maxPrice,
     minPrice,
+    page,
     size,
     sort,
     status,
@@ -343,7 +364,13 @@ export default function Products() {
           sản phẩm phù hợp ({products.length} sản phẩm trong cửa hàng)
         </p>
 
-        {sorted.length === 0 ? (
+        {loading ? (
+          <div className="product-grid" aria-busy="true" aria-label="Đang tải sản phẩm">
+            {Array.from({ length: Math.min(visibleProducts.length || PAGE_SIZE, PAGE_SIZE) }, (_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : sorted.length === 0 ? (
           <div className="empty-state">
             <span className="icon">search_off</span>
             <p>Không tìm thấy sản phẩm nào phù hợp.</p>

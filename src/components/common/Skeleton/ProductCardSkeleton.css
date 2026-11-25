@@ -1,0 +1,81 @@
+/* Khung xương hiển thị trong lúc đang tải/filter sản phẩm */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: skeleton-shimmer 1.4s infinite;
+}
+
+@keyframes skeleton-shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-card > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.skeleton-image {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--spacing-2);
+}
+
+.skeleton-line {
+  height: 12px;
+  margin-bottom: var(--spacing-2);
+}
+
+.skeleton-line--sm { width: 40%; height: 10px; }
+.skeleton-line--md { width: 70%; }
+.skeleton-line--lg { width: 90%; margin-bottom: var(--spacing-3); }
+.skeleton-line--price { width: 45%; height: 22px; margin: 0; }
+
+.skeleton-sizes {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--spacing-2);
+}
+
+.skeleton-chip {
+  width: 34px;
+  height: 28px;
+  border-radius: var(--radius);
+}
+
+.skeleton-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.skeleton-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after { animation: none; }
+}

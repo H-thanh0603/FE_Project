@@ -41,61 +41,71 @@ export default function Cart() {
         <FreeShippingProgress subtotal={total} />
 
         <ul className="cart-list">
-          {items.map((item) => (
-            <li key={`${item.id}-${item.size}`} className="cart-row">
-              <Link to={`/products/${item.id}`} className="cart-row-image">
-                {item.image ? (
-                  <img src={item.image} alt={item.name} />
-                ) : (
-                  <span className="icon" style={{ color: 'var(--color-muted)' }}>
-                    image
-                  </span>
-                )}
-              </Link>
-
-              <div className="cart-row-info">
-                <Link to={`/products/${item.id}`} className="cart-row-name">
-                  {item.name}
+          {items.map((item) => {
+            const productUrl = item.colorway
+              ? `/products/${item.id}?color=${encodeURIComponent(item.colorway)}`
+              : `/products/${item.id}`;
+            return (
+              <li key={`${item.id}-${item.size}-${item.colorway ?? ''}`} className="cart-row">
+                <Link to={productUrl} className="cart-row-image">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} />
+                  ) : (
+                    <span className="icon" style={{ color: 'var(--color-muted)' }}>
+                      image
+                    </span>
+                  )}
                 </Link>
-                <div className="cart-row-size">
-                  Kích cỡ: <strong>{item.size}</strong>
+
+                <div className="cart-row-info">
+                  <Link to={productUrl} className="cart-row-name">
+                    {item.name}
+                  </Link>
+                  <div className="cart-row-size">
+                    Kích cỡ: <strong>{item.size}</strong>
+                    {item.colorway && (
+                      <>
+                        {' · '}Màu: <strong>{item.colorway}</strong>
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <span className="cart-row-price">{formatPrice(item.price)}</span>
+                <span className="cart-row-price">{formatPrice(item.price)}</span>
 
-              <div className="quantity-controls">
+                <div className="quantity-controls">
+                  <button
+                    type="button"
+                    aria-label="Giảm số lượng"
+                    onClick={() => updateQuantity(item.id, item.size, item.quantity - 1, item.colorway)}
+                  >
+                    −
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    type="button"
+                    aria-label="Tăng số lượng"
+                    onClick={() => updateQuantity(item.id, item.size, item.quantity + 1, item.colorway)}
+                  >
+                    +
+                  </button>
+                </div>
+
+                <span className="cart-row-subtotal">
+                  {formatPrice(item.price * item.quantity)}
+                </span>
+
                 <button
                   type="button"
-                  aria-label="Giảm số lượng"
-                  onClick={() => updateQuantity(item.id, item.size, item.quantity - 1)}
+                  className="btn btn--light"
+                  onClick={() => removeItem(item.id, item.size, item.colorway)}
                 >
-                  −
+                  <span className="icon" style={{ fontSize: 16 }}>delete</span>
+                  Xóa
                 </button>
-                <span>{item.quantity}</span>
-                <button
-                  type="button"
-                  aria-label="Tăng số lượng"
-                  onClick={() => updateQuantity(item.id, item.size, item.quantity + 1)}
-                >
-                  +
-                </button>
-              </div>
-
-              <span className="cart-row-subtotal">
-                {formatPrice(item.price * item.quantity)}
-              </span>
-
-              <button
-                type="button"
-                className="btn btn--light"
-                onClick={() => removeItem(item.id, item.size)}
-              >
-                <span className="icon" style={{ fontSize: 16 }}>delete</span>
-                Xóa
-              </button>
-            </li>
-          ))}
+              </li>
+            );
+          })}
         </ul>
 
         <div className="cart-coupon">

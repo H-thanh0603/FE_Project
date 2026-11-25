@@ -1041,3 +1041,24 @@
   font-weight: 600;
   margin-top: var(--spacing-2);
 }
+
+/* ================== 9. SCROLL REVEAL ================== */
+.reveal-enabled section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-enabled section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-enabled section,
+  .reveal-enabled section.is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
