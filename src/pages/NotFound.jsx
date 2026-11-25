@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 export default function NotFound() {
+  useDocumentTitle('Không tìm thấy trang');
   return (
     <div className="container">
       <div className="page" style={{ alignItems: 'center', textAlign: 'center', paddingTop: '4rem' }}>

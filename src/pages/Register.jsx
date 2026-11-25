@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
 import { useAuth } from '../context/AuthContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail, isPhone, isNotEmpty, isPassword, isMatch } from '../utils/validators';
 
 const EMPTY_FORM = {
@@ -18,6 +19,7 @@ const EMPTY_FORM = {
  * KHÔNG được lưu trữ. AuthContext chỉ lưu thông tin hồ sơ vào LocalStorage.
  */
 export default function Register() {
+  useDocumentTitle('Đăng ký');
   const { register } = useAuth();
   const navigate = useNavigate();
 

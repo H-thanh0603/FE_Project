@@ -9,6 +9,7 @@ import {
   getNextOrderStatus,
   getOrders,
 } from '../services/orderService';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import formatPrice from '../utils/formatPrice';
 
 const STATUS_LABELS = {
@@ -24,6 +25,7 @@ function getStatusLabel(status) {
 }
 
 export default function Orders() {
+  useDocumentTitle('Đơn hàng của bạn');
   const [orders, setOrders] = useState(getOrders);
   const [confirmCancelId, setConfirmCancelId] = useState(null);
   const [actionMessage, setActionMessage] = useState('');

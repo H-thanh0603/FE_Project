@@ -6,6 +6,7 @@ import { useAddresses } from '../context/AddressContext';
 import { useNotifications } from '../context/NotificationContext';
 import { saveOrder } from '../services/orderService';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import formatPrice from '../utils/formatPrice';
 import { isEmail, isPhone, isNotEmpty } from '../utils/validators';
 
@@ -37,6 +38,7 @@ function getCustomerError(form) {
 }
 
 export default function Checkout() {
+  useDocumentTitle('Thanh toán');
   const { items, total, clearCart, coupon, discount } = useCart();
   const { user } = useAuth();
   const { addresses } = useAddresses();

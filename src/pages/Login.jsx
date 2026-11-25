@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
 import { useAuth } from '../context/AuthContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail, isPassword } from '../utils/validators';
 
 /**
@@ -10,6 +11,7 @@ import { isEmail, isPassword } from '../utils/validators';
  * API xác thực thật (JWT, session...).
  */
 export default function Login() {
+  useDocumentTitle('Đăng nhập');
   const { login } = useAuth();
   const navigate = useNavigate();
 

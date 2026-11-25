@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail, isNotEmpty, isPhone } from '../utils/validators';
 
 export default function Profile() {
+  useDocumentTitle('Thông tin cá nhân');
   const { user, updateProfile } = useAuth();
   const [form, setForm] = useState({
     name: user?.name ?? '',

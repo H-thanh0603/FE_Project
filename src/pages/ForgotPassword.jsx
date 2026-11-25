@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail } from '../utils/validators';
 
 /**
@@ -8,6 +9,7 @@ import { isEmail } from '../utils/validators';
  * mà không có hệ thống gửi thư thật. Khi có backend cần thay bằng API.
  */
 export default function ForgotPassword() {
+  useDocumentTitle('Quên mật khẩu');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [sent, setSent] = useState(false);

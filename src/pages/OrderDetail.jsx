@@ -9,6 +9,7 @@ import {
   getNextOrderStatus,
   getOrderById,
 } from '../services/orderService';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import formatPrice from '../utils/formatPrice';
 
 const ORDER_STATUSES = {
@@ -43,6 +44,7 @@ function getSubtotal(order) {
 export default function OrderDetail() {
   const { id } = useParams();
   const [order, setOrder] = useState(() => getOrderById(id));
+  useDocumentTitle(order ? `Đơn hàng ${order.id}` : 'Chi tiết đơn hàng');
   const [confirmCancel, setConfirmCancel] = useState(false);
   const [actionMessage, setActionMessage] = useState('');
   const { addItem } = useCart();
