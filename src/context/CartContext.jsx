@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from 'react';
+import { createContext, useContext, useEffect, useMemo } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { STORAGE_KEYS } from '../utils/constants';
 import { calculateItemCount, calculateTotal } from '../services/cartService';
@@ -51,11 +51,22 @@ export function CartProvider({ children }) {
   const removeItem = (id, size) =>
     setItems((prev) => prev.filter((item) => !(item.id === id && item.size === size)));
 
-  const clearCart = () => setItems([]);
+  const clearCart = () => {
+    setItems([]);
+    setCoupon(null);
+  };
+
+  const total = calculateTotal(items);
+
+  useEffect(() => {
+    if (coupon && (items.length === 0 || total < (coupon.minSubtotal ?? 0))) {
+      setCoupon(null);
+    }
+  }, [coupon, items.length, setCoupon, total]);
 
   /** Áp dụng mã giảm giá; trả về kết quả để UI hiển thị lỗi nếu có */
   const applyCoupon = (code) => {
-    const result = validateCoupon(code, calculateTotal(items));
+    const result = validateCoupon(code, total);
     if (result.ok) setCoupon(result.coupon);
     return result;
   };
@@ -70,16 +81,14 @@ export function CartProvider({ children }) {
       removeItem,
       clearCart,
       itemCount: calculateItemCount(items),
-      total: calculateTotal(items),
+      total,
       coupon,
       applyCoupon,
       removeCoupon,
-      // shortcut: mã đã áp dụng không được kiểm tra lại khi tổng đơn thay đổi,
-      // nâng cấp khi cần chặn mã hết hạn theo giá trị đơn hàng
-      discount: calculateDiscount(coupon, calculateTotal(items)),
+      discount: calculateDiscount(coupon, total),
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items, coupon],
+    [items, coupon, total],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
