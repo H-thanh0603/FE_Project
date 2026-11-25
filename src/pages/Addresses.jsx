@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useAddresses } from '../context/AddressContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isNotEmpty, isPhone } from '../utils/validators';
 
 function createEmptyForm(user) {
@@ -14,6 +15,7 @@ function createEmptyForm(user) {
 }
 
 export default function Addresses() {
+  useDocumentTitle('Sổ địa chỉ');
   const { user } = useAuth();
   const { addresses, addAddress, updateAddress, deleteAddress, setDefaultAddress } =
     useAddresses();

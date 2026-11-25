@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useNotifications } from '../context/NotificationContext';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 
 /** Danh sách thông báo mô phỏng — sinh khi đặt, hủy hoặc đổi trạng thái đơn hàng. */
 export default function Notifications() {
+  useDocumentTitle('Thông báo');
   const { notifications, unreadCount, markAllRead, clearNotifications } = useNotifications();
 
   return (

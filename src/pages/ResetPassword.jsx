@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isMatch, isPassword } from '../utils/validators';
 
 /**
@@ -8,6 +9,7 @@ import { isMatch, isPassword } from '../utils/validators';
  * chỉ kiểm tra hợp lệ trên biểu mẫu. Khi có backend cần thay bằng API thật.
  */
 export default function ResetPassword() {
+  useDocumentTitle('Đặt lại mật khẩu');
   const [searchParams] = useSearchParams();
   const email = searchParams.get('email') ?? '';
   const [form, setForm] = useState({ password: '', confirm: '' });
