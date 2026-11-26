@@ -238,6 +238,11 @@ export default function ProductDetail() {
       <SizeGuideModal
         isOpen={isSizeGuideOpen}
         onClose={() => setIsSizeGuideOpen(false)}
+        availableSizes={product.sizes}
+        onSelectSize={(pickedSize) => {
+          setSize(pickedSize);
+          showToast(`Đã chọn size ${pickedSize} theo gợi ý.`);
+        }}
       />
 
       <div className="sticky-buy-bar" role="region" aria-label="Mua nhanh">
