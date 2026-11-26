@@ -6,6 +6,163 @@
   color: var(--color-muted);
 }
 
+.size-finder {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.size-finder-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-dark);
+}
+
+.size-finder-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+}
+
+@media (min-width: 560px) {
+  .size-finder-grid {
+    grid-template-columns: 160px 1fr;
+    align-items: end;
+  }
+}
+
+.size-finder-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.size-finder-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.size-finder-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.size-finder-input {
+  width: 100%;
+  border: none;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-dark);
+  background: transparent;
+  outline: none;
+}
+
+.size-finder-unit {
+  padding: 0 0.65rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  border-left: 1px solid var(--color-border);
+}
+
+.size-finder-shapes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.size-finder-shape {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.size-finder-shape:hover {
+  border-color: var(--color-dark);
+}
+
+.size-finder-shape.active {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: #fff;
+}
+
+.size-finder-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: 0.75rem 0.9rem;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.size-finder-result-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.size-finder-result-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.65rem;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.size-finder-result-sub {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 0.1rem;
+}
+
+.size-finder-apply {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.82rem;
+}
+
+.size-finder-error {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-danger);
+}
+
+.size-table tr.is-recommended td {
+  background: rgba(255, 59, 0, 0.1);
+  font-weight: 700;
+}
+
 .size-guide-steps {
   background: var(--color-surface);
   border: 1px solid var(--color-border);

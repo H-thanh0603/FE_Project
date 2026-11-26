@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import useLocalStorage from '../hooks/useLocalStorage';
 import { STORAGE_KEYS } from '../utils/constants';
 import { calculateItemCount, calculateTotal } from '../services/cartService';
@@ -25,6 +25,10 @@ export function CartProvider({ children }) {
   const [items, setItems] = useLocalStorage(STORAGE_KEYS.CART, []);
   // Mã giảm giá đang áp dụng, lưu lại để không mất khi tải lại trang
   const [coupon, setCoupon] = useLocalStorage(STORAGE_KEYS.COUPON, null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const openDrawer = useCallback(() => setIsDrawerOpen(true), []);
+  const closeDrawer = useCallback(() => setIsDrawerOpen(false), []);
 
   /** Thêm giày vào giỏ; trùng sản phẩm + size + phối màu thì cộng dồn số lượng */
   const addItem = (product, size, quantity = 1, colorway = null) => {
@@ -112,9 +116,12 @@ export function CartProvider({ children }) {
       applyCoupon,
       removeCoupon,
       discount: calculateDiscount(coupon, total),
+      isDrawerOpen,
+      openDrawer,
+      closeDrawer,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [items, coupon, total],
+    [items, coupon, total, isDrawerOpen],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
