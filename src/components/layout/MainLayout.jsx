@@ -5,6 +5,7 @@ import Footer from './Footer/Footer';
 import ToastStack from '../common/Toast/ToastStack';
 import ScrollToTop from '../common/ScrollToTop';
 import BackToTop from '../common/BackToTop/BackToTop';
+import MiniCartDrawer from '../cart/MiniCartDrawer/MiniCartDrawer';
 
 function PageFallback() {
   return (
@@ -29,6 +30,7 @@ export default function MainLayout() {
       </main>
       <Footer />
       <ToastStack />
+      <MiniCartDrawer />
       <BackToTop />
     </div>
   );
