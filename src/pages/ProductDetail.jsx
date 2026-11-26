@@ -12,6 +12,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle';
 import SizeGuideModal from '../components/product/SizeGuideModal/SizeGuideModal';
 import ProductReviews from '../components/product/ProductReviews/ProductReviews';
 import RelatedProducts from '../components/product/RelatedProducts/RelatedProducts';
+import ProductGallery from '../components/product/ProductGallery/ProductGallery';
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -104,23 +105,12 @@ export default function ProductDetail() {
         </nav>
 
         <div className="detail">
-          <div className="detail-image">
-            {badge && (
-              <span className={`shop-card-tag${badge.tone ? ` shop-card-tag--${badge.tone}` : ''}`}>
-                {badge.label}
-              </span>
-            )}
-            {product.image || activeColorway?.image ? (
-              <img
-                src={activeColorway?.image || product.image}
-                alt={`${product.name}${activeColorway ? ` - ${activeColorway.name}` : ''}`}
-              />
-            ) : (
-              <span className="detail-image-placeholder icon" aria-label="Chưa có ảnh sản phẩm">
-                image
-              </span>
-            )}
-          </div>
+          <ProductGallery
+            product={product}
+            activeColorway={activeColorway}
+            badge={badge}
+            onSelectColorway={handleColorSelect}
+          />
 
           <div className="detail-info">
             <div className="eyebrow">{getBrandName(product.brandId)}</div>
