@@ -7,7 +7,7 @@ import { useCompare } from '../../../context/CompareContext';
 const navLinkClass = ({ isActive }) => (isActive ? 'nav-link active' : 'nav-link');
 
 export default function Navbar() {
-  const { itemCount } = useCart();
+  const { itemCount, openDrawer } = useCart();
   const { user, logout } = useAuth();
   const { unreadCount } = useNotifications();
   const { productIds: compareIds } = useCompare();
@@ -60,11 +60,16 @@ export default function Navbar() {
               <span className="icon">notifications</span>
               {unreadCount > 0 && <span className="notif-badge">{unreadCount}</span>}
             </Link>
-            <Link to="/cart" className="cart-link">
+            <button
+              type="button"
+              className="cart-link"
+              onClick={openDrawer}
+              aria-label={itemCount > 0 ? `Mở giỏ hàng, ${itemCount} sản phẩm` : 'Mở giỏ hàng'}
+            >
               <span className="icon">shopping_bag</span>
               Giỏ hàng
               {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
-            </Link>
+            </button>
             {user ? (
               <>
                 <Link to="/profile" className="btn btn--light">
