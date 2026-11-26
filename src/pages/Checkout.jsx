@@ -5,6 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { useAddresses } from '../context/AddressContext';
 import { useNotifications } from '../context/NotificationContext';
 import { saveOrder } from '../services/orderService';
+import { getProductById } from '../services/productService';
+import { deductStockForItems } from '../services/stockService';
 import CouponInput from '../components/cart/CouponInput/CouponInput';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import formatPrice from '../utils/formatPrice';
@@ -130,6 +132,7 @@ export default function Checkout() {
       total: orderTotal,
       status: 'pending',
     });
+    deductStockForItems(items, getProductById);
     clearCart();
     setError('');
     setPlacedOrder(newOrder);
