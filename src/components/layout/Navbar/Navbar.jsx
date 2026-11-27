@@ -22,15 +22,24 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    if (location.pathname === '/products') {
+      const params = new URLSearchParams(location.search);
+      setSearchQuery(params.get('q') ?? '');
+    }
   }, [location.pathname, location.search]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return undefined;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') setMobileMenuOpen(false);
     };
     document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [mobileMenuOpen]);
 
   const handleSearchSubmit = (term) => {
