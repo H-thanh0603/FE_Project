@@ -20,6 +20,13 @@ export const COUPONS = [
     label: 'Giảm 200.000₫ cho đơn từ 1.000.000₫',
   },
   {
+    code: 'WELCOME15',
+    type: 'percent',
+    value: 15,
+    minSubtotal: 0,
+    label: 'Giảm 15% đơn đầu tiên (ưu đãi email)',
+  },
+  {
     code: 'SUMMER15',
     type: 'percent',
     value: 15,

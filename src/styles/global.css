@@ -1171,12 +1171,24 @@ h1, h2, h3, h4 {
   color: var(--color-muted);
 }
 
-.footer-links a {
+.footer-links a,
+.footer-link-btn {
   text-decoration: none;
+  color: inherit;
   transition: color 0.2s ease;
 }
 
-.footer-links a:hover {
+.footer-link-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.footer-links a:hover,
+.footer-link-btn:hover {
   color: var(--color-text);
 }
 
@@ -1196,6 +1208,46 @@ h1, h2, h3, h4 {
   font-size: 0.85rem;
   margin-bottom: var(--spacing-2);
   outline: none;
+}
+
+.footer-promo-error {
+  margin-top: var(--spacing-1);
+  font-size: 0.8rem;
+  color: var(--color-primary);
+}
+
+.footer-promo-success {
+  margin-top: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: 0.45rem 0.65rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.footer-promo-copy {
+  background: transparent;
+  border: none;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.footer-policy-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--color-text);
+  line-height: 1.6;
 }
 
 .footer-bottom {
