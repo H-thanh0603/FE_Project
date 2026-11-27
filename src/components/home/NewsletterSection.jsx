@@ -45,7 +45,7 @@ export default function NewsletterSection() {
           {error && <p className="newsletter-success" style={{ color: '#ffdad6' }}>{error}</p>}
           {subscribed && (
             <p className="newsletter-success">
-              ✓ Cảm ơn bạn! Mã voucher KINETIC200K đã được gửi vào hòm thư (mô phỏng).
+              ✓ Cảm ơn bạn! Mã voucher KINETIC200 đã được gửi vào hòm thư (mô phỏng).
             </p>
           )}
         </div>
