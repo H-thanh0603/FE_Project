@@ -1,0 +1,25 @@
+.error-boundary {
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-6) var(--spacing-4);
+  gap: var(--spacing-3);
+}
+
+.error-boundary-icon {
+  font-size: 48px;
+  color: var(--color-primary);
+}
+
+.error-boundary-desc {
+  max-width: 32rem;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+}
+
+.error-boundary-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}

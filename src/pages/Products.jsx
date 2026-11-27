@@ -37,8 +37,9 @@ export default function Products() {
   const categoryIds = categories.map((item) => item.category);
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const requestedQuery = searchParams.get('q') ?? '';
   const [brand, setBrand] = useState('all');
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(requestedQuery);
   const [size, setSize] = useState('all');
   const [color, setColor] = useState('all');
   const [status, setStatus] = useState('all');
@@ -85,6 +86,10 @@ export default function Products() {
     });
   };
 
+  useEffect(() => {
+    setSearch(requestedQuery);
+  }, [requestedQuery]);
+
   const clearFilters = () => {
     setBrand('all');
     setSearch('');
@@ -93,7 +98,12 @@ export default function Products() {
     setStatus('all');
     setMinPrice('');
     setMaxPrice('');
-    setCategory('all');
+    setSearchParams((current) => {
+      const next = new URLSearchParams(current);
+      next.delete('category');
+      next.delete('q');
+      return next;
+    });
   };
 
   const filtered = useMemo(

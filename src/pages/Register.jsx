@@ -1,9 +1,16 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
 import { useAuth } from '../context/AuthContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail, isPhone, isNotEmpty, isPassword, isMatch } from '../utils/validators';
+
+function getSafeRedirect(raw) {
+  if (typeof raw !== 'string') return '/';
+  const trimmed = raw.trim();
+  if (!trimmed.startsWith('/') || trimmed.startsWith('//')) return '/';
+  return trimmed;
+}
 
 const EMPTY_FORM = {
   name: '',
@@ -22,6 +29,9 @@ export default function Register() {
   useDocumentTitle('Đăng ký');
   const { register } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const rawNext = searchParams.get('next');
+  const redirectTo = getSafeRedirect(rawNext);
 
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
@@ -72,7 +82,7 @@ export default function Register() {
         setErrors({ email: result.error });
         return;
       }
-      navigate('/');
+      navigate(redirectTo, { replace: true });
     }, 800);
   };
 
@@ -199,7 +209,10 @@ export default function Register() {
       </form>
 
       <p className="auth-switch">
-        Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
+        Đã có tài khoản?{' '}
+        <Link to={rawNext ? `/login?next=${encodeURIComponent(redirectTo)}` : '/login'}>
+          Đăng nhập
+        </Link>
       </p>
     </AuthLayout>
   );
