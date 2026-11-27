@@ -74,6 +74,11 @@ export default function Login() {
       subtitle="Đăng nhập để lưu giỏ hàng, theo dõi đơn hàng và nhận ưu đãi thành viên."
     >
       <form className="auth-form" onSubmit={handleSubmit} noValidate>
+        {rawNext && !formError && (
+          <p className="form-banner form-banner--info">
+            Vui lòng đăng nhập để tiếp tục truy cập trang này.
+          </p>
+        )}
         {formError && <p className="form-banner form-banner--error">{formError}</p>}
 
         <div className="field">

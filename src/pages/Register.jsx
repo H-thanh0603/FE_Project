@@ -30,7 +30,8 @@ export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const redirectTo = getSafeRedirect(searchParams.get('next'));
+  const rawNext = searchParams.get('next');
+  const redirectTo = getSafeRedirect(rawNext);
 
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
@@ -208,7 +209,10 @@ export default function Register() {
       </form>
 
       <p className="auth-switch">
-        Đã có tài khoản? <Link to="/login">Đăng nhập</Link>
+        Đã có tài khoản?{' '}
+        <Link to={rawNext ? `/login?next=${encodeURIComponent(redirectTo)}` : '/login'}>
+          Đăng nhập
+        </Link>
       </p>
     </AuthLayout>
   );
