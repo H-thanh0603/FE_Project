@@ -10,6 +10,7 @@ const MAX_SUGGESTIONS = 6;
 export default function SearchAutocomplete({
   value,
   onChange,
+  onSubmit = null,
   placeholder = 'Tìm kiếm...',
 }) {
   const navigate = useNavigate();
@@ -71,9 +72,20 @@ export default function SearchAutocomplete({
 
     onChange(item.label);
     addTerm(item.label);
+    if (onSubmit) onSubmit(item.label);
   };
 
   const handleKeyDown = (event) => {
+    if (event.key === 'Enter' && (!isOpen || activeIndex < 0)) {
+      if (query) {
+        event.preventDefault();
+        addTerm(value);
+        close();
+        if (onSubmit) onSubmit(value.trim());
+      }
+      return;
+    }
+
     if (!isOpen) return;
 
     if (event.key === 'ArrowDown') {
@@ -87,8 +99,10 @@ export default function SearchAutocomplete({
         event.preventDefault();
         selectItem(items[activeIndex]);
       } else if (query) {
+        event.preventDefault();
         addTerm(value);
         close();
+        if (onSubmit) onSubmit(value.trim());
       }
     } else if (event.key === 'Escape') {
       close();

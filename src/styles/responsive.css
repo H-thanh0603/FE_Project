@@ -23,17 +23,6 @@
 }
 
 @media (max-width: 640px) {
-  .navbar-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--spacing-2);
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    gap: var(--spacing-2);
-  }
-
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
