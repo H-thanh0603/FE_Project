@@ -1,9 +1,16 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import AuthLayout from '../components/layout/AuthLayout';
 import { useAuth } from '../context/AuthContext';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import { isEmail, isPassword } from '../utils/validators';
+
+function getSafeRedirect(raw) {
+  if (typeof raw !== 'string') return '/';
+  const trimmed = raw.trim();
+  if (!trimmed.startsWith('/') || trimmed.startsWith('//')) return '/';
+  return trimmed;
+}
 
 /**
  * ⚠️ Đăng nhập MÔ PHỎNG: mật khẩu chỉ dùng để kiểm tra hợp lệ phía client,
@@ -14,6 +21,9 @@ export default function Login() {
   useDocumentTitle('Đăng nhập');
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const rawNext = searchParams.get('next');
+  const redirectTo = getSafeRedirect(rawNext);
 
   const [form, setForm] = useState({ email: '', password: '', remember: true });
   const [errors, setErrors] = useState({});
@@ -53,7 +63,7 @@ export default function Login() {
         setFormError(result.error);
         return;
       }
-      navigate('/');
+      navigate(redirectTo, { replace: true });
     }, 800);
   };
 
@@ -158,7 +168,10 @@ export default function Login() {
       </div>
 
       <p className="auth-switch">
-        Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
+        Chưa có tài khoản?{' '}
+        <Link to={rawNext ? `/register?next=${encodeURIComponent(redirectTo)}` : '/register'}>
+          Đăng ký ngay
+        </Link>
       </p>
     </AuthLayout>
   );

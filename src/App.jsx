@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
+import ProtectedRoute from './components/common/ProtectedRoute';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -35,11 +36,13 @@ export default function App() {
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
-        <Route path="orders" element={<Orders />} />
-        <Route path="orders/:id" element={<OrderDetail />} />
-        <Route path="notifications" element={<Notifications />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="addresses" element={<Addresses />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="orders" element={<Orders />} />
+          <Route path="orders/:id" element={<OrderDetail />} />
+          <Route path="notifications" element={<Notifications />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="addresses" element={<Addresses />} />
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
