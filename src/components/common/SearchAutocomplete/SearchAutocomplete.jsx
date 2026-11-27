@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getProducts, getBrandName } from '../../../services/productService';
 import useSearchHistory from '../../../hooks/useSearchHistory';
@@ -14,6 +14,7 @@ export default function SearchAutocomplete({
   placeholder = 'Tìm kiếm...',
 }) {
   const navigate = useNavigate();
+  const listboxId = useId();
   const { history, addTerm, clearHistory } = useSearchHistory();
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -118,9 +119,9 @@ export default function SearchAutocomplete({
         placeholder={placeholder}
         role="combobox"
         aria-expanded={isOpen}
-        aria-controls="search-suggestions"
+        aria-controls={listboxId}
         aria-autocomplete="list"
-        aria-activedescendant={activeIndex >= 0 ? `search-suggestion-${activeIndex}` : undefined}
+        aria-activedescendant={activeIndex >= 0 ? `${listboxId}-opt-${activeIndex}` : undefined}
         value={value}
         onChange={(event) => {
           onChange(event.target.value);
@@ -131,14 +132,14 @@ export default function SearchAutocomplete({
       />
 
       {isOpen && query && (
-        <div className="search-suggestions" id="search-suggestions" role="listbox">
+        <div className="search-suggestions" id={listboxId} role="listbox">
           {items.length === 0 ? (
             <p className="search-suggestions-empty">Không có gợi ý phù hợp.</p>
           ) : (
             items.map((item, index) => (
               <button
                 key={item.id}
-                id={`search-suggestion-${index}`}
+                id={`${listboxId}-opt-${index}`}
                 type="button"
                 role="option"
                 aria-selected={index === activeIndex}
@@ -157,7 +158,7 @@ export default function SearchAutocomplete({
       )}
 
       {isOpen && !query && items.length > 0 && (
-        <div className="search-suggestions" id="search-suggestions" role="listbox">
+        <div className="search-suggestions" id={listboxId} role="listbox">
           <div className="search-suggestions-head">
             <span>Tìm kiếm gần đây</span>
             <button type="button" className="search-suggestions-clear" onClick={clearHistory}>
@@ -167,7 +168,7 @@ export default function SearchAutocomplete({
           {items.map((item, index) => (
             <button
               key={item.id}
-              id={`search-suggestion-${index}`}
+              id={`${listboxId}-opt-${index}`}
               type="button"
               role="option"
               aria-selected={index === activeIndex}
